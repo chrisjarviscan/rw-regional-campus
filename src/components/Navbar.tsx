@@ -23,8 +23,8 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
       <div className="container mx-auto flex items-center justify-between py-3 px-4 md:px-8">
         <a href="#" className="flex items-center">
           <img
-            src={rwiLogo}
-            alt="Realized Worth Institute"
+            src={rwLogo}
+            alt="Realized Worth"
             className="h-10 md:h-12 w-auto"
           />
         </a>

@@ -9,18 +9,10 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 mb-8">
           <div className="flex flex-col items-center md:items-start gap-3">
             <img
-              src={rwiLogoWhite}
-              alt="Realized Worth Institute"
+              src={rwLogoWhite}
+              alt="Realized Worth"
               className="h-10 w-auto"
             />
-            <div className="flex items-center gap-2">
-              <span className="text-light-grey font-light text-[13px]">A Realized Worth program</span>
-              <img
-                src={rwLogoWhite}
-                alt="Realized Worth"
-                className="h-5 w-auto opacity-70"
-              />
-            </div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             {navLinks.map((link) => (
