@@ -5,7 +5,11 @@ const Footer = () => {
     <footer className="bg-hero-navy py-10 px-4">
       <div className="container mx-auto max-w-5xl">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 mb-8">
-          <div className="text-primary-foreground font-bold text-lg">RW Institute</div>
+          <div className="flex items-center gap-2 md:gap-3">
+            <span className="text-primary-foreground font-bold text-lg">Realized Worth</span>
+            <span className="w-px h-4 bg-primary-foreground/40" aria-hidden="true" />
+            <span className="text-light-teal font-medium text-[15px]">RW Institute</span>
+          </div>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             {navLinks.map((link) => (
               <a

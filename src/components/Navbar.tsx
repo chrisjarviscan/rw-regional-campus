@@ -20,8 +20,10 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
   return (
     <nav className="sticky top-0 z-50 bg-background border-b border-light-grey">
       <div className="container mx-auto flex items-center justify-between py-3 px-4 md:px-8">
-        <a href="#" className="text-hero-navy font-bold text-xl tracking-tight">
-          RW Institute
+        <a href="#" className="flex items-center gap-2 md:gap-3">
+          <span className="text-hero-navy font-bold text-lg md:text-xl tracking-tight">Realized Worth</span>
+          <span className="w-px h-5 bg-light-grey" aria-hidden="true" />
+          <span className="text-dark-teal font-medium text-[15px] md:text-[17px] tracking-tight">RW Institute</span>
         </a>
 
         {/* Desktop nav */}
