@@ -1,4 +1,3 @@
-import rwiLogoWhite from "@/assets/logos/rwi_logo_white.png";
 import rwLogoWhite from "@/assets/logos/RW_Logo_White_Web.png";
 
 const navLinks = ["Program", "Agenda", "Cities", "Pricing", "Certification", "FAQ", "Contact"];
