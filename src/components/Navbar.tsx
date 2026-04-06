@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import rwiLogo from "@/assets/logos/RWI_Long_Logo_JPEG.jpg";
+import rwLogo from "@/assets/logos/RW_Logo_Orange_Web.png";
 
 const navLinks = [
   { label: "Program", href: "#program" },
@@ -23,8 +23,8 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
       <div className="container mx-auto flex items-center justify-between py-3 px-4 md:px-8">
         <a href="#" className="flex items-center">
           <img
-            src={rwiLogo}
-            alt="Realized Worth Institute"
+            src={rwLogo}
+            alt="Realized Worth"
             className="h-10 md:h-12 w-auto"
           />
         </a>
