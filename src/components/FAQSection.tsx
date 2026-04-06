@@ -1,9 +1,11 @@
+import { HelpCircle } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import AnimatedSection from "./AnimatedSection";
 
 const faqs = [
   {
@@ -34,23 +36,32 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="py-16 md:py-24 px-4 bg-background">
+    <section id="faq" className="py-16 md:py-28 px-4 bg-background overflow-hidden">
       <div className="container mx-auto max-w-3xl">
-        <h2 className="text-hero-navy font-bold text-[22px] md:text-[30px] text-center mb-12">
-          Frequently Asked Questions
-        </h2>
-        <Accordion type="single" collapsible className="space-y-0">
-          {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`faq-${i}`} className="border-b border-light-grey">
-              <AccordionTrigger className="text-hero-navy font-medium text-left text-base py-5 hover:no-underline [&>svg]:text-dark-teal">
-                {faq.q}
-              </AccordionTrigger>
-              <AccordionContent className="text-dark-grey font-light text-[15px] pb-5">
-                {faq.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <AnimatedSection>
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <HelpCircle className="text-dark-teal" size={28} />
+            <h2 className="text-hero-navy font-bold text-[22px] md:text-[32px]">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <div className="w-16 h-1 bg-hero-orange mx-auto rounded-full mb-12" />
+        </AnimatedSection>
+
+        <AnimatedSection delay={200}>
+          <Accordion type="single" collapsible className="space-y-0">
+            {faqs.map((faq, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="border-b border-light-grey group">
+                <AccordionTrigger className="text-hero-navy font-medium text-left text-base py-5 hover:no-underline [&>svg]:text-dark-teal group-hover:text-hero-orange transition-colors">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-dark-grey font-light text-[15px] pb-5 leading-relaxed">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </AnimatedSection>
       </div>
     </section>
   );
