@@ -1,3 +1,6 @@
+import rwiLogoWhite from "@/assets/logos/rwi_logo_white.png";
+import rwLogoWhite from "@/assets/logos/RW_Logo_White_Web.png";
+
 const navLinks = ["Program", "Agenda", "Cities", "Pricing", "Certification", "FAQ", "Contact"];
 
 const Footer = () => {
@@ -5,10 +8,20 @@ const Footer = () => {
     <footer className="bg-hero-navy py-10 px-4">
       <div className="container mx-auto max-w-5xl">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 mb-8">
-          <div className="flex items-center gap-2 md:gap-3">
-            <span className="text-primary-foreground font-bold text-lg">Realized Worth</span>
-            <span className="w-px h-4 bg-primary-foreground/40" aria-hidden="true" />
-            <span className="text-light-teal font-medium text-[15px]">RW Institute</span>
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <img
+              src={rwiLogoWhite}
+              alt="Realized Worth Institute"
+              className="h-10 w-auto"
+            />
+            <div className="flex items-center gap-2">
+              <span className="text-light-grey font-light text-[13px]">A Realized Worth program</span>
+              <img
+                src={rwLogoWhite}
+                alt="Realized Worth"
+                className="h-5 w-auto opacity-70"
+              />
+            </div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             {navLinks.map((link) => (
