@@ -1,16 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import ProgramOverview from "@/components/ProgramOverview";
+import WhoThisIsFor from "@/components/WhoThisIsFor";
+import AgendaSection from "@/components/AgendaSection";
+import CitiesSection from "@/components/CitiesSection";
+import PricingSection from "@/components/PricingSection";
+import CertificationSection from "@/components/CertificationSection";
+import SocialProof from "@/components/SocialProof";
+import BecomeHost from "@/components/BecomeHost";
+import FAQSection from "@/components/FAQSection";
+import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
+import RegistrationModal from "@/components/RegistrationModal";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen">
+      <Navbar onRegisterClick={openModal} />
+      <HeroSection onRegisterClick={openModal} />
+      <ProgramOverview />
+      <WhoThisIsFor />
+      <AgendaSection />
+      <CitiesSection />
+      <PricingSection onRegisterClick={openModal} />
+      <CertificationSection />
+      <SocialProof />
+      <BecomeHost />
+      <FAQSection />
+      <FinalCTA onRegisterClick={openModal} />
+      <Footer />
+      <RegistrationModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
