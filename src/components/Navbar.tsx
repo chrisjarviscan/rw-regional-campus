@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import rwiLogo from "@/assets/logos/RWI_Long_Logo_JPEG.jpg";
+import rwLogo from "@/assets/logos/RW_Logo_Orange_Web.png";
 
 const navLinks = [
   { label: "Program", href: "#program" },
