@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 interface FinalCTAProps {
@@ -14,9 +14,8 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
 
       <div className="container mx-auto max-w-3xl text-center relative z-10">
         <AnimatedSection>
-          <div className="inline-flex items-center gap-2 bg-primary-foreground/10 text-primary-foreground text-sm font-medium px-4 py-1.5 rounded-full mb-6 border border-primary-foreground/20">
-            <Sparkles size={14} className="text-hero-orange" />
-            Limited to 40-50 participants per campus
+          <div className="inline-flex items-center bg-primary-foreground/5 text-primary-foreground text-xs font-bold uppercase tracking-[0.15em] px-4 py-1.5 rounded-sm mb-6 border border-primary-foreground/20">
+            Capped at 40–50 participants per campus
           </div>
         </AnimatedSection>
 
