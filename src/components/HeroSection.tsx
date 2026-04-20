@@ -33,8 +33,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
           height={1080}
         />
         <div className="absolute inset-0 bg-hero-navy/90" />
-        {/* Decorative elements */}
-        <div className="absolute top-20 right-10 w-72 h-72 rounded-full bg-dark-teal/10 blur-3xl" />
+        {/* Single subtle accent */}
         <div className="absolute bottom-20 left-10 w-96 h-96 rounded-full bg-hero-orange/5 blur-3xl" />
       </div>
 
@@ -42,8 +41,8 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
         <div
           className={`transition-all duration-1000 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
-          <span className="inline-block bg-hero-orange/20 text-hero-orange border border-hero-orange/30 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-            🔥 2026 Regional Campus — Now Enrolling
+          <span className="inline-block bg-hero-orange/15 text-hero-orange border border-hero-orange/30 text-xs font-bold uppercase tracking-[0.15em] px-4 py-1.5 rounded-sm mb-6">
+            2026 Regional Campus · Now Enrolling
           </span>
         </div>
 

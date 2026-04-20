@@ -1,4 +1,4 @@
-import { Check, Sparkles } from "lucide-react";
+import { Check } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const tiers = [
@@ -84,8 +84,7 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
                 }`}
               >
                 {tier.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-mustard text-primary-foreground text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
-                    <Sparkles size={12} />
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-mustard text-primary-foreground text-[11px] font-bold uppercase tracking-[0.15em] px-4 py-1 rounded-sm">
                     Most Popular
                   </span>
                 )}

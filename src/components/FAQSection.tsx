@@ -1,4 +1,4 @@
-import { HelpCircle } from "lucide-react";
+// icons removed for a cleaner brand-aligned heading
 import {
   Accordion,
   AccordionContent,
@@ -39,13 +39,10 @@ const FAQSection = () => {
     <section id="faq" className="py-16 md:py-28 px-4 bg-background overflow-hidden">
       <div className="container mx-auto max-w-3xl">
         <AnimatedSection>
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <HelpCircle className="text-dark-teal" size={28} />
-            <h2 className="text-hero-navy font-bold text-[22px] md:text-[32px]">
-              Frequently Asked Questions
-            </h2>
-          </div>
-          <div className="w-16 h-1 bg-hero-orange mx-auto rounded-full mb-12" />
+          <h2 className="text-hero-navy font-bold text-[22px] md:text-[32px] text-center">
+            Frequently asked questions
+          </h2>
+          <div className="w-16 h-1 bg-hero-orange mx-auto rounded-full mt-4 mb-12" />
         </AnimatedSection>
 
         <AnimatedSection delay={200}>

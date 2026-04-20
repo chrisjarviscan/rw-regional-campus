@@ -1,4 +1,4 @@
-import { Award, GraduationCap, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { Award, GraduationCap, ArrowRight, CheckCircle2 } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import certImg from "@/assets/images/certification.jpg";
 
@@ -11,15 +11,14 @@ const CertificationSection = () => {
 
       <div className="container mx-auto max-w-6xl relative z-10">
         <AnimatedSection>
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="text-hero-orange" size={20} />
-            <span className="text-hero-orange text-sm font-bold uppercase tracking-wider">Certification Pathway</span>
+          <div className="flex justify-center mb-4">
+            <span className="text-hero-orange text-xs font-bold uppercase tracking-[0.15em]">Certification Pathway</span>
           </div>
           <h2 className="text-hero-navy font-bold text-[22px] md:text-[36px] text-center mb-3">
-            A Credential That Means Something
+            A credential that means something
           </h2>
           <p className="text-dark-grey text-center text-base md:text-lg mb-14 max-w-2xl mx-auto">
-            Two stages designed to validate real capability — not just attendance.
+            Two stages built to validate real capability rather than attendance.
           </p>
         </AnimatedSection>
 
