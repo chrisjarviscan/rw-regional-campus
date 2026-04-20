@@ -49,9 +49,9 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
         <h1
           className={`text-primary-foreground font-bold text-[44px] md:text-[72px] leading-[1.05] mb-6 transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
-          What is
+          Leadership and Execution Training for Employee Volunteer Leaders
           <br />
-          <span className="text-hero-orange">Transformative Volunteering?</span>
+          <span className="text-hero-orange">The Regional Campus Series</span>
         </h1>
 
         <p
