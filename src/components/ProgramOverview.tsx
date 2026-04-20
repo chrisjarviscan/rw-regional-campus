@@ -14,9 +14,15 @@ const ProgramOverview = () => {
     <section id="program" className="py-16 md:py-28 px-4 bg-background overflow-hidden">
       <div className="container mx-auto max-w-6xl">
         <AnimatedSection>
-          <h2 className="text-hero-navy font-bold text-[22px] md:text-[32px] text-center mb-4">
-            What is the Regional Campus?
+          <h2 className="text-hero-navy font-bold text-[22px] md:text-[32px] text-center mb-3">
+            Transformative Volunteering for Employee Volunteer Leaders
           </h2>
+          <p className="text-dark-teal font-medium text-center text-base md:text-lg mb-2">
+            The Regional Campus Series
+          </p>
+          <p className="text-dark-grey font-light text-center text-sm md:text-base max-w-3xl mx-auto mb-4">
+            Leadership and execution training for employee volunteer leaders. Transformative Volunteering is a strategic approach to corporate volunteering that creates conditions for lasting change and trains employee volunteer leaders to generate strong business and community results.
+          </p>
           <div className="w-16 h-1 bg-hero-orange mx-auto rounded-full mb-12" />
         </AnimatedSection>
 
