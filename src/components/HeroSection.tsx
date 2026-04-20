@@ -37,7 +37,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
         <div className="absolute bottom-20 left-10 w-96 h-96 rounded-full bg-hero-orange/5 blur-3xl" />
       </div>
 
-      <div className="container mx-auto max-w-5xl text-center relative z-10 px-4 py-20 md:py-28">
+      <div className="container mx-auto max-w-7xl text-center relative z-10 px-4 py-20 md:py-28">
         <div
           className={`transition-all duration-1000 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
@@ -47,11 +47,10 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
         </div>
 
         <h1
-          className={`text-primary-foreground font-bold text-[22px] md:text-[36px] leading-[1.1] mb-6 transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+          className={`text-primary-foreground font-bold leading-[1.05] mb-6 transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
-          Leadership and Execution Training for Employee Volunteer Leaders
-          <br />
-          <span className="text-hero-orange text-[44px] md:text-[72px]">The Regional Campus Series</span>
+          <span className="block text-[18px] md:text-[26px] lg:text-[32px] whitespace-nowrap">Leadership and Execution Training for Employee Volunteer Leaders</span>
+          <span className="block text-hero-orange text-[40px] md:text-[64px] lg:text-[72px] mt-3">The Regional Campus Series</span>
         </h1>
 
         <p
