@@ -7,6 +7,7 @@ import AgendaSection from "@/components/AgendaSection";
 import CitiesSection from "@/components/CitiesSection";
 import PricingSection from "@/components/PricingSection";
 import CertificationSection from "@/components/CertificationSection";
+import PostCampusCommunity from "@/components/PostCampusCommunity";
 import SocialProof from "@/components/SocialProof";
 import BecomeHost from "@/components/BecomeHost";
 import FAQSection from "@/components/FAQSection";
@@ -27,8 +28,9 @@ const Index = () => {
       <AgendaSection />
       <CitiesSection />
       <PricingSection onRegisterClick={openModal} />
-      <CertificationSection />
-      <SocialProof />
+        <CertificationSection />
+        <PostCampusCommunity />
+        <SocialProof />
       <BecomeHost />
       <FAQSection />
       <FinalCTA onRegisterClick={openModal} />
