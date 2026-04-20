@@ -14,11 +14,11 @@ const faqs = [
   },
   {
     q: "Do I need to be a CSR professional to attend?",
-    a: "No. The Campus is designed for anyone who leads, manages, or champions employee volunteering and community engagement, regardless of title. HR leaders, employee engagement managers, and grassroots volunteer champions all benefit from the methodology.",
+    a: "No. The Campus is built for your most committed volunteer leaders — Champions, Ambassadors, Social Impact Leads, Volunteer Committee Members, or anyone organizing employee volunteering at their company. You don't need a CSR title or program management background. If you care about doing this work well, you belong here.",
   },
   {
     q: "What if my company wants to send a team?",
-    a: "Corporate packages offer volume pricing and additional benefits like group onboarding calls and post-event team debriefs. To preserve the multi-company learning dynamic, no single organization can hold more than one-third of the seats at any campus.",
+    a: "Many participants come in twos or threes — the work travels further when you bring a colleague. Multi-pack pricing (6, 12, or 18 seats) offers volume discounts and can be split across any 2026 campuses. To preserve the multi-company learning environment, no single organization can hold more than one-third of the seats at any campus.",
   },
   {
     q: "Is the certification recognized?",

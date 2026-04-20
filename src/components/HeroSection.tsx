@@ -7,9 +7,9 @@ interface HeroSectionProps {
 }
 
 const stats = [
-  { value: "2 Days", label: "Immersive Learning" },
-  { value: "40–50", label: "Participants Per Campus" },
-  { value: "15+", label: "Years of Methodology" },
+  { value: "2 Days", label: "Immersive, In-Person" },
+  { value: "~40", label: "Participants Per Campus" },
+  { value: "Up to 8", label: "Companies Per Cohort" },
   { value: "2-Stage", label: "Certification Pathway" },
 ];
 
@@ -42,7 +42,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
           className={`transition-all duration-1000 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
           <span className="inline-block bg-hero-orange/15 text-hero-orange border border-hero-orange/30 text-xs font-bold uppercase tracking-[0.15em] px-4 py-1.5 rounded-sm mb-6">
-            2026 Regional Campus · Now Enrolling
+            2026 Regional Campus · Detroit · Washington, DC · Atlanta
           </span>
         </div>
 
@@ -67,7 +67,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
             onClick={onRegisterClick}
             className="group bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-8 py-4 hover:brightness-90 hover:-translate-y-0.5 transition-all w-full sm:w-auto flex items-center justify-center gap-2"
           >
-            Register Now
+            Express Interest
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
           <a

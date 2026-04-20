@@ -25,9 +25,14 @@ const Footer = () => {
               </a>
             ))}
           </div>
-          <a href="mailto:contact@realizedworth.com" className="text-light-teal text-sm hover:underline">
-            contact@realizedworth.com
-          </a>
+          <div className="flex flex-col items-center md:items-end gap-1">
+            <a href="mailto:nichole@realizedworth.com" className="text-light-teal text-sm hover:underline">
+              nichole@realizedworth.com
+            </a>
+            <span className="text-light-grey/70 text-xs">
+              Nichole Giller · Director of Experience &amp; Integration
+            </span>
+          </div>
         </div>
         <div className="border-t border-light-grey/30 pt-6 text-center space-y-1">
           <p className="text-light-teal/80 font-light italic text-[13px]">

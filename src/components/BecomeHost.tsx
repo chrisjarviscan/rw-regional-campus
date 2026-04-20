@@ -38,10 +38,13 @@ const BecomeHost = () => {
         </div>
 
         <AnimatedSection delay={500}>
-          <button className="group bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-8 py-4 hover:brightness-90 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2">
+          <a
+            href="mailto:campus@realizedworth.com?subject=Host%20a%20Regional%20Campus%20in%20our%20city"
+            className="group bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-8 py-4 hover:brightness-90 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2"
+          >
             Become a Host
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </button>
+          </a>
         </AnimatedSection>
       </div>
     </section>

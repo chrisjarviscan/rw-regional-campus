@@ -1,34 +1,43 @@
 import { MapPin, ArrowRight, Calendar } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
-import citySeattle from "@/assets/images/city-seattle.jpg";
 import cityDetroit from "@/assets/images/city-detroit.jpg";
+import cityWashington from "@/assets/images/city-washington.jpg";
 import cityAtlanta from "@/assets/images/city-atlanta.jpg";
+import citySeattle from "@/assets/images/city-seattle.jpg";
 
 const cities = [
   {
-    city: "Seattle, WA",
-    dates: "Fall 2026",
-    status: "Pilot Campus",
+    city: "Detroit, MI",
+    dates: "August 2026",
+    status: "Accepting Registrations Soon",
     statusColor: "bg-dark-teal",
-    text: "The inaugural Regional Campus. Dates will be confirmed soon.",
-    image: citySeattle,
+    text: "Campus 01. Register by mid-June. Hosted at a corporate venue in metro Detroit.",
+    image: cityDetroit,
   },
   {
-    city: "Detroit, MI",
-    dates: "Q4 2026",
-    status: "Coming Soon",
-    statusColor: "bg-mustard",
-    text: "Partnering with a major corporate host in the Motor City.",
-    image: cityDetroit,
+    city: "Washington, DC",
+    dates: "September 2026",
+    status: "Accepting Registrations Soon",
+    statusColor: "bg-dark-teal",
+    text: "Campus 02. Register by mid-July. A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
+    image: cityWashington,
   },
   {
     city: "Atlanta, GA",
     dates: "October 2026",
+    status: "Accepting Registrations Soon",
+    statusColor: "bg-dark-teal",
+    text: "Campus 03. Register by late August. Southeast campus with a confirmed venue partner.",
+    image: cityAtlanta,
+  },
+  {
+    city: "Seattle, WA",
+    dates: "Fall 2026",
     status: "Coming Soon",
     statusColor: "bg-mustard",
-    text: "A Southeast campus with a confirmed venue partner.",
-    image: cityAtlanta,
+    text: "In development with the Microsoft Alumni Network. Dates and registration to follow.",
+    image: citySeattle,
   },
 ];
 
@@ -41,21 +50,20 @@ const CitiesSection = () => {
         <div className="absolute inset-0 bg-hero-navy/85" />
       </div>
 
-      <div className="container mx-auto max-w-5xl relative z-10">
+      <div className="container mx-auto max-w-6xl relative z-10">
         <AnimatedSection>
           <h2 className="text-primary-foreground font-bold text-[22px] md:text-[32px] text-center mb-3">
             Where We're Headed in 2026
           </h2>
           <p className="text-light-teal text-center text-sm md:text-base mb-12">
-            Three host cities for the 2026 cohort, each running the same Transformative Experience.
+            Each campus runs the same Transformative Experience, capped at ~40 participants from up to 8 companies.
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {cities.map((c, i) => (
-            <AnimatedSection key={c.city} delay={i * 150} animation="scale">
+            <AnimatedSection key={c.city} delay={i * 120} animation="scale">
               <div className="bg-background rounded-xl border border-light-grey shadow-[0_4px_20px_rgba(0,0,0,0.12)] hover-lift group h-full flex flex-col overflow-hidden">
-                {/* City Image */}
                 <div className="relative h-44 overflow-hidden">
                   <img
                     src={c.image}
@@ -66,12 +74,11 @@ const CitiesSection = () => {
                     height={512}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-hero-navy/60 to-transparent" />
-                  <span className={`absolute top-3 left-3 ${c.statusColor} text-primary-foreground text-xs font-bold px-3 py-1 rounded-full`}>
+                  <span className={`absolute top-3 left-3 ${c.statusColor} text-primary-foreground text-[11px] font-bold px-3 py-1 rounded-full`}>
                     {c.status}
                   </span>
                 </div>
 
-                {/* Content */}
                 <div className="p-5 flex flex-col flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <MapPin className="text-hero-orange" size={18} />
@@ -82,10 +89,13 @@ const CitiesSection = () => {
                     <p className="text-dark-teal font-normal text-sm">{c.dates}</p>
                   </div>
                   <p className="text-dark-grey font-light text-sm mb-5 flex-1">{c.text}</p>
-                  <button className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3">
-                    Get Notified
+                  <a
+                    href="mailto:campus@realizedworth.com?subject=Notify%20me%20about%20a%202026%20Regional%20Campus"
+                    className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
+                  >
+                    Notify Me
                     <ArrowRight size={16} className="transition-all" />
-                  </button>
+                  </a>
                 </div>
               </div>
             </AnimatedSection>
@@ -93,9 +103,18 @@ const CitiesSection = () => {
         </div>
 
         <AnimatedSection delay={500}>
-          <p className="text-light-teal text-center text-sm mt-10 font-normal">
-            More cities coming. Toronto, Bay Area, and Chicago are under consideration.
-          </p>
+          <div className="mt-10 text-center">
+            <p className="text-light-teal text-sm font-normal mb-3">
+              More cities coming. Philadelphia and Minneapolis are under consideration.
+            </p>
+            <a
+              href="mailto:campus@realizedworth.com?subject=Request%20a%20campus%20in%20my%20region"
+              className="inline-flex items-center gap-2 text-primary-foreground font-medium text-sm border-b border-primary-foreground/40 hover:border-primary-foreground transition-colors pb-0.5"
+            >
+              Would you like your region to be considered?
+              <ArrowRight size={14} />
+            </a>
+          </div>
         </AnimatedSection>
       </div>
     </section>

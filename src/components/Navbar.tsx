@@ -44,7 +44,7 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
             onClick={onRegisterClick}
             className="bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-7 py-3 hover:brightness-90 hover:-translate-y-0.5 transition-all"
           >
-            Register Now
+            Express Interest
           </button>
         </div>
 
@@ -75,7 +75,7 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
             onClick={() => { setMobileOpen(false); onRegisterClick(); }}
             className="w-full mt-3 bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-7 py-3.5"
           >
-            Register Now
+            Express Interest
           </button>
         </div>
       )}
