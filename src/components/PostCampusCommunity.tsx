@@ -34,7 +34,7 @@ const PostCampusCommunity = () => {
           </h2>
           <div className="w-16 h-1 bg-hero-orange mx-auto rounded-full mb-4" />
           <p className="text-dark-grey font-light text-center text-base md:text-lg max-w-2xl mx-auto mb-12">
-            Every registration includes 6 months of structured community.
+            Every registration includes the option for 6 months of structured community.
           </p>
         </AnimatedSection>
 
