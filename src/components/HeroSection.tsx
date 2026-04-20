@@ -47,7 +47,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
         </div>
 
         <h1
-          className={`text-primary-foreground font-bold text-[34px] md:text-[56px] leading-[1.1] mb-6 transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+          className={`text-primary-foreground font-bold text-[44px] md:text-[72px] leading-[1.05] mb-6 transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
           What is
           <br />
