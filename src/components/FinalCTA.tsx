@@ -44,7 +44,7 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <a
-              href="mailto:campus@realizedworth.com"
+              href="mailto:contact@realizedworth.com"
               className="border-2 border-primary-foreground/60 text-primary-foreground font-bold text-base rounded-md px-8 py-4 hover:bg-primary-foreground/10 hover:border-primary-foreground transition-all w-full sm:w-auto text-center"
             >
               Talk to Our Team

@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "Is the certification recognized?",
-    a: "The Certificate of Completion and the Certified Transformative Volunteering Leader credential are issued by Realized Worth Institute. The methodology behind the program has been developed and tested over more than fifteen years with Fortune 500 companies globally.",
+    a: "The Certificate of Completion and the Certified Transformative Volunteering Leader credential are issued by RW Institute. The methodology behind the program has been developed and tested over more than fifteen years with Fortune 500 companies globally.",
   },
   {
     q: "Can I attend virtually?",

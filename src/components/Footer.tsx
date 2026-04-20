@@ -18,20 +18,23 @@ const Footer = () => {
             {navLinks.map((link) => (
               <a
                 key={link}
-                href={link === "Contact" ? "mailto:campus@realizedworth.com" : `#${link.toLowerCase()}`}
+                href={link === "Contact" ? "mailto:contact@realizedworth.com" : `#${link.toLowerCase()}`}
                 className="text-primary-foreground/80 hover:text-primary-foreground font-normal text-sm transition-colors"
               >
                 {link}
               </a>
             ))}
           </div>
-          <a href="mailto:campus@realizedworth.com" className="text-light-teal text-sm hover:underline">
-            campus@realizedworth.com
+          <a href="mailto:contact@realizedworth.com" className="text-light-teal text-sm hover:underline">
+            contact@realizedworth.com
           </a>
         </div>
-        <div className="border-t border-light-grey/30 pt-6 text-center">
+        <div className="border-t border-light-grey/30 pt-6 text-center space-y-1">
+          <p className="text-light-teal/80 font-light italic text-[13px]">
+            Create space for transformation.
+          </p>
           <p className="text-light-grey font-light text-[13px]">
-            © 2026 Realized Worth Institute. All rights reserved.
+            © 2026 RW Institute, a Realized Worth program. All rights reserved.
           </p>
         </div>
       </div>
