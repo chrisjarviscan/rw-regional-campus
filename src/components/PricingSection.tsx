@@ -84,7 +84,7 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
                 }`}
               >
                 {tier.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-mustard text-primary-foreground text-[11px] font-bold uppercase tracking-[0.15em] px-4 py-1 rounded-sm">
+                  <span className="absolute -top-3 right-4 bg-mustard text-primary-foreground text-[11px] font-bold uppercase tracking-[0.15em] px-4 py-1 rounded-sm">
                     Most Popular
                   </span>
                 )}
