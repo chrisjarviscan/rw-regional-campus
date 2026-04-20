@@ -68,7 +68,7 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
       <div className="container mx-auto max-w-6xl">
         <AnimatedSection>
           <h2 className="text-hero-navy font-bold text-[22px] md:text-[32px] text-center mb-3">
-            Invest in Your Team's Capacity to Lead Change
+            Invest in Your Volunteer Leaders' Capacity to Drive Change
           </h2>
           <div className="w-16 h-1 bg-hero-orange mx-auto rounded-full mb-12" />
         </AnimatedSection>
