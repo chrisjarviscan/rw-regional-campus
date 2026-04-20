@@ -51,7 +51,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
         >
           Leadership and Execution Training for Employee Volunteer Leaders
           <br />
-          <span className="text-hero-orange">The Regional Campus Series</span>
+          <span className="text-hero-orange text-[44px] md:text-[72px]">The Regional Campus Series</span>
         </h1>
 
         <p
