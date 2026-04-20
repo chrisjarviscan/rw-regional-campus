@@ -42,7 +42,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
           className={`transition-all duration-1000 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
           <span className="inline-block bg-hero-orange/15 text-hero-orange border border-hero-orange/30 text-xs font-bold uppercase tracking-[0.15em] px-4 py-1.5 rounded-sm mb-6">
-            The Regional Campus Series · 2026
+            2026 REGIONAL CAMPUSES - DETROIT - WASHINGTON D.C. - ATLANTA - SEATTLE
           </span>
         </div>
 
