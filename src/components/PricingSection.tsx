@@ -101,16 +101,29 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
                     </li>
                   ))}
                 </ul>
-                <button
-                  onClick={tier.cta === "Talk to Us" ? undefined : onRegisterClick}
-                  className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 ${
-                    tier.outline
-                      ? "border-2 border-hero-navy text-hero-navy bg-transparent"
-                      : "bg-hero-orange text-primary-foreground"
-                  }`}
-                >
-                  {tier.cta}
-                </button>
+                {tier.cta === "Talk to Us" ? (
+                  <a
+                    href="mailto:nichole@realizedworth.com?subject=18-Pack%20inquiry%20%E2%80%94%20Regional%20Campus%202026"
+                    className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 text-center inline-block ${
+                      tier.outline
+                        ? "border-2 border-hero-navy text-hero-navy bg-transparent"
+                        : "bg-hero-orange text-primary-foreground"
+                    }`}
+                  >
+                    {tier.cta}
+                  </a>
+                ) : (
+                  <button
+                    onClick={onRegisterClick}
+                    className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 ${
+                      tier.outline
+                        ? "border-2 border-hero-navy text-hero-navy bg-transparent"
+                        : "bg-hero-orange text-primary-foreground"
+                    }`}
+                  >
+                    {tier.cta}
+                  </button>
+                )}
               </div>
             </AnimatedSection>
           ))}

@@ -18,7 +18,7 @@ const Footer = () => {
             {navLinks.map((link) => (
               <a
                 key={link}
-                href={link === "Contact" ? "mailto:contact@realizedworth.com" : `#${link.toLowerCase()}`}
+                href={link === "Contact" ? "mailto:nichole@realizedworth.com" : `#${link.toLowerCase()}`}
                 className="text-primary-foreground/80 hover:text-primary-foreground font-normal text-sm transition-colors"
               >
                 {link}
