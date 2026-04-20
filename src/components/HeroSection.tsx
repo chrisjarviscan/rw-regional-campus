@@ -42,16 +42,16 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
           className={`transition-all duration-1000 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
           <span className="inline-block bg-hero-orange/15 text-hero-orange border border-hero-orange/30 text-xs font-bold uppercase tracking-[0.15em] px-4 py-1.5 rounded-sm mb-6">
-            2026 Regional Campus · Detroit · Washington, DC · Atlanta
+            The Regional Campus Series · 2026
           </span>
         </div>
 
         <h1
           className={`text-primary-foreground font-bold text-[34px] md:text-[56px] leading-[1.1] mb-6 transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
-          Two days that change how
+          What is
           <br />
-          <span className="text-hero-orange">your company does good.</span>
+          <span className="text-hero-orange">Transformative Volunteering?</span>
         </h1>
 
         <p
