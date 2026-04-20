@@ -47,7 +47,7 @@ const CitiesSection = () => {
             Where We're Headed in 2026
           </h2>
           <p className="text-light-teal text-center text-sm md:text-base mb-12">
-            Three cities. Three cohorts. One Transformative Experience.
+            Three host cities for the 2026 cohort, each running the same Transformative Experience.
           </p>
         </AnimatedSection>
 

@@ -60,10 +60,10 @@ const AgendaSection = () => {
       <div className="container mx-auto max-w-5xl">
         <AnimatedSection>
           <h2 className="text-hero-navy font-bold text-[22px] md:text-[32px] text-center mb-2">
-            Two Days. Three Frameworks. One Transformation.
+            Two days, built around the Alert-Orient-Act framework.
           </h2>
           <p className="text-dark-teal text-center text-base md:text-lg mb-4 font-normal">
-            The Alert-Orient-Act Framework
+            Realized Worth's methodology, taught the way it was designed to be practiced.
           </p>
           <div className="w-16 h-1 bg-hero-orange mx-auto rounded-full mb-12" />
         </AnimatedSection>
