@@ -1,30 +1,24 @@
-import { Clock, Coffee, Wrench, MessageSquare, Brain, Map, Award, Users2 } from "lucide-react";
+import { Users2, Compass, Lightbulb, HandHeart, MessageSquare, Coffee, Wrench, Map, Award } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const day1 = [
-  { time: "9:00 AM", title: "Welcome and Orientation", desc: "Setting context for why most corporate volunteering fails to produce lasting change", icon: Clock },
-  { time: "9:30 AM", title: "The Brief", desc: "Creating proximity between volunteers and beneficiaries; surfacing the disorienting dilemma that opens people to change", icon: Brain },
-  { time: "11:00 AM", title: "Task Significance", desc: "How to design volunteer experiences where the work itself communicates meaning", icon: Map },
-  { time: "12:00 PM", title: "Lunch and Community", desc: "Facilitated networking with cross-company peers", icon: Coffee },
-  { time: "1:00 PM", title: "Guiding Volunteers", desc: "The Tourist-Traveler-Guide framework: recognizing where each volunteer is and meeting them at their highest level of contribution", icon: Users2 },
-  { time: "2:30 PM", title: "Practice Lab", desc: "Hands-on application: writing briefs and designing orientation touchpoints for real programs", icon: Wrench },
-  { time: "4:00 PM", title: "Day 1 Debrief", desc: "Facilitated reflection on the day's learning", icon: MessageSquare },
+  { title: "Welcome and Community Building", desc: "Meet your cohort: peers from across companies and industries who came to do this work better.", icon: Users2 },
+  { title: "Understanding the Employee Volunteering Landscape", desc: "Where corporate volunteering sits today, what works, and where it falls short of what people came for.", icon: Compass },
+  { title: "What Is Transformative Volunteering, and Why Does It Matter?", desc: "The shift from one-off activity to experiences that change how people see their work, their company, and their community.", icon: Lightbulb },
+  { title: "Train-the-Trainer Volunteer Experience", desc: "An immersive ~4-hour session with a real nonprofit partner, designed and debriefed the way you'll lead them at home.", icon: HandHeart },
+  { title: "On-Site Reception and Reflection", desc: "Food, conversation, and structured reflection to close the day.", icon: Coffee },
 ];
 
 const day2 = [
-  { time: "9:00 AM", title: "Day 1 Recap and Reset", desc: "Reconnecting with key insights from Day 1", icon: Clock },
-  { time: "9:30 AM", title: "The Debrief", desc: "Sensemaking and critical reflection: the skill that separates transformation from a nice day out", icon: Brain },
-  { time: "11:00 AM", title: "Troubleshooting the Debrief", desc: "Common failure modes and how to recover when debriefs go flat", icon: Wrench },
-  { time: "12:00 PM", title: "Lunch and Community", desc: "", icon: Coffee },
-  { time: "1:00 PM", title: "Program Design Integration", desc: "Applying Alert-Orient-Act to your actual programs: mapping your current state and designing next moves", icon: Map },
-  { time: "2:30 PM", title: "Certification Pathway", desc: "Overview of the two-stage credential and what comes after the Campus", icon: Award },
-  { time: "3:30 PM", title: "Action Planning", desc: "Each participant leaves with a concrete 90-day plan", icon: MessageSquare },
-  { time: "4:30 PM", title: "Closing and Cohort Connection", desc: "Introduction to the ongoing cohort community", icon: Users2 },
+  { title: "Community Debrief: What Have We Learned So Far?", desc: "Reconvene with your cohort and turn yesterday's experience into shared insight.", icon: MessageSquare },
+  { title: "Planning and Facilitating Volunteer Events", desc: "How to recruit and motivate volunteers, work with nonprofit partners, make events safe and inclusive, respond when things go wrong, and recognize the people leading alongside you.", icon: Wrench },
+  { title: "Cross-Company Peer Design Workshop", desc: "Bring your real program. Get feedback from peers who run programs of their own.", icon: Map },
+  { title: "Cohort Commitments: Actions You'll Lead at Home", desc: "Leave with a concrete plan and a community to lean on while you put it into practice.", icon: Award },
 ];
 
 const TimelineDay = ({ title, subtitle, items, delay }: { title: string; subtitle: string; items: typeof day1; delay: number }) => (
   <AnimatedSection animation={delay === 0 ? "fade-left" : "fade-right"} delay={delay}>
-    <div className="bg-background rounded-xl border border-light-grey p-6 md:p-8 shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+    <div className="bg-background rounded-xl border border-light-grey p-6 md:p-8 shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-full">
       <div className="flex items-center gap-3 mb-6">
         <span className="bg-hero-orange text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
           {subtitle}
@@ -33,18 +27,15 @@ const TimelineDay = ({ title, subtitle, items, delay }: { title: string; subtitl
       </div>
       <div className="relative pl-6 border-l-2 border-hero-orange/30">
         {items.map((item, i) => (
-          <div key={i} className="mb-5 last:mb-0 relative group">
+          <div key={i} className="mb-6 last:mb-0 relative group">
             <div className="absolute -left-[25px] top-1.5 w-3 h-3 rounded-full bg-hero-orange group-hover:scale-125 transition-transform" />
             <div className="flex items-start gap-3">
               <div className="hidden sm:flex shrink-0 w-8 h-8 rounded-md bg-dark-teal/10 items-center justify-center mt-0.5">
                 <item.icon className="text-dark-teal" size={16} />
               </div>
               <div>
-                <div className="text-hero-orange font-bold text-xs mb-0.5">{item.time}</div>
                 <div className="text-hero-navy font-medium text-base">{item.title}</div>
-                {item.desc && (
-                  <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">{item.desc}</p>
-                )}
+                <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">{item.desc}</p>
               </div>
             </div>
           </div>
@@ -60,17 +51,22 @@ const AgendaSection = () => {
       <div className="container mx-auto max-w-5xl">
         <AnimatedSection>
           <h2 className="text-hero-navy font-bold text-[22px] md:text-[32px] text-center mb-2">
-            Two days, built around the Alert-Orient-Act framework.
+            Two days, designed to be lived through, not lectured at.
           </h2>
-          <p className="text-dark-teal text-center text-base md:text-lg mb-4 font-normal">
-            Realized Worth's methodology, taught the way it was designed to be practiced.
+          <p className="text-dark-teal text-center text-base md:text-lg mb-4 font-normal max-w-2xl mx-auto">
+            Day one builds the foundation through an immersive volunteer experience. Day two turns that experience into a plan you can lead at home.
           </p>
           <div className="w-16 h-1 bg-hero-orange mx-auto rounded-full mb-12" />
         </AnimatedSection>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <TimelineDay title="Day 1" subtitle="ALERT & ORIENT" items={day1} delay={0} />
-          <TimelineDay title="Day 2" subtitle="ACT & INTEGRATE" items={day2} delay={150} />
+          <TimelineDay title="Day 1" subtitle="FOUNDATION & IMMERSION" items={day1} delay={0} />
+          <TimelineDay title="Day 2" subtitle="APPLICATION & INTEGRATION" items={day2} delay={150} />
         </div>
+        <AnimatedSection delay={400}>
+          <p className="text-dark-grey font-light text-[13px] text-center max-w-xl mx-auto mt-10">
+            All sessions include meals, materials, and networking opportunities.
+          </p>
+        </AnimatedSection>
       </div>
     </section>
   );

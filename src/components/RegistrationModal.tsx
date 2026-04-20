@@ -7,7 +7,6 @@ interface RegistrationModalProps {
 }
 
 const RegistrationModal = ({ open, onClose }: RegistrationModalProps) => {
-  const [regType, setRegType] = useState<"individual" | "corporate">("individual");
   const [submitted, setSubmitted] = useState(false);
 
   if (!open) return null;
@@ -29,86 +28,67 @@ const RegistrationModal = ({ open, onClose }: RegistrationModalProps) => {
 
         {submitted ? (
           <div className="text-center py-10">
-            <h3 className="text-hero-navy font-bold text-xl mb-3">Thank you for registering.</h3>
-            <p className="text-dark-grey font-light">You will receive a confirmation email within 24 hours.</p>
+            <h3 className="text-hero-navy font-bold text-xl mb-3">Your name's on the list.</h3>
+            <p className="text-dark-grey font-light">
+              We'll be in touch as soon as registration opens for the campus you chose. Watch your inbox for a confirmation in the next few minutes.
+            </p>
           </div>
         ) : (
           <>
-            <h3 className="text-hero-navy font-bold text-xl mb-6">Register for the Regional Campus</h3>
+            <h3 className="text-hero-navy font-bold text-xl mb-2">Express Interest</h3>
+            <p className="text-dark-grey font-light text-sm mb-6">
+              Add your name to the 2026 list. We'll let you know the moment registration opens for the campus you choose. No commitment.
+            </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input label="Full Name" required />
               <Input label="Email Address" type="email" required />
               <Input label="Company / Organization" required />
-              <Input label="Job Title" required />
 
               <div>
-                <label className="block text-hero-navy font-medium text-sm mb-1">Campus</label>
+                <label className="block text-hero-navy font-medium text-sm mb-1">Which campus?</label>
                 <select className="w-full border border-light-grey rounded-md px-3 py-2.5 text-dark-grey font-light text-sm focus:outline-none focus:ring-2 focus:ring-hero-orange" required>
                   <option value="">Select a campus</option>
-                  <option>Seattle</option>
-                  <option>Detroit</option>
-                  <option>Atlanta</option>
+                  <option>Detroit — August 2026</option>
+                  <option>Washington, DC — September 2026</option>
+                  <option>Atlanta — October 2026</option>
+                  <option>Seattle — Fall 2026</option>
+                  <option>Not sure yet / open to options</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-hero-navy font-medium text-sm mb-1">Registration Type</label>
-                <div className="flex gap-4">
+                <label className="block text-hero-navy font-medium text-sm mb-2">I'm interested as</label>
+                <div className="flex flex-col sm:flex-row gap-3">
                   <label className="flex items-center gap-2 text-dark-grey font-light text-sm cursor-pointer">
-                    <input type="radio" name="regType" checked={regType === "individual"} onChange={() => setRegType("individual")} className="accent-hero-orange" />
-                    Individual
+                    <input type="radio" name="regType" defaultChecked className="accent-hero-orange" />
+                    An individual attendee
                   </label>
                   <label className="flex items-center gap-2 text-dark-grey font-light text-sm cursor-pointer">
-                    <input type="radio" name="regType" checked={regType === "corporate"} onChange={() => setRegType("corporate")} className="accent-hero-orange" />
-                    Corporate Package
+                    <input type="radio" name="regType" className="accent-hero-orange" />
+                    Representing a company / team
                   </label>
                 </div>
               </div>
 
-              {regType === "corporate" && (
-                <>
-                  <div>
-                    <label className="block text-hero-navy font-medium text-sm mb-1">Package Size</label>
-                    <select className="w-full border border-light-grey rounded-md px-3 py-2.5 text-dark-grey font-light text-sm focus:outline-none focus:ring-2 focus:ring-hero-orange" required>
-                      <option>6-Pack</option>
-                      <option>12-Pack</option>
-                      <option>18-Pack</option>
-                    </select>
-                  </div>
-                  <Input label="Number of Attendees for This Campus" type="number" required />
-                  <Input label="Billing Contact Name" required />
-                  <Input label="Billing Contact Email" type="email" required />
-                </>
-              )}
-
               <div>
-                <label className="block text-hero-navy font-medium text-sm mb-1">How did you hear about the Regional Campus?</label>
-                <select className="w-full border border-light-grey rounded-md px-3 py-2.5 text-dark-grey font-light text-sm focus:outline-none focus:ring-2 focus:ring-hero-orange">
-                  <option value="">Select one (optional)</option>
-                  <option>Colleague</option>
-                  <option>LinkedIn</option>
-                  <option>Conference</option>
-                  <option>Web Search</option>
-                  <option>Other</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-hero-navy font-medium text-sm mb-1">Biggest challenge with your current volunteer program?</label>
-                <textarea className="w-full border border-light-grey rounded-md px-3 py-2.5 text-dark-grey font-light text-sm focus:outline-none focus:ring-2 focus:ring-hero-orange h-20 resize-none" />
-              </div>
-
-              <div>
-                <label className="block text-hero-navy font-medium text-sm mb-1">Dietary restrictions or accessibility needs</label>
-                <textarea className="w-full border border-light-grey rounded-md px-3 py-2.5 text-dark-grey font-light text-sm focus:outline-none focus:ring-2 focus:ring-hero-orange h-20 resize-none" />
+                <label className="block text-hero-navy font-medium text-sm mb-1">
+                  What excites you most about attending a campus?
+                </label>
+                <textarea
+                  className="w-full border border-light-grey rounded-md px-3 py-2.5 text-dark-grey font-light text-sm focus:outline-none focus:ring-2 focus:ring-hero-orange h-24 resize-none"
+                  placeholder="A sentence or two is plenty."
+                />
               </div>
 
               <button
                 type="submit"
                 className="w-full bg-hero-orange text-primary-foreground font-bold text-base rounded-md py-3.5 hover:brightness-90 transition-all mt-2"
               >
-                Complete Registration
+                Add Me to the List
               </button>
+              <p className="text-dark-grey font-light text-xs text-center">
+                We'll only use your details to follow up about the Regional Campus.
+              </p>
             </form>
           </>
         )}

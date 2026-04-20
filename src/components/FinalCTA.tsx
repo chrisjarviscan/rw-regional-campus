@@ -15,7 +15,7 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
       <div className="container mx-auto max-w-3xl text-center relative z-10">
         <AnimatedSection>
           <div className="inline-flex items-center bg-primary-foreground/5 text-primary-foreground text-xs font-bold uppercase tracking-[0.15em] px-4 py-1.5 rounded-sm mb-6 border border-primary-foreground/20">
-            Capped at 40–50 participants per campus
+            Capped at ~40 participants per campus
           </div>
         </AnimatedSection>
 
@@ -29,7 +29,7 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
 
         <AnimatedSection delay={300}>
           <p className="text-light-teal text-base md:text-lg mb-10 font-normal max-w-2xl mx-auto">
-            Register for the 2026 Regional Campus and bring Transformative Volunteering to your organization.
+            Add your name to the 2026 list. We'll let you know when registration opens for the campus you choose.
           </p>
         </AnimatedSection>
 
@@ -39,14 +39,14 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
               onClick={onRegisterClick}
               className="group bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-8 py-4 hover:brightness-90 hover:-translate-y-0.5 transition-all w-full sm:w-auto inline-flex items-center justify-center gap-2"
             >
-              Register Now
+              Express Interest
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <a
-              href="mailto:contact@realizedworth.com"
+              href="mailto:nichole@realizedworth.com"
               className="border-2 border-primary-foreground/60 text-primary-foreground font-bold text-base rounded-md px-8 py-4 hover:bg-primary-foreground/10 hover:border-primary-foreground transition-all w-full sm:w-auto text-center"
             >
-              Talk to Our Team
+              Talk to Nichole
             </a>
           </div>
         </AnimatedSection>

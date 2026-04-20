@@ -4,55 +4,55 @@ import AnimatedSection from "./AnimatedSection";
 const tiers = [
   {
     name: "Individual",
-    price: "$1,895",
+    price: "$2,100",
     perSeat: "per person",
     features: [
-      "Full two-day program",
-      "All materials and meals included",
-      "Certificate of Completion",
-      "Post-event cohort community access",
+      "Any single 2026 campus",
+      "Two-day immersive in-person program",
+      "Stage 1 Certificate of Completion",
+      "6-month cohort access included",
     ],
-    cta: "Register Now",
+    cta: "Express Interest",
     popular: false,
     outline: false,
   },
   {
     name: "6-Pack",
-    price: "$15,000",
-    perSeat: "$2,500 per seat",
+    price: "$12,000",
+    perSeat: "$2,000 per seat · 5% off",
     features: [
-      "6 registrations from one organization",
+      "6 seats across any 2026 campuses",
       "Everything in Individual",
       "Group onboarding call",
-      "Post-event team debrief session",
+      "Post-event team debrief",
     ],
-    cta: "Reserve Your Pack",
+    cta: "Get Notified",
     popular: true,
     outline: false,
   },
   {
     name: "12-Pack",
-    price: "$27,000",
-    perSeat: "$2,250 per seat",
+    price: "$22,800",
+    perSeat: "$1,900 per seat · 10% off",
     features: [
-      "12 registrations",
+      "12 seats across any 2026 campuses",
       "Everything in 6-Pack",
-      "Priority city selection across 2026 campuses",
+      "Priority city selection",
     ],
-    cta: "Reserve Your Pack",
+    cta: "Get Notified",
     popular: false,
     outline: false,
   },
   {
     name: "18-Pack",
-    price: "$33,750",
-    perSeat: "$1,875 per seat",
+    price: "$32,130",
+    perSeat: "$1,785 per seat · 15% off",
     features: [
-      "18 registrations",
-      "Everything in 12-Pack",
+      "18 seats across any 2026 campuses",
+      "Full-scale capability development",
       "Dedicated account coordination",
     ],
-    cta: "Contact Us",
+    cta: "Talk to Us",
     popular: false,
     outline: true,
   },
@@ -102,7 +102,7 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
                   ))}
                 </ul>
                 <button
-                  onClick={tier.cta === "Register Now" || tier.cta === "Reserve Your Pack" ? onRegisterClick : undefined}
+                  onClick={tier.cta === "Talk to Us" ? undefined : onRegisterClick}
                   className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 ${
                     tier.outline
                       ? "border-2 border-hero-navy text-hero-navy bg-transparent"
@@ -117,8 +117,8 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
         </div>
 
         <AnimatedSection delay={600}>
-          <p className="text-dark-grey font-light text-[13px] text-center max-w-xl mx-auto mt-8">
-            All prices in USD. Corporate packages can be split across multiple campuses. No single organization may hold more than one-third of seats at any campus to preserve the multi-company learning environment. Net 30 payment terms for corporate invoices.
+          <p className="text-dark-grey font-light text-[13px] text-center max-w-2xl mx-auto mt-8">
+            All prices in USD. Multi-pack seats can be split across any combination of 2026 campuses. To preserve the multi-company learning environment, no single organization may hold more than one-third of seats at any campus. Net 30 payment terms for corporate invoices.
           </p>
         </AnimatedSection>
       </div>
