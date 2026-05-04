@@ -38,7 +38,7 @@ const RegistrationModal = ({ open, onClose }: RegistrationModalProps) => {
     setSubmitting(false);
 
     if (insertError) {
-      setError("Something went wrong. Please try again, or email nichole@realizedworth.com.");
+      setError("Something went wrong. Please try again, or email contact@rw.institute.");
       return;
     }
 
