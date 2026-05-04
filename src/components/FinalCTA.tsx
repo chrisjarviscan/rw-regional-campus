@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import { trackMailto } from "@/lib/trackMailto";
 
 interface FinalCTAProps {
   onRegisterClick: () => void;
