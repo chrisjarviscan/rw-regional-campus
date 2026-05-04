@@ -117,7 +117,15 @@ const CitiesSection = () => {
               More cities coming. Philadelphia and Minneapolis are under consideration.
             </p>
             <a
-              href="mailto:campus@realizedworth.com?subject=Request%20a%20campus%20in%20my%20region"
+              href="mailto:contact@rw.institute?subject=Request%20a%20campus%20in%20my%20region"
+              onClick={() =>
+                trackMailto({
+                  ctaLabel: "Request a campus in my region",
+                  ctaLocation: "Cities footer",
+                  emailTo: "contact@rw.institute",
+                  subject: "Request a campus in my region",
+                })
+              }
               className="inline-flex items-center gap-2 text-primary-foreground font-medium text-sm border-b border-primary-foreground/40 hover:border-primary-foreground transition-colors pb-0.5"
             >
               Would you like your region to be considered?
