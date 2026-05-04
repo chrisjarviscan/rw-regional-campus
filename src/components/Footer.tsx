@@ -20,7 +20,12 @@ const Footer = () => {
             {navLinks.map((link) => (
               <a
                 key={link}
-                href={link === "Contact" ? "mailto:nichole@realizedworth.com" : `#${link.toLowerCase()}`}
+                href={link === "Contact" ? `mailto:${CONTACT_EMAIL}` : `#${link.toLowerCase()}`}
+                onClick={
+                  link === "Contact"
+                    ? () => trackMailto({ ctaLabel: "Contact", ctaLocation: "Footer nav", emailTo: CONTACT_EMAIL })
+                    : undefined
+                }
                 className="text-primary-foreground/80 hover:text-primary-foreground font-normal text-sm transition-colors"
               >
                 {link}
@@ -28,8 +33,12 @@ const Footer = () => {
             ))}
           </div>
           <div className="flex flex-col items-center md:items-end gap-1">
-            <a href="mailto:nichole@realizedworth.com" className="text-light-teal text-sm hover:underline">
-              nichole@realizedworth.com
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              onClick={() => trackMailto({ ctaLabel: "Email address", ctaLocation: "Footer", emailTo: CONTACT_EMAIL })}
+              className="text-light-teal text-sm hover:underline"
+            >
+              {CONTACT_EMAIL}
             </a>
             <span className="text-light-grey/70 text-xs">
               Nichole Giller · Director of Experience &amp; Integration
