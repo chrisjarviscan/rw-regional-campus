@@ -38,7 +38,7 @@ const CampusTeam = () => {
                   </p>
                   <a
                     href="mailto:nichole@realizedworth.com"
-                    onClick={() => trackMailto("campus_team_nichole")}
+                    onClick={() => trackMailto({ ctaLabel: "Email Nichole", ctaLocation: "campus_team", emailTo: "nichole@realizedworth.com" })}
                     className="text-sm font-medium text-hero-navy hover:text-hero-orange transition-colors underline underline-offset-4"
                   >
                     nichole@realizedworth.com
