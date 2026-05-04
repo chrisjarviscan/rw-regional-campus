@@ -26,18 +26,23 @@ const RegistrationModal = ({ open, onClose }: RegistrationModalProps) => {
     setError(null);
     setSubmitting(true);
 
-    const { error: insertError } = await supabase.from("interest_submissions").insert({
-      full_name: fullName,
-      email,
-      company,
-      campus,
-      interest_type: interestType,
-      excitement: excitement || null,
+    const { error: invokeError } = await supabase.functions.invoke("submit-form", {
+      body: {
+        type: "interest",
+        data: {
+          full_name: fullName,
+          email,
+          company,
+          campus,
+          interest_type: interestType,
+          excitement: excitement || "",
+        },
+      },
     });
 
     setSubmitting(false);
 
-    if (insertError) {
+    if (invokeError) {
       setError("Something went wrong. Please try again, or email contact@rw.institute.");
       return;
     }
