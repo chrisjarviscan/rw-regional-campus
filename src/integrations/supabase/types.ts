@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      host_applications: {
+        Row: {
+          booking_lead_time: string
+          champion_readiness: string
+          city: string | null
+          company: string
+          contribution_level: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          interest_reason: string | null
+          preferred_quarter: string
+          venue_capacity: string
+        }
+        Insert: {
+          booking_lead_time: string
+          champion_readiness: string
+          city?: string | null
+          company: string
+          contribution_level: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          interest_reason?: string | null
+          preferred_quarter: string
+          venue_capacity: string
+        }
+        Update: {
+          booking_lead_time?: string
+          champion_readiness?: string
+          city?: string | null
+          company?: string
+          contribution_level?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          interest_reason?: string | null
+          preferred_quarter?: string
+          venue_capacity?: string
+        }
+        Relationships: []
+      }
       interest_submissions: {
         Row: {
           campus: string
