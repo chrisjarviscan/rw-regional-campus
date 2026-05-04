@@ -1,5 +1,7 @@
 import rwLogoWhite from "@/assets/logos/RW_Logo_White_Web.png";
+import { trackMailto } from "@/lib/trackMailto";
 
+const CONTACT_EMAIL = "contact@rw.institute";
 const navLinks = ["Program", "Agenda", "Cities", "Pricing", "Certification", "FAQ", "Contact"];
 
 const Footer = () => {
