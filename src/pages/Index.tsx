@@ -11,6 +11,7 @@ import PostCampusCommunity from "@/components/PostCampusCommunity";
 import SocialProof from "@/components/SocialProof";
 import BecomeHost from "@/components/BecomeHost";
 import FitAssessment from "@/components/FitAssessment";
+import CampusTeam from "@/components/CampusTeam";
 import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -34,6 +35,7 @@ const Index = () => {
         <SocialProof />
       <BecomeHost />
       <FitAssessment onExpressInterest={openModal} />
+      <CampusTeam />
       <FAQSection />
       <FinalCTA onRegisterClick={openModal} />
       <Footer />
