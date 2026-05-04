@@ -10,6 +10,7 @@ import CertificationSection from "@/components/CertificationSection";
 import PostCampusCommunity from "@/components/PostCampusCommunity";
 import SocialProof from "@/components/SocialProof";
 import BecomeHost from "@/components/BecomeHost";
+import FitAssessment from "@/components/FitAssessment";
 import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -32,6 +33,7 @@ const Index = () => {
         <PostCampusCommunity />
         <SocialProof />
       <BecomeHost />
+      <FitAssessment onExpressInterest={openModal} />
       <FAQSection />
       <FinalCTA onRegisterClick={openModal} />
       <Footer />
