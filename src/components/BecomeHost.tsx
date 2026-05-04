@@ -1,6 +1,7 @@
 import { Building, Star, Eye, ArrowRight } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
+import { trackMailto } from "@/lib/trackMailto";
 
 const benefits = [
   { icon: Star, label: "Preferred Registration Access" },
