@@ -40,7 +40,15 @@ const BecomeHost = () => {
 
         <AnimatedSection delay={500}>
           <a
-            href="mailto:campus@realizedworth.com?subject=Host%20a%20Regional%20Campus%20in%20our%20city"
+            href="mailto:contact@rw.institute?subject=Host%20a%20Regional%20Campus%20in%20our%20city"
+            onClick={() =>
+              trackMailto({
+                ctaLabel: "Become a Host",
+                ctaLocation: "Become a Host section",
+                emailTo: "contact@rw.institute",
+                subject: "Host a Regional Campus in our city",
+              })
+            }
             className="group bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-8 py-4 hover:brightness-90 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2"
           >
             Become a Host
