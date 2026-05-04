@@ -91,7 +91,15 @@ const CitiesSection = () => {
                   </div>
                   <p className="text-dark-grey font-light text-sm mb-5 flex-1">{c.text}</p>
                   <a
-                    href="mailto:campus@realizedworth.com?subject=Notify%20me%20about%20a%202026%20Regional%20Campus"
+                    href="mailto:contact@rw.institute?subject=Notify%20me%20about%20a%202026%20Regional%20Campus"
+                    onClick={() =>
+                      trackMailto({
+                        ctaLabel: "Notify Me",
+                        ctaLocation: `Cities · ${c.city}`,
+                        emailTo: "contact@rw.institute",
+                        subject: "Notify me about a 2026 Regional Campus",
+                      })
+                    }
                     className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
                   >
                     Notify Me
