@@ -186,20 +186,25 @@ const HostQuestionnaireModal = ({ open, onClose }: HostQuestionnaireModalProps) 
   const submit = async () => {
     setError(null);
     setSubmitting(true);
-    const { error: insertError } = await supabase.from("host_applications").insert({
-      full_name: answers.full_name,
-      email: answers.email,
-      company: answers.company,
-      city: answers.city || null,
-      venue_capacity: answers.venue_capacity,
-      booking_lead_time: answers.booking_lead_time,
-      champion_readiness: answers.champion_readiness,
-      interest_reason: answers.interest_reason || null,
-      contribution_level: answers.contribution_level,
-      preferred_quarter: answers.preferred_quarter,
+    const { error: invokeError } = await supabase.functions.invoke("submit-form", {
+      body: {
+        type: "host_application",
+        data: {
+          full_name: answers.full_name,
+          email: answers.email,
+          company: answers.company,
+          city: answers.city || "",
+          venue_capacity: answers.venue_capacity,
+          booking_lead_time: answers.booking_lead_time,
+          champion_readiness: answers.champion_readiness,
+          interest_reason: answers.interest_reason || "",
+          contribution_level: answers.contribution_level,
+          preferred_quarter: answers.preferred_quarter,
+        },
+      },
     });
     setSubmitting(false);
-    if (insertError) {
+    if (invokeError) {
       setError("Something went wrong. Please try again, or email contact@rw.institute.");
       return;
     }
