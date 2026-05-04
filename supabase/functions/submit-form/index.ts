@@ -18,8 +18,8 @@ const INTEREST_HEADERS = [
 ];
 
 const SHEET_TABS = {
-  host_application: { title: "Host Applications", headers: HOST_HEADERS },
-  interest: { title: "Interest Submissions", headers: INTEREST_HEADERS },
+  host_application: { title: "HostApplications", headers: HOST_HEADERS },
+  interest: { title: "InterestSubmissions", headers: INTEREST_HEADERS },
 };
 
 async function gw(url: string, init: RequestInit = {}) {
