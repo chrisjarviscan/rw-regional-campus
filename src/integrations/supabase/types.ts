@@ -47,6 +47,42 @@ export type Database = {
         }
         Relationships: []
       }
+      mailto_clicks: {
+        Row: {
+          created_at: string
+          cta_label: string
+          cta_location: string | null
+          email_to: string
+          id: string
+          page_path: string | null
+          referrer: string | null
+          subject: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          cta_label: string
+          cta_location?: string | null
+          email_to: string
+          id?: string
+          page_path?: string | null
+          referrer?: string | null
+          subject?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          cta_label?: string
+          cta_location?: string | null
+          email_to?: string
+          id?: string
+          page_path?: string | null
+          referrer?: string | null
+          subject?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

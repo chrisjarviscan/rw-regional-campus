@@ -5,6 +5,7 @@ import cityDetroit from "@/assets/images/city-detroit.jpg";
 import cityWashington from "@/assets/images/city-washington.jpg";
 import cityAtlanta from "@/assets/images/city-atlanta.jpg";
 import citySeattle from "@/assets/images/city-seattle.jpg";
+import { trackMailto } from "@/lib/trackMailto";
 
 const cities = [
   {
@@ -90,7 +91,15 @@ const CitiesSection = () => {
                   </div>
                   <p className="text-dark-grey font-light text-sm mb-5 flex-1">{c.text}</p>
                   <a
-                    href="mailto:campus@realizedworth.com?subject=Notify%20me%20about%20a%202026%20Regional%20Campus"
+                    href="mailto:contact@rw.institute?subject=Notify%20me%20about%20a%202026%20Regional%20Campus"
+                    onClick={() =>
+                      trackMailto({
+                        ctaLabel: "Notify Me",
+                        ctaLocation: `Cities · ${c.city}`,
+                        emailTo: "contact@rw.institute",
+                        subject: "Notify me about a 2026 Regional Campus",
+                      })
+                    }
                     className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
                   >
                     Notify Me
@@ -108,7 +117,15 @@ const CitiesSection = () => {
               More cities coming. Philadelphia and Minneapolis are under consideration.
             </p>
             <a
-              href="mailto:campus@realizedworth.com?subject=Request%20a%20campus%20in%20my%20region"
+              href="mailto:contact@rw.institute?subject=Request%20a%20campus%20in%20my%20region"
+              onClick={() =>
+                trackMailto({
+                  ctaLabel: "Request a campus in my region",
+                  ctaLocation: "Cities footer",
+                  emailTo: "contact@rw.institute",
+                  subject: "Request a campus in my region",
+                })
+              }
               className="inline-flex items-center gap-2 text-primary-foreground font-medium text-sm border-b border-primary-foreground/40 hover:border-primary-foreground transition-colors pb-0.5"
             >
               Would you like your region to be considered?
