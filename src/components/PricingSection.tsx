@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import { trackMailto } from "@/lib/trackMailto";
 
 const tiers = [
   {
