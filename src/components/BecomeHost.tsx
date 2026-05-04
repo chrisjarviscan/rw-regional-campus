@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { Building, Star, Eye, ArrowRight } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
-import { trackMailto } from "@/lib/trackMailto";
+import HostQuestionnaireModal from "./HostQuestionnaireModal";
 
 const benefits = [
   { icon: Star, label: "Preferred Registration Access" },
@@ -10,6 +11,8 @@ const benefits = [
 ];
 
 const BecomeHost = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="relative py-16 md:py-28 px-4 overflow-hidden">
       <div className="absolute inset-0">
@@ -39,23 +42,18 @@ const BecomeHost = () => {
         </div>
 
         <AnimatedSection delay={500}>
-          <a
-            href="mailto:contact@rw.institute?subject=Host%20a%20Regional%20Campus%20in%20our%20city"
-            onClick={() =>
-              trackMailto({
-                ctaLabel: "Become a Host",
-                ctaLocation: "Become a Host section",
-                emailTo: "contact@rw.institute",
-                subject: "Host a Regional Campus in our city",
-              })
-            }
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
             className="group bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-8 py-4 hover:brightness-90 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2"
           >
             Become a Host
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </a>
+          </button>
         </AnimatedSection>
       </div>
+
+      <HostQuestionnaireModal open={open} onClose={() => setOpen(false)} />
     </section>
   );
 };
