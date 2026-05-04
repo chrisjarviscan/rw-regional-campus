@@ -5,6 +5,7 @@ import cityDetroit from "@/assets/images/city-detroit.jpg";
 import cityWashington from "@/assets/images/city-washington.jpg";
 import cityAtlanta from "@/assets/images/city-atlanta.jpg";
 import citySeattle from "@/assets/images/city-seattle.jpg";
+import { trackMailto } from "@/lib/trackMailto";
 
 const cities = [
   {
