@@ -52,6 +52,18 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
             </a>
           </div>
         </AnimatedSection>
+
+        <AnimatedSection delay={600}>
+          <p className="text-light-teal/80 text-sm mt-10">
+            Need to convince a sponsor first?{" "}
+            <a
+              href="/business-case/"
+              className="text-hero-orange font-bold underline underline-offset-4 hover:brightness-110"
+            >
+              Build your business case →
+            </a>
+          </p>
+        </AnimatedSection>
       </div>
     </section>
   );
