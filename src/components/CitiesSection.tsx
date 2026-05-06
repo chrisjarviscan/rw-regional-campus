@@ -15,6 +15,7 @@ const cities = [
     statusColor: "bg-dark-teal",
     text: "Campus 01. Register by mid-June. Hosted at a corporate venue in metro Detroit.",
     image: cityDetroit,
+    campusValue: "Detroit — August 2026",
   },
   {
     city: "Washington, DC",
@@ -23,6 +24,7 @@ const cities = [
     statusColor: "bg-dark-teal",
     text: "Campus 02. Register by mid-July. A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
     image: cityWashington,
+    campusValue: "Washington, DC — September 2026",
   },
   {
     city: "Atlanta, GA",
@@ -31,6 +33,7 @@ const cities = [
     statusColor: "bg-dark-teal",
     text: "Campus 03. Register by late August. Southeast campus with a confirmed venue partner.",
     image: cityAtlanta,
+    campusValue: "Atlanta — October 2026",
   },
   {
     city: "Seattle, WA",
@@ -39,6 +42,7 @@ const cities = [
     statusColor: "bg-mustard",
     text: "In development with the Microsoft Alumni Network. Dates and registration to follow.",
     image: citySeattle,
+    campusValue: "Seattle — Fall 2026",
   },
 ];
 
