@@ -19,7 +19,15 @@ import RegistrationModal from "@/components/RegistrationModal";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const openModal = () => setModalOpen(true);
+  const [initialCampus, setInitialCampus] = useState<string | undefined>(undefined);
+  const openModal = () => {
+    setInitialCampus(undefined);
+    setModalOpen(true);
+  };
+  const openModalWithCampus = (campus: string) => {
+    setInitialCampus(campus);
+    setModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen">
@@ -28,7 +36,7 @@ const Index = () => {
       <ProgramOverview />
       <WhoThisIsFor />
       <AgendaSection />
-      <CitiesSection />
+      <CitiesSection onNotifyClick={openModalWithCampus} />
       <PricingSection onRegisterClick={openModal} />
         <CertificationSection />
         <PostCampusCommunity />
@@ -39,7 +47,11 @@ const Index = () => {
       <FAQSection />
       <FinalCTA onRegisterClick={openModal} />
       <Footer />
-      <RegistrationModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <RegistrationModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        initialCampus={initialCampus}
+      />
     </div>
   );
 };
