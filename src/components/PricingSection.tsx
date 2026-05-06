@@ -104,13 +104,36 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
                 </ul>
                 {tier.cta === "Talk to Us" ? (
                   <a
-                    href="mailto:contact@rw.institute?subject=18-Pack%20inquiry%20%E2%80%94%20Regional%20Campus%202026"
+                    href="mailto:nichole@realizedworth.com?subject=18-Pack%20inquiry%20%E2%80%94%20Regional%20Campus%202026&cc=contact@rw.institute"
                     onClick={() =>
                       trackMailto({
                         ctaLabel: "18-Pack — Talk to Us",
                         ctaLocation: "Pricing · 18-Pack tier",
-                        emailTo: "contact@rw.institute",
+                        emailTo: "nichole@realizedworth.com",
                         subject: "18-Pack inquiry — Regional Campus 2026",
+                      })
+                    }
+                    className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 text-center inline-block ${
+                      tier.outline
+                        ? "border-2 border-hero-navy text-hero-navy bg-transparent"
+                        : "bg-hero-orange text-primary-foreground"
+                    }`}
+                  >
+                    {tier.cta}
+                  </a>
+                ) : tier.cta === "Purchase" ? (
+                  <a
+                    href={`mailto:nichole@realizedworth.com?subject=${encodeURIComponent(
+                      `I'd like to purchase the ${tier.name} — Regional Campus 2026`
+                    )}&cc=contact@rw.institute&body=${encodeURIComponent(
+                      `Hi Nichole,\n\nI'd like to purchase the ${tier.name} (${tier.price}) for the 2026 Regional Campus program.\n\nPreferred campus / session: \nCompany / Organization: \nName: \nPreferred payment method (invoice or credit card — note 5% CC fee): \n\nThanks,\n`
+                    )}`}
+                    onClick={() =>
+                      trackMailto({
+                        ctaLabel: `${tier.name} — Purchase`,
+                        ctaLocation: `Pricing · ${tier.name} tier`,
+                        emailTo: "nichole@realizedworth.com",
+                        subject: `I'd like to purchase the ${tier.name} — Regional Campus 2026`,
                       })
                     }
                     className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 text-center inline-block ${
