@@ -1,97 +1,73 @@
-## Make Your Business Case — phased build
+## Goal
 
-The uploaded spec is ~1000 lines covering research + multi-step form + personalized PPTX. Building it all at once is risky: if research produces weak data, the rest is wasted. Recommend three phases. **This plan covers Phase 1 in detail; Phases 2–3 are scoped but built only after Phase 1 is validated.**
+Replace the current 8-slide generic deck with a brand-faithful 13-slide business case (modeled on the Chase Bank reference you provided) and emit **both** a `.pptx` and a self-contained `.html` file the user can download immediately. Keep the citation links live.
 
-### Where it lives
+## Brand corrections (from the design system zip)
 
-Standalone HTML at `public/business-case/index.html`, served at `https://rw-regional-campus.lovable.app/business-case/`. Self-contained — own CSS, own JS, no React. Uses RW brand tokens (Hero Navy, Hero Orange, Roboto) inline so it matches the main site visually.
+The current edge function uses approximate hex values. Replace with the canonical RW tokens from `colors_and_type.css`:
 
-A small "Make Your Business Case" link added to the main site footer so people can find it.
+| Token | Current | Correct |
+|---|---|---|
+| Hero Orange | `EF6135` | `EC5C2A` |
+| Hero Navy | `0B3552` | `0A3454` |
+| Charcoal (heads) | — | `3C3F44` |
+| Dark Teal (links) | `4A89A2` | `4491A9` |
+| Light Teal | `A2C1CD` | `7FB5C2` |
+| Aqua (ring) | — | `B8D8DC` |
+| Burgundy (data) | — | `981C20` |
+| Mustard (warm) | — | `F59328` |
+| Soft bg | `F8F4EE` | `F6F7F8` |
 
-### AI provider
+Typography: Roboto (300/400/500/700/900) for body+heads; Roboto Condensed for chart labels and eyebrow text. RW logo white-on-navy for cover/closing, orange-on-white for content footers. Strict ban on pure `#000000`.
 
-Lovable AI (no API key needed). Model: `google/gemini-2.5-pro` with Google Search grounding for the research call. The Anthropic + native `web_search` flow from the doc is replaced with Gemini grounded search — same outcome (real URLs, real findings, citations), zero secret setup for you.
+## Deck structure (13 slides — mirrors Chase reference)
 
-All AI calls go through a Supabase edge function `research-company`. The browser never sees the API key. CORS limited to the published domain + preview.
+1. **Cover** — full-bleed navy, orange accent bar, white RW logo, "BUSINESS CASE / Regional Campus Series", company name, presenter, date.
+2. **Where {Company} is now** — research-driven situation read, eyebrow + long-form paragraph, aqua sidebar pull-quote.
+3. **Why most volunteer programs produce activity, not change** — *diagram*: horizontal flow `RECRUIT → BRIEF (missing) → EXPERIENCE → DEBRIEF (missing) → RETURN`, with the two "missing" nodes rendered in burgundy with dashed outline. Three explanation columns under it (Before / During / After). Footnote chips [1][2][3].
+4. **Why immersive learning changes practice** — 4-card grid (Practice / Disorienting dilemma / 40-min debrief / Cohort identity) with numbered orange circle motif.
+5. **What trained champions do differently** — three orange-numbered rows with nonprofit photo thumbnails on the right (using existing `RevBest` photos from project).
+6. **What changes for employee / company / community** — 3-column card grid with icons in aqua circles.
+7. **From a small group to a shift in how {Company} volunteers** — *chart*: stacked bar visualizing "untrained vs trained champion ripple" across 6/12/18-pack tiers.
+8. **The campus** — 2-day agenda timeline (horizontal track with morning/afternoon blocks per day) — pulled from `AgendaSection.tsx`.
+9. **The credential** — two-stage card layout (Stage 1 / Stage 2 optional), orange and navy variants, badge motif.
+10. **Investment** — pricing table, all four tiers, orange highlight on the seat count matching their `seats_requested`. "Includes" footer in muted bar. Campus city/date pulled from selection.
+11. **What {Company} gets back** — 6-cell grid (2×3) of value props, alternating navy/teal accents.
+12. **Next steps** — 3-step orange-numbered sequence with the right contact (`nichole@realizedworth.com`) and URL.
+13. **References** — full citation list with hyperlinks to DOIs, Roboto Condensed, two-column.
 
----
+All slides carry a footer strip: `RW Institute · Regional Campus Series` left, slide # right, thin orange rule.
 
-## Phase 1 — Research engine + minimal shell (this build)
+## AI tailoring (Lovable AI / `google/gemini-2.5-pro`)
 
-**Goal:** prove the AI can produce useful, accurate, structured findings about a real company, and let the user review/edit them.
+Expand the structured-output tool from 9 fields to ~18 to cover slides 2, 5, 7, 11 personalization. Audience-role conditioning rules stay (CFO ↔ cost/risk; CHRO ↔ talent; CSR ↔ reporting depth). Citation footnote indices are fixed and rendered from a constant table — never hallucinated.
 
-### 1. Edge function: `research-company`
+## HTML output (the new piece)
 
-- Accepts `{ company_name }`, validates with zod (length 2–120, trimmed).
-- Calls Lovable AI Gateway with Gemini 2.5 Pro + Google Search grounding.
-- System prompt = the structured-output spec from the doc (CompanyResearch schema, confidence rules, "use null, never fabricate", max 5 items per array, etc.).
-- Uses tool-calling for structured output (not "please return JSON") so we get reliable parsed data.
-- Returns `CompanyResearch` JSON exactly matching the doc's interface, plus `researched_at` and `sources[]` extracted from grounding metadata.
-- Handles 429 (rate limit) and 402 (credits) with friendly messages surfaced to the UI.
-- In-memory IP rate limit (10 req / 10 min) since the tool is public and the AI calls cost money.
+A second renderer in the same edge function builds a self-contained `.html` (single file, inline CSS, base64 fonts/logos) with **dynamic** elements the PPTX can't do:
 
-### 2. Tool shell: `public/business-case/index.html`
+- Animated reveal on scroll (IntersectionObserver, fade+rise).
+- The slide-3 flow diagram as inline SVG with the "missing" nodes pulsing.
+- Slide-7 ripple visualization as a live SVG bar chart.
+- Pricing table row highlighted on hover; selected seat tier pre-highlighted.
+- Citations as clickable footnotes that smooth-scroll to the references section.
+- Print stylesheet so the HTML prints cleanly to PDF if the reader prefers.
 
-Single HTML file, RW-branded. Sections:
+Both files are returned in one response: `{ filename_pptx, base64_pptx, filename_html, base64_html }`. The frontend (`public/business-case/app.js`) triggers two downloads back-to-back and shows both filenames in the success state.
 
-- **Step 1 — Company name** (single input + "Research my company" button).
-- **Step 1.5 — Research findings** with three states: loading (skeleton + status text), results (finding cards with confidence badges, inline edit, "Looks good" / "Skip"), error (friendly fallback to manual entry).
-- **Step 2 — placeholder** for now ("Coming soon — for now, your research is below"), with a "Copy findings as text" button so the output is useful even before the form/PPTX exist.
+## Files changed
 
-`renderResearchFindings()` builds DOM with `createElement` (no `innerHTML` with user/AI strings). Confidence badges color-coded per the doc spec.
+- `supabase/functions/generate-deck/index.ts` — replace palette constants, expand structured-output schema, build all 13 PPTX slides, add HTML renderer, return both artifacts.
+- `public/business-case/app.js` — handle dual download, update success copy ("Your deck is ready — PowerPoint and HTML versions downloaded").
+- `public/business-case/index.html` + `styles.css` — minor copy update on step 7 ("Generate & download deck (PPTX + HTML)") and the done step.
+- No changes to React landing page, routing, or DB.
 
-### 3. Footer link on main site
+## Out of scope
 
-Add a small "Make Your Business Case" link to `Footer.tsx` nav, pointing to `/business-case/`.
+- Email delivery (already removed; downloads only, per your earlier instruction).
+- Editing the public landing page beyond what's already shipped.
+- Storing generated decks server-side.
 
-### Phase 1 deliverable
+## Confirm before I build
 
-You give it a real company name (e.g. "Ford Motor Company", "Salesforce"), get back accurate, sourced findings with confidence badges, can edit any field, and can copy the result as text. That's a useful tool on its own and proves the AI piece works before we invest in the rest.
-
----
-
-## Phase 2 — Multi-step form (later, separate build)
-
-After Phase 1 is validated:
-- Steps 2–6 from the doc: presenter info, audience/decision-makers, current program state, asks (budget, sponsorship, time), success metrics.
-- Research findings pre-fill relevant fields.
-- Local storage persistence so refresh doesn't lose progress.
-- Add a second edge function `business-case-coach` that takes the assembled form data and returns suggested wording / sharper framing for the deck (Lovable AI, no grounding needed).
-
-## Phase 3 — Personalized PPTX (later, separate build)
-
-After Phase 2:
-- PptxGenJS in the browser. Slides 2, 7, 11 personalized from research; remaining slides from form data.
-- RW palette (Hero Navy + Hero Orange), Roboto, real photos via `<img>` from `src/assets`.
-- Download button generates and saves the .pptx client-side.
-
----
-
-## Technical notes
-
-**Files created in Phase 1:**
-- `supabase/functions/research-company/index.ts` — edge function (Lovable AI proxy)
-- `public/business-case/index.html` — standalone tool
-- `public/business-case/styles.css` — RW-branded styles
-- `public/business-case/app.js` — research call + render + edit logic
-- edit `src/components/Footer.tsx` — add link
-
-**No new secrets needed.** `LOVABLE_API_KEY` is already in the project.
-
-**No DB tables** in Phase 1. (Phase 2 may add a `business_case_drafts` table for resume-from-link.)
-
-**Verify_jwt:** function deployed with `verify_jwt = false` so the public tool can call it without a session.
-
-**Cost guardrail:** in-memory IP rate limit + max_tokens cap (~2048) keep AI spend bounded.
-
-```text
-public/business-case/
-  index.html        Step 1, 1.5, 2 placeholder
-  styles.css        RW tokens + skeleton/finding-card styles
-  app.js            fetch → render → edit → copy
-
-supabase/functions/research-company/
-  index.ts          zod validate → Lovable AI grounded call → CompanyResearch JSON
-```
-
-Approve and I'll build Phase 1.
+The plan assumes the citation list and slide order should match the Chase reference 1:1 (only company-specific copy varies). If you want a shorter variant (e.g., drop slide 8 agenda or slide 13 references for a 10-slide version), say so and I'll trim.
