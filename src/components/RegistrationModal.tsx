@@ -63,9 +63,20 @@ const RegistrationModal = ({ open, onClose }: RegistrationModalProps) => {
         {submitted ? (
           <div className="text-center py-10">
             <h3 className="text-hero-navy font-bold text-xl mb-3">Your name's on the list.</h3>
-            <p className="text-dark-grey font-light">
+            <p className="text-dark-grey font-light mb-6">
               We'll be in touch as soon as registration opens for the campus you chose. Watch your inbox for a confirmation in the next few minutes.
             </p>
+            <div className="border-t border-light-grey pt-6 mt-2">
+              <p className="text-dark-grey font-light text-sm mb-2">
+                Don't want to wait? Talk to us now.
+              </p>
+              <a
+                href="mailto:contact@rw.institute"
+                className="inline-block text-hero-orange font-medium hover:underline"
+              >
+                contact@rw.institute
+              </a>
+            </div>
           </div>
         ) : (
           <>
