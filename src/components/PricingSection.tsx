@@ -158,6 +158,12 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
           </p>
         </AnimatedSection>
       </div>
+      <PurchaseModal
+        open={purchaseTier !== null}
+        onClose={() => setPurchaseTier(null)}
+        pack={purchaseTier?.name ?? ""}
+        packPrice={purchaseTier?.price ?? ""}
+      />
     </section>
   );
 };
