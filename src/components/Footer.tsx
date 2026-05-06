@@ -20,7 +20,13 @@ const Footer = () => {
             {navLinks.map((link) => (
               <a
                 key={link}
-                href={link === "Contact" ? `mailto:${CONTACT_EMAIL}` : `#${link.toLowerCase()}`}
+                href={
+                  link === "Contact"
+                    ? `mailto:${CONTACT_EMAIL}`
+                    : link === "Business Case"
+                    ? "/business-case/"
+                    : `#${link.toLowerCase()}`
+                }
                 onClick={
                   link === "Contact"
                     ? () => trackMailto({ ctaLabel: "Contact", ctaLocation: "Footer nav", emailTo: CONTACT_EMAIL })
