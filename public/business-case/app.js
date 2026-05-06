@@ -7,8 +7,9 @@
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0bWhlbWdubXFsY3R2aGtxZWN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2ODY5NTYsImV4cCI6MjA5MjI2Mjk1Nn0.vDNE1KgFjoiMVeMu44wbtrM9hF0-jpO2XZvdQTRUu00";
   const RESEARCH_URL = `${SUPABASE_URL}/functions/v1/research-company`;
   const GENERATE_URL = `${SUPABASE_URL}/functions/v1/generate-deck`;
-  const DRAFTS_URL = `${SUPABASE_URL}/rest/v1/business_case_drafts`;
-  const STORAGE_KEY = "rw_business_case_draft_v1";
+  const SUBMIT_URL = `${SUPABASE_URL}/functions/v1/submit-form`;
+  const STORAGE_KEY = "rw_business_case_draft_v2";
+  const STORAGE_TTL_MS = 1000 * 60 * 60 * 24; // 24h — drafts auto-expire
   const TOTAL_STEPS = 7;
 
   /** ---------------- State ---------------- */
