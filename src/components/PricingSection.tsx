@@ -40,7 +40,7 @@ const tiers = [
       "Everything in 6-Pack",
       "Priority city selection",
     ],
-    cta: "Get Notified",
+    cta: "Purchase",
     popular: false,
     outline: false,
   },
