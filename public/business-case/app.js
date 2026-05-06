@@ -81,19 +81,34 @@
   }
 
   function persist() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+    try {
+      const wrapped = { savedAt: Date.now(), state };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(wrapped));
+    } catch {}
   }
   function restore() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
-      const saved = JSON.parse(raw);
-      Object.assign(state, saved);
+      const parsed = JSON.parse(raw);
+      // Backwards-compat: legacy v1 stored state at top level. Drop it — too risky to inherit cross-user data.
+      if (!parsed || typeof parsed !== "object" || !parsed.savedAt || !parsed.state) {
+        localStorage.removeItem(STORAGE_KEY);
+        // Also clear the legacy key if present
+        try { localStorage.removeItem("rw_business_case_draft_v1"); } catch {}
+        return;
+      }
+      if (Date.now() - parsed.savedAt > STORAGE_TTL_MS) {
+        localStorage.removeItem(STORAGE_KEY);
+        return;
+      }
+      Object.assign(state, parsed.state);
     } catch {}
   }
 
   function clearStorage() {
     try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    try { localStorage.removeItem("rw_business_case_draft_v1"); } catch {}
   }
 
   /** ---------------- Stepper ---------------- */
