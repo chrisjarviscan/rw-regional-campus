@@ -76,6 +76,23 @@ async function ensureSpreadsheet(supabase: ReturnType<typeof createClient>) {
   return sheetId;
 }
 
+async function ensureTab(sheetId: string, tab: { title: string; headers: string[] }) {
+  // Try to read row 1 — if the tab is missing this 400s. Add the tab + headers in that case.
+  try {
+    await gw(`${GATEWAY_SHEETS}/spreadsheets/${sheetId}/values/${tab.title}!A1`);
+    return;
+  } catch (_) {
+    await gw(`${GATEWAY_SHEETS}/spreadsheets/${sheetId}:batchUpdate`, {
+      method: "POST",
+      body: JSON.stringify({ requests: [{ addSheet: { properties: { title: tab.title } } }] }),
+    });
+    await gw(
+      `${GATEWAY_SHEETS}/spreadsheets/${sheetId}/values/${tab.title}!A1?valueInputOption=RAW`,
+      { method: "PUT", body: JSON.stringify({ values: [tab.headers] }) },
+    );
+  }
+}
+
 async function appendRow(sheetId: string, tabTitle: string, row: string[]) {
   await gw(
     `${GATEWAY_SHEETS}/spreadsheets/${sheetId}/values/${tabTitle}!A1:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
