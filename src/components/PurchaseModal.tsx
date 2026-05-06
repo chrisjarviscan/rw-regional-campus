@@ -142,7 +142,7 @@ const PurchaseModal = ({ open, onClose, pack, packPrice }: PurchaseModalProps) =
               </div>
 
               <div>
-                <label className="block text-hero-navy font-medium text-sm mb-2">Preferred payment</label>
+                <label className="block text-hero-navy font-medium text-sm mb-2">Intended payment method (not a charge — just so Nichole knows what to send)</label>
                 <div className="flex flex-col gap-2">
                   <label className="flex items-start gap-2 text-dark-grey font-light text-sm cursor-pointer">
                     <input
