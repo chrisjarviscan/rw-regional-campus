@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface RegistrationModalProps {
   open: boolean;
   onClose: () => void;
+  initialCampus?: string;
 }
 
-const RegistrationModal = ({ open, onClose }: RegistrationModalProps) => {
+const RegistrationModal = ({ open, onClose, initialCampus }: RegistrationModalProps) => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,6 +19,10 @@ const RegistrationModal = ({ open, onClose }: RegistrationModalProps) => {
   const [campus, setCampus] = useState("");
   const [interestType, setInterestType] = useState<"individual" | "company">("individual");
   const [excitement, setExcitement] = useState("");
+
+  useEffect(() => {
+    if (open && initialCampus) setCampus(initialCampus);
+  }, [open, initialCampus]);
 
   if (!open) return null;
 
