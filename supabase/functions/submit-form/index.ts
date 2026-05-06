@@ -180,6 +180,22 @@ Deno.serve(async (req) => {
         arr(d.selected_challenges), arr(d.desired_outcomes), s(d.sponsor_name), s(d.budget_range),
         s(d.primary_ask), s(d.extra_notes),
       ];
+    } else if (payload.type === "purchase") {
+      const d = payload.data;
+      const insert = {
+        full_name: d.full_name, email: d.email, company: d.company, role: d.role || null,
+        pack: d.pack, preferred_campus: d.preferred_campus || null,
+        payment_method: d.payment_method,
+        seats_notes: d.seats_notes || null, extra_notes: d.extra_notes || null,
+      };
+      table = "purchase_inquiries";
+      const { error } = await supabase.from(table).insert(insert);
+      if (error) throw new Error(`DB insert: ${error.message}`);
+      row = [
+        submittedAt, d.full_name, d.email, d.company, d.role || "",
+        d.pack, d.preferred_campus || "", d.payment_method,
+        d.seats_notes || "", d.extra_notes || "",
+      ];
     } else {
       return new Response(JSON.stringify({ error: "unknown type" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
