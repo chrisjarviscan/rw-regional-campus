@@ -46,7 +46,11 @@ const cities = [
   },
 ];
 
-const CitiesSection = () => {
+interface CitiesSectionProps {
+  onNotifyClick: (campus: string) => void;
+}
+
+const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
   return (
     <section id="cities" className="relative py-16 md:py-28 px-4 overflow-hidden">
       {/* Background */}
