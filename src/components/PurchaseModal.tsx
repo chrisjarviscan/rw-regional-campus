@@ -186,10 +186,10 @@ const PurchaseModal = ({ open, onClose, pack, packPrice }: PurchaseModalProps) =
                 disabled={submitting}
                 className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all disabled:opacity-60"
               >
-                {submitting ? "Submitting…" : "Submit purchase request"}
+                {submitting ? "Submitting…" : "Send purchase request"}
               </button>
               <p className="text-[12px] text-dark-grey font-light text-center">
-                No charge yet — Nichole will confirm details and send the invoice or payment link.
+                No payment is taken on this site. Nichole will follow up to confirm seats and send the invoice or payment link.
               </p>
             </form>
           </>
