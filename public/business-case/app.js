@@ -636,25 +636,23 @@
   }
 
   /** Trigger a browser download from base64 */
-  function downloadBase64(base64, filename) {
+  function downloadBase64(base64, filename, mime) {
     const bin = atob(base64);
     const bytes = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    const blob = new Blob([bytes], {
-      type: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-    });
+    const blob = new Blob([bytes], { type: mime });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url; a.download = filename;
     document.body.appendChild(a); a.click();
-    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
   }
 
   async function generateAndDownload() {
     const btn = $("download-btn");
     const status = $("submit-status");
     if (btn) { btn.disabled = true; btn.textContent = "Generating your deck…"; }
-    show(status); status.textContent = "Tailoring copy and building slides — this takes 15–25 seconds.";
+    show(status); status.textContent = "Tailoring copy and building both PowerPoint and HTML versions — this takes 15–25 seconds.";
 
     const payload = buildPayload();
     saveDraft(payload); // fire and forget
@@ -679,8 +677,24 @@
         if (btn) { btn.disabled = false; btn.textContent = "Try again"; }
         return;
       }
-      downloadBase64(data.base64, data.filename || "RW_Institute_Business_Case.pptx");
-      status.textContent = "Deck downloaded.";
+
+      const pptx = data.pptx || (data.base64 ? { base64: data.base64, filename: data.filename } : null);
+      const html = data.html || null;
+      const PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+
+      if (pptx && pptx.base64) {
+        downloadBase64(pptx.base64, pptx.filename || "RW_Business_Case.pptx", PPTX_MIME);
+      }
+      if (html && html.base64) {
+        // Slight delay so browsers don't dedupe the download
+        setTimeout(() => {
+          downloadBase64(html.base64, html.filename || "RW_Business_Case.html", "text/html");
+        }, 800);
+      }
+
+      status.textContent = html
+        ? "Both files downloaded — PowerPoint and HTML versions."
+        : "Deck downloaded.";
       if (btn) { btn.disabled = false; btn.textContent = "Download again"; }
       hide($("step-7"));
       show($("step-done"));
