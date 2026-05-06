@@ -768,6 +768,19 @@
       goToStep(1);
     }
     if (state.currentStep === 7) renderReview();
+
+    const resetBtn = document.getElementById("reset-btn");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        if (!confirm("Clear this draft and start over?")) return;
+        clearStorage();
+        Object.assign(state, {
+          currentStep: 1, company_name: "", research: null,
+          audience: {}, timing: {}, fit: { challenges: [], outcomes: [] }, ask: {},
+        });
+        location.reload();
+      });
+    }
   }
 
   init();
