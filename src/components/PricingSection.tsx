@@ -66,6 +66,11 @@ interface PricingSectionProps {
 }
 
 const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
+  const [purchaseTier, setPurchaseTier] = useState<{ name: string; price: string } | null>(null);
+  return (
+    <></>
+  ) as never; // dummy to satisfy edit; real return below
+};
   return (
     <section id="pricing" className="py-16 md:py-28 px-4 bg-background overflow-hidden">
       <div className="container mx-auto max-w-6xl">
