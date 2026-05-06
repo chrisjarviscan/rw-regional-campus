@@ -27,7 +27,7 @@ const tiers = [
       "Group onboarding call",
       "Post-event team debrief",
     ],
-    cta: "Get Notified",
+    cta: "Purchase",
     popular: true,
     outline: false,
   },
