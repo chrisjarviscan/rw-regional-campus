@@ -32,6 +32,78 @@ export type Database = {
         }
         Relationships: []
       }
+      business_case_drafts: {
+        Row: {
+          audience_role: string | null
+          budget_range: string | null
+          company_name: string
+          created_at: string
+          decision_maker: string | null
+          desired_outcomes: string[] | null
+          extra_notes: string | null
+          has_champions: string | null
+          has_formal_training: string | null
+          headcount_bracket: string | null
+          id: string
+          preferred_city: string | null
+          preferred_quarter: string | null
+          presenter_email: string | null
+          presenter_name: string | null
+          presenter_role: string | null
+          primary_ask: string | null
+          research_snapshot: Json | null
+          seats_requested: string | null
+          selected_challenges: string[] | null
+          sponsor_name: string | null
+        }
+        Insert: {
+          audience_role?: string | null
+          budget_range?: string | null
+          company_name: string
+          created_at?: string
+          decision_maker?: string | null
+          desired_outcomes?: string[] | null
+          extra_notes?: string | null
+          has_champions?: string | null
+          has_formal_training?: string | null
+          headcount_bracket?: string | null
+          id?: string
+          preferred_city?: string | null
+          preferred_quarter?: string | null
+          presenter_email?: string | null
+          presenter_name?: string | null
+          presenter_role?: string | null
+          primary_ask?: string | null
+          research_snapshot?: Json | null
+          seats_requested?: string | null
+          selected_challenges?: string[] | null
+          sponsor_name?: string | null
+        }
+        Update: {
+          audience_role?: string | null
+          budget_range?: string | null
+          company_name?: string
+          created_at?: string
+          decision_maker?: string | null
+          desired_outcomes?: string[] | null
+          extra_notes?: string | null
+          has_champions?: string | null
+          has_formal_training?: string | null
+          headcount_bracket?: string | null
+          id?: string
+          preferred_city?: string | null
+          preferred_quarter?: string | null
+          presenter_email?: string | null
+          presenter_name?: string | null
+          presenter_role?: string | null
+          primary_ask?: string | null
+          research_snapshot?: Json | null
+          seats_requested?: string | null
+          selected_challenges?: string[] | null
+          sponsor_name?: string | null
+        }
+        Relationships: []
+      }
       host_applications: {
         Row: {
           booking_lead_time: string
