@@ -56,7 +56,7 @@ const Footer = () => {
             Create space for transformation.
           </p>
           <p className="text-light-grey font-light text-[13px]">
-            © 2026 RW Institute, a Realized Worth program. All rights reserved.
+            © 2026 Realized Worth. All rights reserved.
           </p>
         </div>
       </div>

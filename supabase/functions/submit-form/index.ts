@@ -61,7 +61,7 @@ async function ensureSpreadsheet(supabase: ReturnType<typeof createClient>) {
   const created = await gw(`${GATEWAY_SHEETS}/spreadsheets`, {
     method: "POST",
     body: JSON.stringify({
-      properties: { title: "RW Institute — Form Submissions" },
+      properties: { title: "Realized Worth — Form Submissions" },
       sheets: [
         { properties: { title: SHEET_TABS.host_application.title } },
         { properties: { title: SHEET_TABS.interest.title } },

@@ -60,7 +60,7 @@ const CampusTeam = () => {
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-xl font-bold text-hero-navy">Chris Jarvis</h3>
                   <p className="text-sm text-hero-orange font-medium mb-3">
-                    Co-Founder & CSO, Realized Worth · Executive Director, RW Institute
+                    Co-Founder Co-Founder & CSO, Realized Worth · Executive Director, Realized Worth CSO, Realized Worth
                   </p>
                   <p className="text-foreground/80 text-sm leading-relaxed">
                     Chris co-founded Realized Worth in 2008 and created the Transformative Volunteering methodology that anchors every campus. With 25 years of experience across neuroscience, behavioral science, and organizational change, his work has shaped volunteer programs at companies including SAP, Medtronic, Abbott, Deloitte, Apple, and Microsoft. He co-leads the curriculum alongside Nichole and facilitation lead Tim Parsons.
