@@ -6,6 +6,7 @@
   const SUPABASE_PUBLISHABLE_KEY =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0bWhlbWdubXFsY3R2aGtxZWN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2ODY5NTYsImV4cCI6MjA5MjI2Mjk1Nn0.vDNE1KgFjoiMVeMu44wbtrM9hF0-jpO2XZvdQTRUu00";
   const RESEARCH_URL = `${SUPABASE_URL}/functions/v1/research-company`;
+  const GENERATE_URL = `${SUPABASE_URL}/functions/v1/generate-deck`;
   const DRAFTS_URL = `${SUPABASE_URL}/rest/v1/business_case_drafts`;
   const STORAGE_KEY = "rw_business_case_draft_v1";
   const TOTAL_STEPS = 7;
@@ -591,14 +592,9 @@
     });
   }
 
-  /** ---------------- Submit ---------------- */
-  $("submit-btn").addEventListener("click", async () => {
-    const btn = $("submit-btn");
-    const status = $("submit-status");
-    btn.disabled = true;
-    show(status); status.textContent = "Sending…";
-
-    const payload = {
+  /** ---------------- Build payload ---------------- */
+  function buildPayload() {
+    return {
       company_name: state.company_name,
       presenter_name: state.audience.presenter_name || null,
       presenter_email: state.audience.presenter_email || null,
@@ -619,9 +615,12 @@
       extra_notes: state.ask.extra_notes || null,
       research_snapshot: state.research || null,
     };
+  }
 
+  /** Save a draft to the DB (best-effort, non-blocking) */
+  async function saveDraft(payload) {
     try {
-      const resp = await fetch(DRAFTS_URL, {
+      await fetch(DRAFTS_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -631,24 +630,72 @@
         },
         body: JSON.stringify(payload),
       });
+    } catch (err) {
+      console.warn("Draft save failed (non-critical):", err);
+    }
+  }
+
+  /** Trigger a browser download from base64 */
+  function downloadBase64(base64, filename) {
+    const bin = atob(base64);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const blob = new Blob([bytes], {
+      type: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
+  }
+
+  async function generateAndDownload() {
+    const btn = $("download-btn");
+    const status = $("submit-status");
+    if (btn) { btn.disabled = true; btn.textContent = "Generating your deck…"; }
+    show(status); status.textContent = "Tailoring copy and building slides — this takes 15–25 seconds.";
+
+    const payload = buildPayload();
+    saveDraft(payload); // fire and forget
+
+    try {
+      const resp = await fetch(GENERATE_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: SUPABASE_PUBLISHABLE_KEY,
+          Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await resp.json().catch(() => ({}));
       if (!resp.ok) {
-        const t = await resp.text();
-        console.error("Submit failed:", resp.status, t);
-        status.textContent = "Something went wrong. Please try again or email contact@realizedworth.com.";
-        btn.disabled = false;
+        const msg =
+          resp.status === 429 ? "We're getting a lot of requests right now. Please try again in a minute." :
+          resp.status === 402 ? "AI credits are temporarily exhausted. Please email nichole@realizedworth.com." :
+          (data.error || "Something went wrong generating the deck. Please try again.");
+        status.textContent = msg;
+        if (btn) { btn.disabled = false; btn.textContent = "Try again"; }
         return;
       }
-      clearStorage();
-      hide(document.querySelector("main").querySelector("#step-7"));
+      downloadBase64(data.base64, data.filename || "RW_Institute_Business_Case.pptx");
+      status.textContent = "Deck downloaded.";
+      if (btn) { btn.disabled = false; btn.textContent = "Download again"; }
+      hide($("step-7"));
       show($("step-done"));
       document.querySelectorAll(".stepper li").forEach((li) => li.classList.add("is-done"));
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       console.error(err);
       status.textContent = "Network error. Please try again.";
-      btn.disabled = false;
+      if (btn) { btn.disabled = false; btn.textContent = "Try again"; }
     }
-  });
+  }
+
+  $("download-btn").addEventListener("click", generateAndDownload);
+  const againBtn = $("download-again-btn");
+  if (againBtn) againBtn.addEventListener("click", () => { goToStep(7); });
 
   /** ---------------- Init ---------------- */
   function rehydrateFormFields() {
