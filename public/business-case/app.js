@@ -714,6 +714,8 @@
       hide($("step-7"));
       show($("step-done"));
       document.querySelectorAll(".stepper li").forEach((li) => li.classList.add("is-done"));
+      // Submission succeeded and files downloaded — clear local draft so the next visitor starts clean.
+      clearStorage();
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       console.error(err);
