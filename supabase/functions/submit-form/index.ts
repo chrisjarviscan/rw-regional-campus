@@ -7,7 +7,8 @@ const GATEWAY_DRIVE = "https://connector-gateway.lovable.dev/google_drive/drive/
 type Payload =
   | { type: "host_application"; data: Record<string, string> }
   | { type: "interest"; data: Record<string, string> }
-  | { type: "business_case"; data: Record<string, unknown> };
+  | { type: "business_case"; data: Record<string, unknown> }
+  | { type: "purchase"; data: Record<string, string> };
 
 const HOST_HEADERS = [
   "Submitted At", "Full Name", "Email", "Company", "City",
@@ -24,11 +25,16 @@ const BUSINESS_CASE_HEADERS = [
   "Selected Challenges", "Desired Outcomes", "Sponsor Name", "Budget Range",
   "Primary Ask", "Extra Notes",
 ];
+const PURCHASE_HEADERS = [
+  "Submitted At", "Full Name", "Email", "Company", "Role",
+  "Pack", "Preferred Campus", "Payment Method", "Seats Notes", "Extra Notes",
+];
 
 const SHEET_TABS = {
   host_application: { title: "HostApplications", headers: HOST_HEADERS },
   interest: { title: "InterestSubmissions", headers: INTEREST_HEADERS },
   business_case: { title: "BusinessCaseSubmissions", headers: BUSINESS_CASE_HEADERS },
+  purchase: { title: "PurchaseInquiries", headers: PURCHASE_HEADERS },
 };
 
 async function gw(url: string, init: RequestInit = {}) {
@@ -174,6 +180,22 @@ Deno.serve(async (req) => {
         arr(d.selected_challenges), arr(d.desired_outcomes), s(d.sponsor_name), s(d.budget_range),
         s(d.primary_ask), s(d.extra_notes),
       ];
+    } else if (payload.type === "purchase") {
+      const d = payload.data;
+      const insert = {
+        full_name: d.full_name, email: d.email, company: d.company, role: d.role || null,
+        pack: d.pack, preferred_campus: d.preferred_campus || null,
+        payment_method: d.payment_method,
+        seats_notes: d.seats_notes || null, extra_notes: d.extra_notes || null,
+      };
+      table = "purchase_inquiries";
+      const { error } = await supabase.from(table).insert(insert);
+      if (error) throw new Error(`DB insert: ${error.message}`);
+      row = [
+        submittedAt, d.full_name, d.email, d.company, d.role || "",
+        d.pack, d.preferred_campus || "", d.payment_method,
+        d.seats_notes || "", d.extra_notes || "",
+      ];
     } else {
       return new Response(JSON.stringify({ error: "unknown type" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -245,6 +267,21 @@ Deno.serve(async (req) => {
           }, `bc-confirm-${id}`));
         }
         await Promise.all(sendOps);
+      } else if (payload.type === "purchase") {
+        const d = payload.data;
+        const paymentLabel = d.payment_method === "credit_card" ? "Credit card (5% fee)" : "Invoice (Net 30)";
+        await Promise.all([
+          send("purchase-confirmation", d.email, {
+            full_name: d.full_name, pack: d.pack,
+            preferred_campus: d.preferred_campus || "", payment_method: d.payment_method,
+          }, `purchase-confirm-${id}`),
+          send("purchase-notification", "nichole@realizedworth.com", {
+            full_name: d.full_name, email: d.email, company: d.company, role: d.role || "",
+            pack: d.pack, preferred_campus: d.preferred_campus || "",
+            payment_method: paymentLabel,
+            seats_notes: d.seats_notes || "", extra_notes: d.extra_notes || "",
+          }, `purchase-notify-${id}`),
+        ]);
       }
     } catch (emailErr) {
       console.error("Email send failed:", emailErr);

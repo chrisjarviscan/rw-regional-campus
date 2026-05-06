@@ -305,6 +305,48 @@ export type Database = {
         }
         Relationships: []
       }
+      purchase_inquiries: {
+        Row: {
+          company: string
+          created_at: string
+          email: string
+          extra_notes: string | null
+          full_name: string
+          id: string
+          pack: string
+          payment_method: string
+          preferred_campus: string | null
+          role: string | null
+          seats_notes: string | null
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          email: string
+          extra_notes?: string | null
+          full_name: string
+          id?: string
+          pack: string
+          payment_method: string
+          preferred_campus?: string | null
+          role?: string | null
+          seats_notes?: string | null
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          email?: string
+          extra_notes?: string | null
+          full_name?: string
+          id?: string
+          pack?: string
+          payment_method?: string
+          preferred_campus?: string | null
+          role?: string | null
+          seats_notes?: string | null
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string

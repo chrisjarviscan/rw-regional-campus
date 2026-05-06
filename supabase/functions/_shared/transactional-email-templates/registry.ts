@@ -15,6 +15,8 @@ import { template as hostConfirmation } from './host-confirmation.tsx'
 import { template as hostNotification } from './host-notification.tsx'
 import { template as businessCaseConfirmation } from './business-case-confirmation.tsx'
 import { template as businessCaseNotification } from './business-case-notification.tsx'
+import { template as purchaseConfirmation } from './purchase-confirmation.tsx'
+import { template as purchaseNotification } from './purchase-notification.tsx'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'interest-confirmation': interestConfirmation,
@@ -23,4 +25,6 @@ export const TEMPLATES: Record<string, TemplateEntry> = {
   'host-notification': hostNotification,
   'business-case-confirmation': businessCaseConfirmation,
   'business-case-notification': businessCaseNotification,
+  'purchase-confirmation': purchaseConfirmation,
+  'purchase-notification': purchaseNotification,
 }

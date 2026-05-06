@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Check } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import PurchaseModal from "./PurchaseModal";
 import { trackMailto } from "@/lib/trackMailto";
 
 const tiers = [
@@ -64,6 +66,7 @@ interface PricingSectionProps {
 }
 
 const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
+  const [purchaseTier, setPurchaseTier] = useState<{ name: string; price: string } | null>(null);
   return (
     <section id="pricing" className="py-16 md:py-28 px-4 bg-background overflow-hidden">
       <div className="container mx-auto max-w-6xl">
@@ -122,28 +125,16 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
                     {tier.cta}
                   </a>
                 ) : tier.cta === "Purchase" ? (
-                  <a
-                    href={`mailto:nichole@realizedworth.com?subject=${encodeURIComponent(
-                      `I'd like to purchase the ${tier.name} — Regional Campus 2026`
-                    )}&cc=contact@rw.institute&body=${encodeURIComponent(
-                      `Hi Nichole,\n\nI'd like to purchase the ${tier.name} (${tier.price}) for the 2026 Regional Campus program.\n\nPreferred campus / session: \nCompany / Organization: \nName: \nPreferred payment method (invoice or credit card — note 5% CC fee): \n\nThanks,\n`
-                    )}`}
-                    onClick={() =>
-                      trackMailto({
-                        ctaLabel: `${tier.name} — Purchase`,
-                        ctaLocation: `Pricing · ${tier.name} tier`,
-                        emailTo: "nichole@realizedworth.com",
-                        subject: `I'd like to purchase the ${tier.name} — Regional Campus 2026`,
-                      })
-                    }
-                    className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 text-center inline-block ${
+                  <button
+                    onClick={() => setPurchaseTier({ name: tier.name, price: tier.price })}
+                    className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 ${
                       tier.outline
                         ? "border-2 border-hero-navy text-hero-navy bg-transparent"
                         : "bg-hero-orange text-primary-foreground"
                     }`}
                   >
                     {tier.cta}
-                  </a>
+                  </button>
                 ) : (
                   <button
                     onClick={onRegisterClick}
@@ -167,6 +158,12 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
           </p>
         </AnimatedSection>
       </div>
+      <PurchaseModal
+        open={purchaseTier !== null}
+        onClose={() => setPurchaseTier(null)}
+        pack={purchaseTier?.name ?? ""}
+        packPrice={purchaseTier?.price ?? ""}
+      />
     </section>
   );
 };
