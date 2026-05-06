@@ -14,23 +14,38 @@
 <header class="site-header">
   <a class="back-link" href="/">← Back to RW Institute</a>
   <h1>Make Your Business Case</h1>
-  <p class="lede">Build a personalized case for bringing your team to a campus program. We'll start by researching what's already public about your company.</p>
+  <p class="lede">Build a case for bringing your team to a campus program. We'll research what's already public about your company, then walk through the questions your VP or sponsor will ask.</p>
 </header>
 
+<nav class="stepper" aria-label="Progress">
+  <ol id="stepper">
+    <li data-step="1">Company</li>
+    <li data-step="2">Research</li>
+    <li data-step="3">Audience</li>
+    <li data-step="4">City &amp; timing</li>
+    <li data-step="5">Program fit</li>
+    <li data-step="6">Sponsor &amp; ask</li>
+    <li data-step="7">Review</li>
+  </ol>
+</nav>
+
 <main>
-  <!-- Step 1 -->
-  <section class="step" id="step-company">
+  <!-- Step 1: Company name -->
+  <section class="step" id="step-1" data-step="1">
     <h2><span class="step-num">1</span> What company are you with?</h2>
     <p class="step-intro">We'll search for public information about your volunteering program, CSR reports, and social impact work. You'll review and edit before anything is used.</p>
     <form id="company-form" autocomplete="off">
       <label for="company-input">Company name</label>
       <input id="company-input" name="company_name" type="text" placeholder="e.g. Salesforce" minlength="2" maxlength="120" required />
-      <button class="btn btn-primary" type="submit" id="research-btn">Research my company</button>
+      <div class="step-actions">
+        <button class="btn btn-primary" type="submit" id="research-btn">Research my company</button>
+        <button class="btn btn-link" type="button" id="skip-research-btn">Skip research</button>
+      </div>
     </form>
   </section>
 
-  <!-- Step 1.5 -->
-  <section class="step" id="step-research" hidden>
+  <!-- Step 2: Research -->
+  <section class="step" id="step-2" data-step="2" hidden>
     <h2><span class="step-num">2</span> What we found</h2>
     <p class="step-intro">Review what we found. Correct anything that's wrong. Skip anything you'd rather fill in yourself.</p>
 
@@ -50,12 +65,207 @@
 
     <div id="research-results" hidden>
       <div id="findings-container"></div>
-      <div class="research-actions">
-        <button class="btn btn-primary" type="button" id="copy-findings">Copy findings as text</button>
-        <button class="btn btn-secondary" type="button" id="restart">Start over</button>
-      </div>
-      <p class="placeholder-note">Next steps — the full multi-step builder and personalized deck export — are coming soon. For now, copy these findings into your draft.</p>
     </div>
+
+    <div class="step-actions" id="research-nav" hidden>
+      <button class="btn btn-secondary" type="button" data-prev>← Back</button>
+      <button class="btn btn-primary" type="button" data-next>Looks good — continue</button>
+    </div>
+  </section>
+
+  <!-- Step 3: Audience -->
+  <section class="step" id="step-3" data-step="3" hidden>
+    <h2><span class="step-num">3</span> Who are you making this case to?</h2>
+    <p class="step-intro">The audience shapes the framing. A CHRO needs different evidence than a CFO.</p>
+
+    <form id="audience-form" autocomplete="off">
+      <label for="presenter_name">Your name</label>
+      <input type="text" id="presenter_name" name="presenter_name" maxlength="120" required />
+
+      <label for="presenter_email">Your email</label>
+      <input type="text" id="presenter_email" name="presenter_email" maxlength="200" required />
+
+      <label for="presenter_role">Your role</label>
+      <input type="text" id="presenter_role" name="presenter_role" placeholder="e.g. Manager, Employee Engagement" maxlength="160" />
+
+      <label for="audience_role">Who is the primary audience for this deck?</label>
+      <select id="audience_role" name="audience_role" required>
+        <option value="">Select…</option>
+        <option value="ceo">CEO / President</option>
+        <option value="chro">CHRO / Chief People Officer</option>
+        <option value="cfo">CFO / Finance leadership</option>
+        <option value="csr_lead">CSR / Sustainability leadership</option>
+        <option value="hr_director">HR / People director</option>
+        <option value="dei_lead">DEI / Inclusion leadership</option>
+        <option value="comms_lead">Communications / Brand</option>
+        <option value="manager">Direct manager</option>
+        <option value="committee">A committee or working group</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="decision_maker">Who actually approves the budget?</label>
+      <input type="text" id="decision_maker" name="decision_maker" placeholder="Name or title — e.g. Jane Doe, VP People" maxlength="160" />
+
+      <div class="step-actions">
+        <button class="btn btn-secondary" type="button" data-prev>← Back</button>
+        <button class="btn btn-primary" type="submit">Continue</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Step 4: City & timing -->
+  <section class="step" id="step-4" data-step="4" hidden>
+    <h2><span class="step-num">4</span> Which campus and when?</h2>
+    <p class="step-intro">Pick the location and quarter that fit your team. We'll surface the right campus details in your deck.</p>
+
+    <form id="timing-form" autocomplete="off">
+      <label for="preferred_city">Preferred campus</label>
+      <select id="preferred_city" name="preferred_city" required>
+        <option value="">Select…</option>
+        <option value="detroit">Detroit (August 2026 — confirmed)</option>
+        <option value="washington_dc">Washington DC (September 2026 — confirmed)</option>
+        <option value="atlanta">Atlanta (October 2026 — confirmed)</option>
+        <option value="seattle">Seattle (Fall 2026 — pipeline)</option>
+        <option value="future">Philadelphia / Minneapolis (future)</option>
+        <option value="request_other">Request a different city</option>
+        <option value="flexible">Flexible — open to options</option>
+      </select>
+
+      <label for="preferred_quarter">If your campus moved, what quarter would still work?</label>
+      <select id="preferred_quarter" name="preferred_quarter">
+        <option value="">No preference</option>
+        <option value="q1_2026">Q1 2026</option>
+        <option value="q2_2026">Q2 2026</option>
+        <option value="q3_2026">Q3 2026</option>
+        <option value="q4_2026">Q4 2026</option>
+        <option value="2027">Sometime in 2027</option>
+      </select>
+
+      <label for="seats_requested">How many seats are you considering?</label>
+      <p class="field-hint">Most sponsors send 2–5 from one team for the first cohort, and bring more once they see the results.</p>
+      <select id="seats_requested" name="seats_requested" required>
+        <option value="">Select…</option>
+        <option value="2_5">2–5 seats</option>
+        <option value="6_12">6–12 seats</option>
+        <option value="13_18">13–18 seats</option>
+        <option value="19_30">19–30 seats</option>
+        <option value="30_plus">More than 30</option>
+        <option value="exploring">Just exploring — not sure yet</option>
+      </select>
+
+      <div class="step-actions">
+        <button class="btn btn-secondary" type="button" data-prev>← Back</button>
+        <button class="btn btn-primary" type="submit">Continue</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Step 5: Program fit -->
+  <section class="step" id="step-5" data-step="5" hidden>
+    <h2><span class="step-num">5</span> Where is your program today?</h2>
+    <p class="step-intro">Honest answers here make the deck sharper. There are no wrong answers.</p>
+
+    <form id="fit-form" autocomplete="off">
+      <label for="headcount_bracket">Roughly how many employees does your company have?</label>
+      <select id="headcount_bracket" name="headcount_bracket" required>
+        <option value="">Select…</option>
+        <option value="lt500">Under 500</option>
+        <option value="500_5k">500 – 5,000</option>
+        <option value="5k_20k">5,000 – 20,000</option>
+        <option value="20k_50k">20,000 – 50,000</option>
+        <option value="50k_plus">More than 50,000</option>
+      </select>
+
+      <fieldset>
+        <legend>Do you have a network of volunteer champions or ambassadors?</legend>
+        <p class="field-hint">Many companies are still building this leadership layer for the first time. A "no" is common and not a problem — it's part of why teams come.</p>
+        <div class="radio-group">
+          <label class="radio"><input type="radio" name="has_champions" value="yes" /> Yes, formally</label>
+          <label class="radio"><input type="radio" name="has_champions" value="informal" /> Informally — a few volunteers lead</label>
+          <label class="radio"><input type="radio" name="has_champions" value="no" /> Not yet</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Have your champions had any formal facilitation training?</legend>
+        <p class="field-hint">Most companies have not yet invested in formal training for volunteer leaders. This is the gap the campus is designed to close.</p>
+        <div class="radio-group">
+          <label class="radio"><input type="radio" name="has_formal_training" value="yes" /> Yes</label>
+          <label class="radio"><input type="radio" name="has_formal_training" value="some" /> Some, ad-hoc</label>
+          <label class="radio"><input type="radio" name="has_formal_training" value="no" /> No</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Which challenges show up most for your team? <span class="meta">(pick up to 5)</span></legend>
+        <div class="checkbox-grid" id="challenges-grid"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>What outcomes would make this a clear win? <span class="meta">(pick up to 4)</span></legend>
+        <div class="checkbox-grid" id="outcomes-grid"></div>
+      </fieldset>
+
+      <div class="step-actions">
+        <button class="btn btn-secondary" type="button" data-prev>← Back</button>
+        <button class="btn btn-primary" type="submit">Continue</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Step 6: Sponsor & ask -->
+  <section class="step" id="step-6" data-step="6" hidden>
+    <h2><span class="step-num">6</span> Your sponsor and the ask</h2>
+    <p class="step-intro">The closing slide of any business case. Who's on your side, what are you asking for, and what would your VP need to see?</p>
+
+    <form id="ask-form" autocomplete="off">
+      <label for="sponsor_name">Who is your internal sponsor or champion?</label>
+      <input type="text" id="sponsor_name" name="sponsor_name" placeholder="Name and title — leave blank if you don't have one yet" maxlength="200" />
+
+      <label for="budget_range">Approximate budget range you're working within</label>
+      <select id="budget_range" name="budget_range">
+        <option value="">Prefer not to say</option>
+        <option value="under_5k">Under $5,000</option>
+        <option value="5k_15k">$5,000 – $15,000</option>
+        <option value="15k_30k">$15,000 – $30,000</option>
+        <option value="30k_60k">$30,000 – $60,000</option>
+        <option value="60k_plus">More than $60,000</option>
+        <option value="no_budget">No budget identified yet</option>
+      </select>
+
+      <label for="primary_ask">What is the specific ask?</label>
+      <p class="field-hint">One sentence. e.g. "Approval for 6 seats at the Detroit campus, $12,000 total, plus 3 days off-site."</p>
+      <textarea id="primary_ask" name="primary_ask" maxlength="500" rows="2"></textarea>
+
+      <label for="extra_notes">What would your VP or leadership need to see in this deck that we haven't covered?</label>
+      <textarea id="extra_notes" name="extra_notes" maxlength="800" rows="3"></textarea>
+
+      <div class="step-actions">
+        <button class="btn btn-secondary" type="button" data-prev>← Back</button>
+        <button class="btn btn-primary" type="submit">Review</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Step 7: Review -->
+  <section class="step" id="step-7" data-step="7" hidden>
+    <h2><span class="step-num">7</span> Review and send</h2>
+    <p class="step-intro">Look it over. When you submit, Nichole gets your case and reaches out within two business days with a draft deck and next steps.</p>
+
+    <div id="review-summary"></div>
+
+    <div class="step-actions">
+      <button class="btn btn-secondary" type="button" data-prev>← Back</button>
+      <button class="btn btn-primary" type="button" id="submit-btn">Send to RW Institute</button>
+    </div>
+
+    <p class="placeholder-note" id="submit-status" hidden></p>
+  </section>
+
+  <!-- Done -->
+  <section class="step" id="step-done" hidden>
+    <h2>Thank you.</h2>
+    <p class="step-intro">Your case is in. Nichole Giller will email you within two business days at the address you provided. In the meantime, you can <a href="/">return to the campus page</a>.</p>
   </section>
 </main>
 
