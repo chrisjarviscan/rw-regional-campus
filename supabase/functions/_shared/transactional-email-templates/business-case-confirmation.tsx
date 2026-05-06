@@ -13,7 +13,7 @@ interface Props {
 const Email = ({ presenter_name, company_name }: Props) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Your RW Institute business case is ready</Preview>
+    <Preview>Your Realized Worth business case is ready</Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={brandBar} />
@@ -21,7 +21,7 @@ const Email = ({ presenter_name, company_name }: Props) => (
           {presenter_name ? `Your deck is on its way, ${presenter_name}.` : 'Your deck is on its way.'}
         </Heading>
         <Text style={text}>
-          Thanks for using the RW Institute business case builder
+          Thanks for using the Realized Worth business case builder
           {company_name ? ` for ${company_name}` : ''}. Your tailored deck —
           both PowerPoint and interactive HTML — should already be downloading
           in your browser.
@@ -33,7 +33,7 @@ const Email = ({ presenter_name, company_name }: Props) => (
         </Text>
         <Text style={signoff}>
           — Nichole Giller<br />
-          <span style={muted}>RW Institute</span>
+          <span style={muted}>Realized Worth</span>
         </Text>
       </Container>
     </Body>
@@ -42,7 +42,7 @@ const Email = ({ presenter_name, company_name }: Props) => (
 
 export const template = {
   component: Email,
-  subject: 'Your RW Institute business case is ready',
+  subject: 'Your Realized Worth business case is ready',
   displayName: 'Business case — submitter confirmation',
   previewData: { presenter_name: 'Sam Patel', company_name: 'Acme Corp' },
 } satisfies TemplateEntry

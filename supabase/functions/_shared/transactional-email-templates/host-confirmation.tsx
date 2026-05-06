@@ -21,7 +21,7 @@ const Email = ({ full_name, city }: Props) => (
           {full_name ? `Thanks, ${full_name}.` : 'Thanks for stepping forward.'}
         </Heading>
         <Text style={text}>
-          We received your application to host an RW Institute Regional Campus
+          We received your application to host an Realized Worth Regional Campus
           {city ? ` in ${city}` : ''}. Nichole or someone from the team will
           reach out within a few business days to learn more and walk you
           through what hosting looks like.
@@ -32,7 +32,7 @@ const Email = ({ full_name, city }: Props) => (
         </Text>
         <Text style={signoff}>
           — Nichole Giller<br />
-          <span style={muted}>RW Institute</span>
+          <span style={muted}>Realized Worth</span>
         </Text>
       </Container>
     </Body>
@@ -41,7 +41,7 @@ const Email = ({ full_name, city }: Props) => (
 
 export const template = {
   component: Email,
-  subject: 'We received your RW Institute host application',
+  subject: 'We received your Realized Worth host application',
   displayName: 'Host — submitter confirmation',
   previewData: { full_name: 'Jordan Lee', city: 'Detroit' },
 } satisfies TemplateEntry

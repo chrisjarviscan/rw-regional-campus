@@ -34,7 +34,7 @@ const Email = ({ full_name, pack, preferred_campus, payment_method }: Props) => 
         </Text>
         <Text style={signoff}>
           — Nichole Giller<br />
-          <span style={muted}>RW Institute</span>
+          <span style={muted}>Realized Worth</span>
         </Text>
       </Container>
     </Body>
@@ -43,7 +43,7 @@ const Email = ({ full_name, pack, preferred_campus, payment_method }: Props) => 
 
 export const template = {
   component: Email,
-  subject: (d: Record<string, any>) => `Your ${d.pack || 'pack'} request — RW Institute`,
+  subject: (d: Record<string, any>) => `Your ${d.pack || 'pack'} request — Realized Worth`,
   displayName: 'Purchase — submitter confirmation',
   previewData: { full_name: 'Jane Doe', pack: '6-Pack', preferred_campus: 'Detroit — August 2026', payment_method: 'invoice' },
 } satisfies TemplateEntry

@@ -13,7 +13,7 @@ interface Props {
 const Email = ({ full_name, campus }: Props) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>You're on the 2026 RW Institute list</Preview>
+    <Preview>You're on the 2026 Realized Worth list</Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={brandBar} />
@@ -21,7 +21,7 @@ const Email = ({ full_name, campus }: Props) => (
           {full_name ? `Thanks, ${full_name}.` : 'Thanks for raising your hand.'}
         </Heading>
         <Text style={text}>
-          You're on the list for the 2026 RW Institute Regional Campus
+          You're on the list for the 2026 Realized Worth Regional Campus
           {campus ? ` — ${campus}` : ''}. We'll be in touch as soon as
           registration opens for the campus you chose.
         </Text>
@@ -31,7 +31,7 @@ const Email = ({ full_name, campus }: Props) => (
         </Text>
         <Text style={signoff}>
           — Nichole Giller<br />
-          <span style={muted}>RW Institute</span>
+          <span style={muted}>Realized Worth</span>
         </Text>
       </Container>
     </Body>
@@ -40,7 +40,7 @@ const Email = ({ full_name, campus }: Props) => (
 
 export const template = {
   component: Email,
-  subject: 'You\'re on the 2026 RW Institute list',
+  subject: 'You\'re on the 2026 Realized Worth list',
   displayName: 'Interest — submitter confirmation',
   previewData: { full_name: 'Jane Doe', campus: 'Detroit — August 2026' },
 } satisfies TemplateEntry

@@ -41,7 +41,7 @@ const COPY_TOOL = {
   type: "function" as const,
   function: {
     name: "return_deck_copy",
-    description: "Return tailored copy for the personalized slides of an RW Institute business case deck.",
+    description: "Return tailored copy for the personalized slides of an Realized Worth business case deck.",
     parameters: {
       type: "object",
       properties: {
@@ -65,14 +65,14 @@ const COPY_TOOL = {
   },
 };
 
-const SYSTEM = `You are a senior strategist helping an internal champion build a business case for sending their team to the RW Institute Regional Campus — a 2-day program that trains corporate volunteer champions to facilitate Transformative Experiences (not just coordinate transactional events).
+const SYSTEM = `You are a senior strategist helping an internal champion build a business case for sending their team to the Realized Worth Regional Campus — a 2-day program that trains corporate volunteer champions to facilitate Transformative Experiences (not just coordinate transactional events).
 
 Voice rules — non-negotiable:
 - Write like a thoughtful colleague, not a marketer. No staccato fragments. No "It's not X. It's Y." patterns. No "Imagine..." openers. No breathless hype.
 - No emojis. No exclamation marks. No "unlock", "elevate", "transform your", "game-changing", "leverage", "synergy".
 - Tailor framing to the audience role: a CFO needs cost/risk language; a CHRO needs talent/retention; a CSR lead needs community impact and reporting depth; a CEO needs strategic narrative.
 - Use specifics from the research and inputs. If a fact is missing, write around it — never invent.
-- "Transformative Experiences" and "Transformative Volunteering" are RW's branded terms (capitalize). Refer to RW as "RW Institute".
+- "Transformative Experiences" and "Transformative Volunteering" are RW's branded terms (capitalize). Refer to RW as "Realized Worth".
 - Keep sentences readable. One idea at a time.
 - For research-grounded slides (situation_paragraph), be honest about what the research shows: scale, structure, gaps. Do not flatter.`;
 
@@ -183,8 +183,8 @@ const CITATIONS = [
 function buildDeck(input: any, copy: any): any {
   const pres = new (pptxgen as any)();
   pres.layout = "LAYOUT_WIDE"; // 13.333 x 7.5
-  pres.title = `RW Institute · Business Case · ${input.company_name}`;
-  pres.author = "RW Institute";
+  pres.title = `Realized Worth · Business Case · ${input.company_name}`;
+  pres.author = "Realized Worth";
 
   const W = 13.333;
   const H = 7.5;
@@ -209,7 +209,7 @@ function buildDeck(input: any, copy: any): any {
       x: 0.6, y: H - 0.55, w: W - 1.2, h: 0,
       line: { color: isDark ? C.orange : C.greyLight, width: 0.5 },
     });
-    s.addText("RW Institute · Regional Campus Series", {
+    s.addText("Realized Worth · Regional Campus Series", {
       x: 0.6, y: H - 0.45, w: 8, h: 0.3,
       fontFace: FONT_COND, fontSize: 9, color: fg, charSpacing: 2,
     });
@@ -895,7 +895,7 @@ function buildHtml(input: any, copy: any): string {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Business Case · ${company} · RW Institute</title>
+<title>Business Case · ${company} · Realized Worth</title>
 <style>
 :root {
   --orange: #EC5C2A;
@@ -1111,7 +1111,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
       ${escapeHtml(copy.situation_pullquote || "")}
     </aside>
   </div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>2</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>2</span></div>
 </section>
 
 <!-- 3 — STRUCTURAL GAP -->
@@ -1142,7 +1142,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
       <p>The 0–40 minute consolidation window ${fn([2])} closes. Champions burn out — repeated exposure without structured processing activates pain-sharing rather than compassion ${fn([3])}.</p>
     </div>
   </div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>3</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>3</span></div>
 </section>
 
 <!-- 4 — IMMERSIVE LEARNING -->
@@ -1155,7 +1155,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
     <div class="card"><div class="num">03</div><h3>40-minute debrief window</h3><p>Structured reflection inside the memory consolidation window. A neurological design requirement, not a scheduling preference. ${fn([2])}</p></div>
     <div class="card"><div class="num">04</div><h3>Cohort identity</h3><p>Cross-company peer group continues for 6 months. Shared identity amplifies behavioral commitment to the new practice. ${fn([6, 8])}</p></div>
   </div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>4</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>4</span></div>
 </section>
 
 <!-- 5 — CHAMPIONS -->
@@ -1168,7 +1168,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
     <div class="row"><div class="num">02</div><div><h3>They build real nonprofit partnerships</h3><p>Trained champions scope projects WITH partners, not FOR them. They frame the experience so volunteers encounter the work as partners — meeting the conditions for positive intergroup contact ${fn([11, 12])}.</p></div></div>
     <div class="row"><div class="num">03</div><div><h3>They turn a good day into a lasting shift</h3><p>A structured debrief within 40 minutes ${fn([2])} uses the gap between expectation and reality ${fn([4])} as the mechanism for prosocial identity change ${fn([5])} — a shift in how someone understands themselves.</p></div></div>
   </div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>5</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>5</span></div>
 </section>
 
 <!-- 6 — TRI -->
@@ -1180,7 +1180,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
     <div class="tri-card"><div class="ring"></div><div class="col-eyebrow">FOR THE COMPANY</div><h3>The organization that invests</h3><p>When prosocial identity is supported by the employer, the company becomes associated with that part of the self-concept ${fn([6])}. Brand perception built on internalized identity is qualitatively different from perception built on messaging.</p></div>
     <div class="tri-card"><div class="ring"></div><div class="col-eyebrow">FOR THE COMMUNITY</div><h3>The nonprofits served</h3><p>Projects scoped around actual need ${fn([11])}. Volunteers oriented toward the work. Reciprocal, recurring relationships ${fn([12])} that produce sustained connection rather than photo opportunities.</p></div>
   </div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>6</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>6</span></div>
 </section>
 
 <!-- 7 — RIPPLE -->
@@ -1200,7 +1200,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
       <div class="legend"><span><i class="ut"></i>Untrained champion</span><span><i class="tr"></i>Trained champion</span></div>
     </div>
   </div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>7</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>7</span></div>
 </section>
 
 <!-- 8 — AGENDA -->
@@ -1221,7 +1221,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
       <div class="block"><div class="time">AFTERNOON</div><h4>Cohort commitments</h4><p>6-month implementation plan + peer pairing.</p></div>
     </div>
   </div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>8</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>8</span></div>
 </section>
 
 <!-- 9 — CREDENTIAL -->
@@ -1232,7 +1232,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
     <div class="cred-card s1"><div class="stage-label">STAGE 1</div><h3>Certificate of Completion</h3><p>Awarded after the two-day campus. Validates competency in the three keystone behaviors: conducting the Brief, guiding the experience, and conducting the Debrief — trainable, repeatable facilitation skills grounded in behavioral science ${fn([1, 4, 5])}. Included in registration.</p></div>
     <div class="cred-card s2"><div class="stage-label">STAGE 2 · OPTIONAL</div><h3>Certified Transformative Volunteering Leader</h3><p>Awarded after the 6-month cohort, sustained implementation, and competency verification. Complex prosocial behaviors require repeated, spaced practice to reach automaticity ${fn([17, 18])}. The cohort provides that structure.</p></div>
   </div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>9</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>9</span></div>
 </section>
 
 <!-- 10 — INVESTMENT -->
@@ -1247,7 +1247,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
     </tbody>
   </table>
   <div class="includes"><strong>INCLUDES</strong>Two-day in-person program · all sessions · meals · materials · networking · Stage 1 certification · 6-month cohort access</div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>10</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>10</span></div>
 </section>
 
 <!-- 11 — GET BACK -->
@@ -1263,7 +1263,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
     <div class="get-cell b"><h4>Brand perception from the inside</h4><p>Employees who undergo genuine prosocial identity change embody the company's commitment. That shows up in Glassdoor, in talent conversations, in how people describe working here.</p></div>
     <div class="get-cell b"><h4>Peer benchmarking at the right altitude</h4><p>Train alongside leaders running comparable programs. The cross-company workshop alone produces more actionable insight than most conferences deliver in three days.</p></div>
   </div>
-  <div class="footstrip"><span>RW Institute · Regional Campus Series</span><span>11</span></div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>11</span></div>
 </section>
 
 <!-- 12 — ASK -->
@@ -1347,7 +1347,7 @@ Deno.serve(async (req: Request) => {
         ripple_headline: `From a small group of trained leaders to a shift in how ${company} volunteers`,
         ripple_body: `At scale, the difference between a good program and a great one is whether the people running events are coordinators or facilitators. A small cohort of trained champions ripples through every regional event they touch — and trains the next layer.`,
         getback_intro: `Six things ${company} gets back from sending a cohort to the campus — sequenced for your audience.`,
-        ask_headline: "Approval to send our team to the RW Institute campus",
+        ask_headline: "Approval to send our team to the Realized Worth campus",
         ask_body: input.primary_ask || "Sponsorship to send our champions to the campus, plus the time off-site to attend. We bring back trained facilitators, a 6-month cohort, and a measurement approach that holds up to scrutiny.",
       };
     }

@@ -5,7 +5,7 @@ import { corsHeaders } from "https://esm.sh/@supabase/supabase-js@2.95.0/cors";
 const GATEWAY = "https://ai.gateway.lovable.dev/v1/chat/completions";
 const MODEL = "google/gemini-2.5-pro";
 
-const SYSTEM_PROMPT = `You are a research assistant for the RW Institute. Given a company name, you return structured information about that company's corporate volunteering program, CSR/ESG reporting, and social impact posture.
+const SYSTEM_PROMPT = `You are a research assistant for the Realized Worth. Given a company name, you return structured information about that company's corporate volunteering program, CSR/ESG reporting, and social impact posture.
 
 CRITICAL RULES:
 - Use null for any field you cannot confirm from training knowledge of well-known public sources. NEVER fabricate values, URLs, partners, or statistics.

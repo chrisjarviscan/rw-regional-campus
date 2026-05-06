@@ -61,7 +61,7 @@ const Unsubscribe = () => {
         {status === "ready" && (
           <>
             <p className="text-dark-grey mb-6">
-              Click below to stop receiving emails from RW Institute. You can always reach
+              Click below to stop receiving emails from Realized Worth. You can always reach
               out to us directly at contact@rw.institute.
             </p>
             <button
