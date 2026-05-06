@@ -7,7 +7,8 @@ const GATEWAY_DRIVE = "https://connector-gateway.lovable.dev/google_drive/drive/
 type Payload =
   | { type: "host_application"; data: Record<string, string> }
   | { type: "interest"; data: Record<string, string> }
-  | { type: "business_case"; data: Record<string, unknown> };
+  | { type: "business_case"; data: Record<string, unknown> }
+  | { type: "purchase"; data: Record<string, string> };
 
 const HOST_HEADERS = [
   "Submitted At", "Full Name", "Email", "Company", "City",
@@ -24,11 +25,16 @@ const BUSINESS_CASE_HEADERS = [
   "Selected Challenges", "Desired Outcomes", "Sponsor Name", "Budget Range",
   "Primary Ask", "Extra Notes",
 ];
+const PURCHASE_HEADERS = [
+  "Submitted At", "Full Name", "Email", "Company", "Role",
+  "Pack", "Preferred Campus", "Payment Method", "Seats Notes", "Extra Notes",
+];
 
 const SHEET_TABS = {
   host_application: { title: "HostApplications", headers: HOST_HEADERS },
   interest: { title: "InterestSubmissions", headers: INTEREST_HEADERS },
   business_case: { title: "BusinessCaseSubmissions", headers: BUSINESS_CASE_HEADERS },
+  purchase: { title: "PurchaseInquiries", headers: PURCHASE_HEADERS },
 };
 
 async function gw(url: string, init: RequestInit = {}) {
