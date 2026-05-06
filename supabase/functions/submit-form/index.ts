@@ -6,7 +6,8 @@ const GATEWAY_DRIVE = "https://connector-gateway.lovable.dev/google_drive/drive/
 
 type Payload =
   | { type: "host_application"; data: Record<string, string> }
-  | { type: "interest"; data: Record<string, string> };
+  | { type: "interest"; data: Record<string, string> }
+  | { type: "business_case"; data: Record<string, unknown> };
 
 const HOST_HEADERS = [
   "Submitted At", "Full Name", "Email", "Company", "City",
@@ -16,10 +17,18 @@ const HOST_HEADERS = [
 const INTEREST_HEADERS = [
   "Submitted At", "Full Name", "Email", "Company", "Campus", "Interest Type", "Excitement",
 ];
+const BUSINESS_CASE_HEADERS = [
+  "Submitted At", "Company", "Presenter Name", "Presenter Email", "Presenter Role",
+  "Audience Role", "Decision Maker", "Preferred City", "Preferred Quarter",
+  "Seats Requested", "Headcount Bracket", "Has Champions", "Has Formal Training",
+  "Selected Challenges", "Desired Outcomes", "Sponsor Name", "Budget Range",
+  "Primary Ask", "Extra Notes",
+];
 
 const SHEET_TABS = {
   host_application: { title: "HostApplications", headers: HOST_HEADERS },
   interest: { title: "InterestSubmissions", headers: INTEREST_HEADERS },
+  business_case: { title: "BusinessCaseSubmissions", headers: BUSINESS_CASE_HEADERS },
 };
 
 async function gw(url: string, init: RequestInit = {}) {
@@ -65,6 +74,23 @@ async function ensureSpreadsheet(supabase: ReturnType<typeof createClient>) {
 
   await supabase.from("app_settings").upsert({ key: "submissions_sheet_id", value: sheetId });
   return sheetId;
+}
+
+async function ensureTab(sheetId: string, tab: { title: string; headers: string[] }) {
+  // Try to read row 1 — if the tab is missing this 400s. Add the tab + headers in that case.
+  try {
+    await gw(`${GATEWAY_SHEETS}/spreadsheets/${sheetId}/values/${tab.title}!A1`);
+    return;
+  } catch (_) {
+    await gw(`${GATEWAY_SHEETS}/spreadsheets/${sheetId}:batchUpdate`, {
+      method: "POST",
+      body: JSON.stringify({ requests: [{ addSheet: { properties: { title: tab.title } } }] }),
+    });
+    await gw(
+      `${GATEWAY_SHEETS}/spreadsheets/${sheetId}/values/${tab.title}!A1?valueInputOption=RAW`,
+      { method: "PUT", body: JSON.stringify({ values: [tab.headers] }) },
+    );
+  }
 }
 
 async function appendRow(sheetId: string, tabTitle: string, row: string[]) {
@@ -113,6 +139,41 @@ Deno.serve(async (req) => {
       const { error } = await supabase.from(table).insert(insert);
       if (error) throw new Error(`DB insert: ${error.message}`);
       row = [submittedAt, d.full_name, d.email, d.company, d.campus, d.interest_type, d.excitement || ""];
+    } else if (payload.type === "business_case") {
+      const d = payload.data as Record<string, unknown>;
+      const arr = (v: unknown) => Array.isArray(v) ? v.join("; ") : "";
+      const s = (v: unknown) => v == null ? "" : String(v);
+      const insert: Record<string, unknown> = {
+        company_name: s(d.company_name),
+        presenter_name: d.presenter_name || null,
+        presenter_email: d.presenter_email || null,
+        presenter_role: d.presenter_role || null,
+        audience_role: d.audience_role || null,
+        decision_maker: d.decision_maker || null,
+        preferred_city: d.preferred_city || null,
+        preferred_quarter: d.preferred_quarter || null,
+        seats_requested: d.seats_requested || null,
+        headcount_bracket: d.headcount_bracket || null,
+        has_champions: d.has_champions || null,
+        has_formal_training: d.has_formal_training || null,
+        selected_challenges: Array.isArray(d.selected_challenges) ? d.selected_challenges : [],
+        desired_outcomes: Array.isArray(d.desired_outcomes) ? d.desired_outcomes : [],
+        sponsor_name: d.sponsor_name || null,
+        budget_range: d.budget_range || null,
+        primary_ask: d.primary_ask || null,
+        extra_notes: d.extra_notes || null,
+        research_snapshot: d.research_snapshot || null,
+      };
+      table = "business_case_drafts";
+      const { error } = await supabase.from(table).insert(insert);
+      if (error) throw new Error(`DB insert: ${error.message}`);
+      row = [
+        submittedAt, s(d.company_name), s(d.presenter_name), s(d.presenter_email), s(d.presenter_role),
+        s(d.audience_role), s(d.decision_maker), s(d.preferred_city), s(d.preferred_quarter),
+        s(d.seats_requested), s(d.headcount_bracket), s(d.has_champions), s(d.has_formal_training),
+        arr(d.selected_challenges), arr(d.desired_outcomes), s(d.sponsor_name), s(d.budget_range),
+        s(d.primary_ask), s(d.extra_notes),
+      ];
     } else {
       return new Response(JSON.stringify({ error: "unknown type" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -122,8 +183,9 @@ Deno.serve(async (req) => {
     // Mirror to sheet (don't fail submission if sheet write fails)
     try {
       const sheetId = await ensureSpreadsheet(supabase);
-      const tab = SHEET_TABS[payload.type].title;
-      await appendRow(sheetId, tab, row);
+      const tab = SHEET_TABS[payload.type];
+      await ensureTab(sheetId, tab);
+      await appendRow(sheetId, tab.title, row);
     } catch (sheetErr) {
       console.error("Sheet mirror failed:", sheetErr);
     }

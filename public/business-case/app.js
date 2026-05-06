@@ -7,8 +7,9 @@
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0bWhlbWdubXFsY3R2aGtxZWN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2ODY5NTYsImV4cCI6MjA5MjI2Mjk1Nn0.vDNE1KgFjoiMVeMu44wbtrM9hF0-jpO2XZvdQTRUu00";
   const RESEARCH_URL = `${SUPABASE_URL}/functions/v1/research-company`;
   const GENERATE_URL = `${SUPABASE_URL}/functions/v1/generate-deck`;
-  const DRAFTS_URL = `${SUPABASE_URL}/rest/v1/business_case_drafts`;
-  const STORAGE_KEY = "rw_business_case_draft_v1";
+  const SUBMIT_URL = `${SUPABASE_URL}/functions/v1/submit-form`;
+  const STORAGE_KEY = "rw_business_case_draft_v2";
+  const STORAGE_TTL_MS = 1000 * 60 * 60 * 24; // 24h — drafts auto-expire
   const TOTAL_STEPS = 7;
 
   /** ---------------- State ---------------- */
@@ -80,19 +81,34 @@
   }
 
   function persist() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+    try {
+      const wrapped = { savedAt: Date.now(), state };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(wrapped));
+    } catch {}
   }
   function restore() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
-      const saved = JSON.parse(raw);
-      Object.assign(state, saved);
+      const parsed = JSON.parse(raw);
+      // Backwards-compat: legacy v1 stored state at top level. Drop it — too risky to inherit cross-user data.
+      if (!parsed || typeof parsed !== "object" || !parsed.savedAt || !parsed.state) {
+        localStorage.removeItem(STORAGE_KEY);
+        // Also clear the legacy key if present
+        try { localStorage.removeItem("rw_business_case_draft_v1"); } catch {}
+        return;
+      }
+      if (Date.now() - parsed.savedAt > STORAGE_TTL_MS) {
+        localStorage.removeItem(STORAGE_KEY);
+        return;
+      }
+      Object.assign(state, parsed.state);
     } catch {}
   }
 
   function clearStorage() {
     try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    try { localStorage.removeItem("rw_business_case_draft_v1"); } catch {}
   }
 
   /** ---------------- Stepper ---------------- */
@@ -617,18 +633,17 @@
     };
   }
 
-  /** Save a draft to the DB (best-effort, non-blocking) */
+  /** Save a draft + mirror to RW team's Google Sheet (best-effort, non-blocking) */
   async function saveDraft(payload) {
     try {
-      await fetch(DRAFTS_URL, {
+      await fetch(SUBMIT_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           apikey: SUPABASE_PUBLISHABLE_KEY,
           Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
-          Prefer: "return=minimal",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ type: "business_case", data: payload }),
       });
     } catch (err) {
       console.warn("Draft save failed (non-critical):", err);
@@ -699,6 +714,8 @@
       hide($("step-7"));
       show($("step-done"));
       document.querySelectorAll(".stepper li").forEach((li) => li.classList.add("is-done"));
+      // Submission succeeded and files downloaded — clear local draft so the next visitor starts clean.
+      clearStorage();
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       console.error(err);
