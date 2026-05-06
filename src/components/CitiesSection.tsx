@@ -15,6 +15,7 @@ const cities = [
     statusColor: "bg-dark-teal",
     text: "Campus 01. Register by mid-June. Hosted at a corporate venue in metro Detroit.",
     image: cityDetroit,
+    campusValue: "Detroit — August 2026",
   },
   {
     city: "Washington, DC",
@@ -23,6 +24,7 @@ const cities = [
     statusColor: "bg-dark-teal",
     text: "Campus 02. Register by mid-July. A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
     image: cityWashington,
+    campusValue: "Washington, DC — September 2026",
   },
   {
     city: "Atlanta, GA",
@@ -31,6 +33,7 @@ const cities = [
     statusColor: "bg-dark-teal",
     text: "Campus 03. Register by late August. Southeast campus with a confirmed venue partner.",
     image: cityAtlanta,
+    campusValue: "Atlanta — October 2026",
   },
   {
     city: "Seattle, WA",
@@ -39,10 +42,15 @@ const cities = [
     statusColor: "bg-mustard",
     text: "In development with the Microsoft Alumni Network. Dates and registration to follow.",
     image: citySeattle,
+    campusValue: "Seattle — Fall 2026",
   },
 ];
 
-const CitiesSection = () => {
+interface CitiesSectionProps {
+  onNotifyClick: (campus: string) => void;
+}
+
+const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
   return (
     <section id="cities" className="relative py-16 md:py-28 px-4 overflow-hidden">
       {/* Background */}
@@ -90,21 +98,14 @@ const CitiesSection = () => {
                     <p className="text-dark-teal font-normal text-sm">{c.dates}</p>
                   </div>
                   <p className="text-dark-grey font-light text-sm mb-5 flex-1">{c.text}</p>
-                  <a
-                    href="mailto:contact@rw.institute?subject=Notify%20me%20about%20a%202026%20Regional%20Campus"
-                    onClick={() =>
-                      trackMailto({
-                        ctaLabel: "Notify Me",
-                        ctaLocation: `Cities · ${c.city}`,
-                        emailTo: "contact@rw.institute",
-                        subject: "Notify me about a 2026 Regional Campus",
-                      })
-                    }
+                  <button
+                    type="button"
+                    onClick={() => onNotifyClick(c.campusValue)}
                     className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
                   >
                     Notify Me
                     <ArrowRight size={16} className="transition-all" />
-                  </a>
+                  </button>
                 </div>
               </div>
             </AnimatedSection>
