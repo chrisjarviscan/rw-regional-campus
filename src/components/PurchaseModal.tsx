@@ -95,7 +95,7 @@ const PurchaseModal = ({ open, onClose, pack, packPrice }: PurchaseModalProps) =
           <div className="text-center py-10">
             <h3 className="text-hero-navy font-bold text-xl mb-3">Request received.</h3>
             <p className="text-dark-grey font-light mb-6">
-              Thanks for your interest in the {pack}. Nichole will follow up within one business day to confirm seats and walk through payment.
+              Thanks for your interest in the {pack}. This was a request for contact — no payment has been taken and no seats are reserved yet. Nichole will follow up within one business day to confirm seats and send the invoice or payment link.
             </p>
             <div className="border-t border-light-grey pt-6 mt-2">
               <p className="text-dark-grey font-light text-sm mb-2">
@@ -111,10 +111,15 @@ const PurchaseModal = ({ open, onClose, pack, packPrice }: PurchaseModalProps) =
           </div>
         ) : (
           <>
-            <h3 className="text-hero-navy font-bold text-xl mb-1">Purchase the {pack}</h3>
-            <p className="text-dark-grey font-light text-sm mb-6">
-              {packPrice} · Nichole will confirm seats and walk you through payment within one business day.
-            </p>
+            <h3 className="text-hero-navy font-bold text-xl mb-1">Request to purchase the {pack}</h3>
+            <p className="text-dark-grey font-light text-sm mb-4">{packPrice}</p>
+            <div className="bg-light-teal/15 border border-light-teal/40 rounded-md px-4 py-3 mb-5">
+              <p className="text-hero-navy font-medium text-sm mb-1">This is a request for contact — not a checkout.</p>
+              <p className="text-dark-grey font-light text-sm">
+                You won't be charged on this site. Tell us your intended payment method below (invoice or credit card with a 5% processing fee) and Nichole will follow up within one business day to confirm seats and send the actual invoice or payment link.
+              </p>
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input label="Full Name" required value={fullName} onChange={setFullName} />
               <Input label="Email Address" type="email" required value={email} onChange={setEmail} />
@@ -137,7 +142,7 @@ const PurchaseModal = ({ open, onClose, pack, packPrice }: PurchaseModalProps) =
               </div>
 
               <div>
-                <label className="block text-hero-navy font-medium text-sm mb-2">Preferred payment</label>
+                <label className="block text-hero-navy font-medium text-sm mb-2">Intended payment method (not a charge — just so Nichole knows what to send)</label>
                 <div className="flex flex-col gap-2">
                   <label className="flex items-start gap-2 text-dark-grey font-light text-sm cursor-pointer">
                     <input
@@ -181,10 +186,10 @@ const PurchaseModal = ({ open, onClose, pack, packPrice }: PurchaseModalProps) =
                 disabled={submitting}
                 className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all disabled:opacity-60"
               >
-                {submitting ? "Submitting…" : "Submit purchase request"}
+                {submitting ? "Submitting…" : "Send purchase request"}
               </button>
               <p className="text-[12px] text-dark-grey font-light text-center">
-                No charge yet — Nichole will confirm details and send the invoice or payment link.
+                No payment is taken on this site. Nichole will follow up to confirm seats and send the invoice or payment link.
               </p>
             </form>
           </>
