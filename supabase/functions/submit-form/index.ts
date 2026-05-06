@@ -267,6 +267,21 @@ Deno.serve(async (req) => {
           }, `bc-confirm-${id}`));
         }
         await Promise.all(sendOps);
+      } else if (payload.type === "purchase") {
+        const d = payload.data;
+        const paymentLabel = d.payment_method === "credit_card" ? "Credit card (5% fee)" : "Invoice (Net 30)";
+        await Promise.all([
+          send("purchase-confirmation", d.email, {
+            full_name: d.full_name, pack: d.pack,
+            preferred_campus: d.preferred_campus || "", payment_method: d.payment_method,
+          }, `purchase-confirm-${id}`),
+          send("purchase-notification", "nichole@realizedworth.com", {
+            full_name: d.full_name, email: d.email, company: d.company, role: d.role || "",
+            pack: d.pack, preferred_campus: d.preferred_campus || "",
+            payment_method: paymentLabel,
+            seats_notes: d.seats_notes || "", extra_notes: d.extra_notes || "",
+          }, `purchase-notify-${id}`),
+        ]);
       }
     } catch (emailErr) {
       console.error("Email send failed:", emailErr);
