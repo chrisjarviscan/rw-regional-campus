@@ -633,18 +633,17 @@
     };
   }
 
-  /** Save a draft to the DB (best-effort, non-blocking) */
+  /** Save a draft + mirror to RW team's Google Sheet (best-effort, non-blocking) */
   async function saveDraft(payload) {
     try {
-      await fetch(DRAFTS_URL, {
+      await fetch(SUBMIT_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           apikey: SUPABASE_PUBLISHABLE_KEY,
           Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
-          Prefer: "return=minimal",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ type: "business_case", data: payload }),
       });
     } catch (err) {
       console.warn("Draft save failed (non-critical):", err);
