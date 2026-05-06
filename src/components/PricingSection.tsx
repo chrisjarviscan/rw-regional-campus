@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Check } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import PurchaseModal from "./PurchaseModal";
 import { trackMailto } from "@/lib/trackMailto";
 
 const tiers = [
