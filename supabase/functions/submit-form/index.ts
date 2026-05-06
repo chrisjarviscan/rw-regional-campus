@@ -190,6 +190,66 @@ Deno.serve(async (req) => {
       console.error("Sheet mirror failed:", sheetErr);
     }
 
+    // Send transactional emails (don't fail submission if email send fails)
+    try {
+      const send = async (templateName: string, recipientEmail: string, templateData: Record<string, unknown>, idempotencyKey: string) => {
+        const { error } = await supabase.functions.invoke("send-transactional-email", {
+          body: { templateName, recipientEmail, templateData, idempotencyKey },
+        });
+        if (error) console.error(`email ${templateName} failed:`, error);
+      };
+
+      const id = crypto.randomUUID();
+
+      if (payload.type === "interest") {
+        const d = payload.data;
+        await Promise.all([
+          send("interest-confirmation", d.email, { full_name: d.full_name, campus: d.campus }, `interest-confirm-${id}`),
+          send("interest-notification", "nichole@realizedworth.com", {
+            full_name: d.full_name, email: d.email, company: d.company,
+            campus: d.campus, interest_type: d.interest_type, excitement: d.excitement || "",
+          }, `interest-notify-${id}`),
+        ]);
+      } else if (payload.type === "host_application") {
+        const d = payload.data;
+        await Promise.all([
+          send("host-confirmation", d.email, { full_name: d.full_name, city: d.city }, `host-confirm-${id}`),
+          send("host-notification", "campus@realizedworth.com", {
+            full_name: d.full_name, email: d.email, company: d.company, city: d.city || "",
+            venue_capacity: d.venue_capacity, booking_lead_time: d.booking_lead_time,
+            champion_readiness: d.champion_readiness, contribution_level: d.contribution_level,
+            preferred_quarter: d.preferred_quarter, interest_reason: d.interest_reason || "",
+          }, `host-notify-${id}`),
+        ]);
+      } else if (payload.type === "business_case") {
+        const d = payload.data as Record<string, unknown>;
+        const s = (v: unknown) => v == null ? "" : String(v);
+        const arr = (v: unknown) => Array.isArray(v) ? v.join("; ") : "";
+        const presenterEmail = s(d.presenter_email);
+        const sendOps: Promise<unknown>[] = [
+          send("business-case-notification", "nichole@realizedworth.com", {
+            company_name: s(d.company_name), presenter_name: s(d.presenter_name),
+            presenter_email: presenterEmail, presenter_role: s(d.presenter_role),
+            audience_role: s(d.audience_role), decision_maker: s(d.decision_maker),
+            preferred_city: s(d.preferred_city), preferred_quarter: s(d.preferred_quarter),
+            seats_requested: s(d.seats_requested), headcount_bracket: s(d.headcount_bracket),
+            has_champions: s(d.has_champions), has_formal_training: s(d.has_formal_training),
+            selected_challenges: arr(d.selected_challenges), desired_outcomes: arr(d.desired_outcomes),
+            sponsor_name: s(d.sponsor_name), budget_range: s(d.budget_range),
+            primary_ask: s(d.primary_ask), extra_notes: s(d.extra_notes),
+          }, `bc-notify-${id}`),
+        ];
+        if (presenterEmail) {
+          sendOps.push(send("business-case-confirmation", presenterEmail, {
+            presenter_name: s(d.presenter_name), company_name: s(d.company_name),
+          }, `bc-confirm-${id}`));
+        }
+        await Promise.all(sendOps);
+      }
+    } catch (emailErr) {
+      console.error("Email send failed:", emailErr);
+    }
+
     return new Response(JSON.stringify({ ok: true }), {
       status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
