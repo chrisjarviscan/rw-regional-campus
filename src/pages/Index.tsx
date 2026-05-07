@@ -16,6 +16,7 @@ import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import RegistrationModal from "@/components/RegistrationModal";
+import CampusAssistant from "@/components/CampusAssistant";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -45,6 +46,7 @@ const Index = () => {
       <FitAssessment onExpressInterest={openModal} />
       <CampusTeam />
       <FAQSection />
+      <CampusAssistant onExpressInterest={openModal} />
       <FinalCTA onRegisterClick={openModal} />
       <Footer />
       <RegistrationModal
