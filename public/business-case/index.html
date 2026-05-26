@@ -260,15 +260,17 @@
     </div>
 
     <p class="placeholder-note" id="submit-status" hidden></p>
-    <p class="field-hint" style="margin-top:1rem;">Generation takes about 15–25 seconds while we tailor the copy for your audience. Both files download to your computer — no email is sent.</p>
+    <p class="field-hint" style="margin-top:1rem;">Generation takes about 15–25 seconds while we tailor the copy for your audience. Your files stay on your computer — no email is sent.</p>
   </section>
 
   <!-- Done -->
   <section class="step" id="step-done" hidden>
     <h2>Your deck is ready.</h2>
-    <p class="step-intro">Two files were downloaded — a PowerPoint deck (.pptx) and an interactive HTML version. Open whichever fits how you want to share it. If you'd like a hand polishing it or want to talk through the program, email <a href="mailto:nichole@realizedworth.com">nichole@realizedworth.com</a> or <a href="/">return to the campus page</a>.</p>
-    <div class="step-actions">
-      <button class="btn btn-secondary" type="button" id="download-again-btn">Download again</button>
+    <p class="step-intro">Two files were generated — a PowerPoint deck (.pptx) you can edit and present, and a self-contained interactive HTML version you can share by link or print to PDF. Click each button below to download. If you'd like a hand polishing it or want to talk through the program, email <a href="mailto:nichole@realizedworth.com">nichole@realizedworth.com</a> or <a href="/">return to the campus page</a>.</p>
+    <div class="step-actions" style="flex-wrap:wrap;gap:0.75rem;">
+      <button class="btn btn-primary" type="button" id="download-pptx-btn" disabled>Download PowerPoint (.pptx)</button>
+      <button class="btn btn-primary" type="button" id="download-html-btn" disabled>Download interactive HTML</button>
+      <button class="btn btn-secondary" type="button" id="download-again-btn">Start over</button>
     </div>
   </section>
 </main>
