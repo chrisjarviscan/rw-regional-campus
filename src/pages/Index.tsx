@@ -46,8 +46,10 @@ const Index = () => {
       </Helmet>
       <Navbar onRegisterClick={openModal} />
       <HeroSection onRegisterClick={openModal} />
+      <WhoIsAnEVL />
       <ProgramOverview />
-      <WhoThisIsFor />
+      <WhoThisIsFor onExpressInterest={openModal} />
+      <SRLCrossPromo />
       <AgendaSection />
       <CitiesSection onNotifyClick={openModalWithCampus} />
       <FitAssessment onExpressInterest={openModal} />
