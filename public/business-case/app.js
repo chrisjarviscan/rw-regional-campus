@@ -183,7 +183,7 @@
       if (!resp.ok) {
         const msg =
           resp.status === 429 ? "We're getting a lot of requests right now. Please try again in a minute." :
-          resp.status === 402 ? "AI credits are temporarily exhausted. Please contact contact@realizedworth.com." :
+          resp.status === 402 ? "AI credits are temporarily exhausted. Please contact nichole@realizedworth.com." :
           (data.error || "Something went wrong. Please try again.");
         showResearchError(msg);
         return;

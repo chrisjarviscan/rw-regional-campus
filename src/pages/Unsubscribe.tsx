@@ -72,7 +72,7 @@ const Unsubscribe = () => {
           <>
             <p className="text-dark-grey mb-6">
               Click below to stop receiving emails from Realized Worth. You can always reach
-              out to us directly at contact@rw.institute.
+              out to us directly at nichole@realizedworth.com.
             </p>
             <button
               onClick={confirm}
@@ -100,13 +100,13 @@ const Unsubscribe = () => {
         {status === "invalid" && (
           <p className="text-dark-grey">
             This unsubscribe link is invalid or has expired. If you're still receiving
-            emails, please email contact@rw.institute and we'll remove you manually.
+            emails, please email nichole@realizedworth.com and we'll remove you manually.
           </p>
         )}
 
         {status === "error" && (
           <p className="text-dark-grey">
-            Something went wrong. Please email contact@rw.institute and we'll take care
+            Something went wrong. Please email nichole@realizedworth.com and we'll take care
             of it.
           </p>
         )}

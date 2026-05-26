@@ -46,7 +46,7 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
             <a
               href={`mailto:nichole@realizedworth.com?subject=${encodeURIComponent(
                 "Regional Campus — I'd like to learn more"
-              )}&cc=contact@rw.institute&body=${encodeURIComponent(
+              )}&body=${encodeURIComponent(
                 "Hi Nichole,\n\nI'd like to learn more about the 2026 Regional Campus Series.\n\nA bit about me / my team:\nCompany / Organization: \nRole: \nCampus(es) I'm curious about: \nQuestions I'd like to discuss: \n\nThanks,\n"
               )}`}
               onClick={() =>
