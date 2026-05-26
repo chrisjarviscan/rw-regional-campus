@@ -11,7 +11,7 @@ const FitAssessment = ({ onExpressInterest }: FitAssessmentProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="py-16 md:py-24 px-4 bg-light-teal/20">
+    <section id="assessment" className="py-16 md:py-24 px-4 bg-light-teal/20">
       <div className="container mx-auto max-w-3xl text-center">
         <AnimatedSection>
           <span className="text-hero-navy font-bold text-sm uppercase tracking-[0.15em]">

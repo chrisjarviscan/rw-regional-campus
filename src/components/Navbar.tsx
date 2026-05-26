@@ -6,9 +6,12 @@ const navLinks = [
   { label: "Program", href: "#program" },
   { label: "Agenda", href: "#agenda" },
   { label: "Cities", href: "#cities" },
+  { label: "Assessment", href: "#assessment" },
+  { label: "Who You'll Work With", href: "#team" },
   { label: "Pricing", href: "#pricing" },
   { label: "Certification", href: "#certification" },
   { label: "FAQ", href: "#faq" },
+  { label: "Make the Case", href: "#make-the-case" },
 ];
 
 interface NavbarProps {

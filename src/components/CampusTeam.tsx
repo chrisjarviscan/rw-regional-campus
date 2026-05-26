@@ -5,7 +5,7 @@ import { trackMailto } from "@/lib/trackMailto";
 
 const CampusTeam = () => {
   return (
-    <section className="py-20 bg-background">
+    <section id="team" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <AnimatedSection>
           <div className="max-w-3xl mx-auto text-center mb-14">
