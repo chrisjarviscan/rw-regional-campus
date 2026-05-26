@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 
 type Status = "loading" | "ready" | "already" | "invalid" | "submitting" | "done" | "error";
@@ -52,6 +53,15 @@ const Unsubscribe = () => {
 
   return (
     <main className="min-h-screen bg-background flex items-center justify-center px-4 py-16">
+      <Helmet>
+        <title>Unsubscribe | Realized Worth</title>
+        <meta name="description" content="Unsubscribe from emails sent by Realized Worth's Regional Campus Series." />
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="canonical" href="https://rw-regional-campus.lovable.app/unsubscribe" />
+        <meta property="og:url" content="https://rw-regional-campus.lovable.app/unsubscribe" />
+        <meta property="og:title" content="Unsubscribe | Realized Worth" />
+        <meta property="og:description" content="Manage your email subscription preferences for the Regional Campus Series." />
+      </Helmet>
       <div className="max-w-md w-full bg-white border border-light-grey rounded-lg p-8 shadow-sm">
         <div className="w-12 h-1 bg-hero-orange mb-6" />
         <h1 className="text-hero-navy text-2xl font-bold mb-3">Unsubscribe</h1>
