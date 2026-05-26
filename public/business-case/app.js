@@ -650,17 +650,42 @@
     }
   }
 
-  /** Trigger a browser download from base64 */
-  function downloadBase64(base64, filename, mime) {
+  /** Decode base64 string to a Blob. */
+  function base64ToBlob(base64, mime) {
     const bin = atob(base64);
     const bytes = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    const blob = new Blob([bytes], { type: mime });
-    const url = URL.createObjectURL(blob);
+    return new Blob([bytes], { type: mime });
+  }
+
+  /** Trigger a browser download from a blob URL (call from a user gesture for reliability). */
+  function triggerDownload(url, filename) {
     const a = document.createElement("a");
-    a.href = url; a.download = filename;
-    document.body.appendChild(a); a.click();
-    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
+    a.href = url;
+    a.download = filename;
+    a.rel = "noopener";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { a.remove(); }, 1500);
+  }
+
+  // Staged files from the most recent generation
+  let stagedFiles = { pptx: null, html: null };
+
+  function revokeStaged() {
+    if (stagedFiles.pptx && stagedFiles.pptx.url) URL.revokeObjectURL(stagedFiles.pptx.url);
+    if (stagedFiles.html && stagedFiles.html.url) URL.revokeObjectURL(stagedFiles.html.url);
+    stagedFiles = { pptx: null, html: null };
+  }
+
+  function wireDownloadButton(btnId, key) {
+    const btn = $(btnId);
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const file = stagedFiles[key];
+      if (!file) return;
+      triggerDownload(file.url, file.filename);
+    });
   }
 
   async function generateAndDownload() {
@@ -697,24 +722,53 @@
       const html = data.html || null;
       const PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
 
-      if (pptx && pptx.base64) {
-        downloadBase64(pptx.base64, pptx.filename || "RW_Business_Case.pptx", PPTX_MIME);
-      }
-      if (html && html.base64) {
-        // Slight delay so browsers don't dedupe the download
-        setTimeout(() => {
-          downloadBase64(html.base64, html.filename || "RW_Business_Case.html", "text/html");
-        }, 800);
+      // Stage blobs so the user can click to download from a fresh user gesture.
+      revokeStaged();
+      try {
+        if (pptx && pptx.base64) {
+          stagedFiles.pptx = {
+            url: URL.createObjectURL(base64ToBlob(pptx.base64, PPTX_MIME)),
+            filename: pptx.filename || "RW_Business_Case.pptx",
+          };
+        }
+        if (html && html.base64) {
+          stagedFiles.html = {
+            url: URL.createObjectURL(base64ToBlob(html.base64, "text/html")),
+            filename: html.filename || "RW_Business_Case.html",
+          };
+        }
+      } catch (decodeErr) {
+        console.error("Failed to decode generated files", decodeErr);
+        status.textContent = "Your deck generated, but we couldn't prepare the download. Please try again or email nichole@realizedworth.com.";
+        if (btn) { btn.disabled = false; btn.textContent = "Try again"; }
+        return;
       }
 
-      status.textContent = html
-        ? "Both files downloaded — PowerPoint and HTML versions."
-        : "Deck downloaded.";
-      if (btn) { btn.disabled = false; btn.textContent = "Download again"; }
+      if (!stagedFiles.pptx && !stagedFiles.html) {
+        status.textContent = "The server returned an empty deck. Please try again.";
+        if (btn) { btn.disabled = false; btn.textContent = "Try again"; }
+        return;
+      }
+
+      // Enable per-file download buttons on the done step.
+      const pptxBtn = $("download-pptx-btn");
+      const htmlBtn = $("download-html-btn");
+      if (pptxBtn) pptxBtn.disabled = !stagedFiles.pptx;
+      if (htmlBtn) htmlBtn.disabled = !stagedFiles.html;
+
+      status.textContent = "Your files are ready below — click each to download.";
+      if (btn) { btn.disabled = false; btn.textContent = "Regenerate"; }
       hide($("step-7"));
       show($("step-done"));
       document.querySelectorAll(".stepper li").forEach((li) => li.classList.add("is-done"));
-      // Submission succeeded and files downloaded — clear local draft so the next visitor starts clean.
+
+      // Attempt a single auto-download of the PPTX. Browsers allow one download per
+      // user gesture; the explicit buttons are the reliable path if this is blocked.
+      if (stagedFiles.pptx) {
+        try { triggerDownload(stagedFiles.pptx.url, stagedFiles.pptx.filename); } catch (_) { /* user can click button */ }
+      }
+
+      // Submission succeeded — clear local draft so the next visitor starts clean.
       clearStorage();
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
@@ -725,8 +779,11 @@
   }
 
   $("download-btn").addEventListener("click", generateAndDownload);
+  wireDownloadButton("download-pptx-btn", "pptx");
+  wireDownloadButton("download-html-btn", "html");
   const againBtn = $("download-again-btn");
-  if (againBtn) againBtn.addEventListener("click", () => { goToStep(7); });
+  if (againBtn) againBtn.addEventListener("click", () => { revokeStaged(); goToStep(7); });
+
 
   /** ---------------- Init ---------------- */
   function rehydrateFormFields() {
