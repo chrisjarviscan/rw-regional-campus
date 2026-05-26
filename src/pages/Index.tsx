@@ -34,12 +34,13 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Helmet>
-        <title>Regional Campus Series | Realized Worth</title>
-        <meta name="description" content="A two-day, multi-company training in Transformative Volunteering methodology by Realized Worth. 2026 campuses in Washington DC and Atlanta." />
+        <title>Corporate Volunteering Training — RW Regional Campus</title>
+        <meta name="description" content="A 2-day, in-person training for corporate volunteering, CSR, and employee engagement leaders. Build community impact at scale. 2026 campuses in DC & Atlanta." />
+        <meta name="keywords" content="corporate volunteering, employee volunteering, CSR training, corporate social responsibility, employee engagement, community impact, volunteer leadership, ESG, social impact, Realized Worth" />
         <link rel="canonical" href="https://rw-regional-campus.lovable.app/" />
         <meta property="og:url" content="https://rw-regional-campus.lovable.app/" />
-        <meta property="og:title" content="Regional Campus Series | Realized Worth" />
-        <meta property="og:description" content="A two-day, multi-company training in Transformative Volunteering methodology by Realized Worth. Express interest for 2026." />
+        <meta property="og:title" content="Corporate Volunteering Training — RW Regional Campus" />
+        <meta property="og:description" content="In-person training for CSR, corporate volunteering, and employee engagement leaders. 2026 campuses in Washington DC and Atlanta." />
       </Helmet>
       <Navbar onRegisterClick={openModal} />
       <HeroSection onRegisterClick={openModal} />
