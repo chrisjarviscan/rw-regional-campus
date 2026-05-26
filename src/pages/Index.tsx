@@ -47,12 +47,12 @@ const Index = () => {
       <WhoThisIsFor />
       <AgendaSection />
       <CitiesSection onNotifyClick={openModalWithCampus} />
+      <FitAssessment onExpressInterest={openModal} />
       <PricingSection onRegisterClick={openModal} />
         <CertificationSection />
         <PostCampusCommunity />
         <SocialProof />
       <BecomeHost />
-      <FitAssessment onExpressInterest={openModal} />
       <CampusTeam />
       <FAQSection />
       <CampusAssistant onExpressInterest={openModal} />
