@@ -191,7 +191,7 @@ const FitAssessmentModal = ({ open, onClose, onExpressInterest }: FitAssessmentM
                 </button>
               ) : (
                 <a
-                  href="mailto:contact@rw.institute?subject=Is the Regional Campus right for me%3F"
+                  href="mailto:nichole@realizedworth.com?subject=Is the Regional Campus right for me%3F"
                   className="bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-6 py-3 hover:brightness-90 transition-all text-center"
                 >
                   Talk to us first

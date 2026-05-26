@@ -66,6 +66,9 @@ const AgendaSection = () => {
           <p className="text-dark-grey font-light text-[13px] text-center max-w-xl mx-auto mt-10">
             All sessions include meals, materials, and networking opportunities.
           </p>
+          <p className="text-hero-navy/60 italic text-[14px] text-center max-w-2xl mx-auto mt-3">
+            Agenda subject to change. All sessions, timings, and activities may be updated as we finalize each campus.
+          </p>
         </AnimatedSection>
       </div>
     </section>

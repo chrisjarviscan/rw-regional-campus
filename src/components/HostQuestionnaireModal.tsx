@@ -205,7 +205,7 @@ const HostQuestionnaireModal = ({ open, onClose }: HostQuestionnaireModalProps) 
     });
     setSubmitting(false);
     if (invokeError) {
-      setError("Something went wrong. Please try again, or email contact@rw.institute.");
+      setError("Something went wrong. Please try again, or email nichole@realizedworth.com.");
       return;
     }
     setSubmitted(true);

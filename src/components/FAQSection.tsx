@@ -13,8 +13,8 @@ const faqs = [
     a: "Conferences deliver information to audiences. The Campus is a facilitated learning experience where you practice skills, work through real scenarios from your own programs, and leave with a concrete action plan. The cohort is capped at 40 to 50 people so every participant gets direct facilitator interaction.",
   },
   {
-    q: "Do I need to be a CSR professional to attend?",
-    a: "No. The Campus is built for your most committed volunteer leaders — Champions, Ambassadors, Social Impact Leads, Volunteer Committee Members, or anyone organizing employee volunteering at their company. You don't need a CSR title or program management background. If you care about doing this work well, you belong here.",
+    q: "Who should attend Campus?",
+    a: "Campus is built for employee volunteer leaders — the people on your team who already lead, coordinate, or champion your company's volunteering. Sometimes they're called Champions or Ambassadors. Sometimes they don't have a title yet. If you run your company's CSR program, you're the one who sends them. For your own training, see Social REV Live at https://www.realizedworth.com/social-rev-live.",
   },
   {
     q: "What if my company wants to send a team?",

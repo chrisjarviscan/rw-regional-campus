@@ -12,7 +12,7 @@ const cities = [
     dates: "September 24–25, 2026",
     status: "Accepting Registrations Soon",
     statusColor: "bg-dark-teal",
-    text: "Campus 01. Register by mid-July. A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
+    text: "Register by mid-July. A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
     image: cityWashington,
     campusValue: "Washington, DC — September 24–25, 2026",
   },
@@ -21,16 +21,16 @@ const cities = [
     dates: "October 14–15, 2026",
     status: "Accepting Registrations Soon",
     statusColor: "bg-dark-teal",
-    text: "Campus 02. Register by late August. Southeast campus with a confirmed venue partner.",
+    text: "Register by late August. Southeast campus with a confirmed venue partner.",
     image: cityAtlanta,
     campusValue: "Atlanta — October 14–15, 2026",
   },
   {
     city: "Seattle, WA",
     dates: "Fall 2026",
-    status: "Coming Soon",
+    status: "Coming Soon — Fall 2026",
     statusColor: "bg-mustard",
-    text: "In development with the Microsoft Alumni Network. Dates and registration to follow.",
+    text: "In development with local partners. Express interest to be notified when registration opens.",
     image: citySeattle,
     campusValue: "Seattle — Fall 2026",
   },
@@ -59,7 +59,7 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cities.map((c, i) => (
             <AnimatedSection key={c.city} delay={i * 120} animation="scale">
               <div className="bg-background rounded-xl border border-light-grey shadow-[0_4px_20px_rgba(0,0,0,0.12)] hover-lift group h-full flex flex-col overflow-hidden">
@@ -108,12 +108,12 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
               More cities coming. Philadelphia and Minneapolis are under consideration.
             </p>
             <a
-              href="mailto:contact@rw.institute?subject=Request%20a%20campus%20in%20my%20region"
+              href="mailto:nichole@realizedworth.com?subject=Request%20a%20campus%20in%20my%20region"
               onClick={() =>
                 trackMailto({
                   ctaLabel: "Request a campus in my region",
                   ctaLocation: "Cities footer",
-                  emailTo: "contact@rw.institute",
+                  emailTo: "nichole@realizedworth.com",
                   subject: "Request a campus in my region",
                 })
               }

@@ -3,7 +3,9 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProgramOverview from "@/components/ProgramOverview";
+import WhoIsAnEVL from "@/components/WhoIsAnEVL";
 import WhoThisIsFor from "@/components/WhoThisIsFor";
+import SRLCrossPromo from "@/components/SRLCrossPromo";
 import AgendaSection from "@/components/AgendaSection";
 import CitiesSection from "@/components/CitiesSection";
 import PricingSection from "@/components/PricingSection";
@@ -44,8 +46,10 @@ const Index = () => {
       </Helmet>
       <Navbar onRegisterClick={openModal} />
       <HeroSection onRegisterClick={openModal} />
+      <WhoIsAnEVL />
       <ProgramOverview />
-      <WhoThisIsFor />
+      <WhoThisIsFor onExpressInterest={openModal} />
+      <SRLCrossPromo />
       <AgendaSection />
       <CitiesSection onNotifyClick={openModalWithCampus} />
       <FitAssessment onExpressInterest={openModal} />

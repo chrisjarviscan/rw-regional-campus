@@ -107,7 +107,7 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
                 </ul>
                 {tier.cta === "Talk to Us" ? (
                   <a
-                    href="mailto:nichole@realizedworth.com?subject=18-Pack%20inquiry%20%E2%80%94%20Regional%20Campus%202026&cc=contact@rw.institute"
+                    href="mailto:nichole@realizedworth.com?subject=18-Pack%20inquiry%20%E2%80%94%20Regional%20Campus%202026"
                     onClick={() =>
                       trackMailto({
                         ctaLabel: "18-Pack — Talk to Us",
