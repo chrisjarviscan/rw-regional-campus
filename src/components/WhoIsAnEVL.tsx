@@ -14,7 +14,7 @@ const WhoIsAnEVL = () => {
           <p className="text-dark-grey font-light text-base md:text-lg leading-relaxed">
             The Regional Campus is built to train them. If you run your company's CSR or volunteering program, this is the experience you send them to. If you're a CSR professional looking for your own training, see{" "}
             <a
-              href="https://www.realizedworth.com/social-rev-live"
+              href="https://www.realizedworth.com/socialrev/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-hero-orange font-medium border-b border-hero-orange/40 hover:border-hero-orange transition-colors"
