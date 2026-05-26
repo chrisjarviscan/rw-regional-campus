@@ -137,14 +137,30 @@ Deno.serve(async (req) => {
       ];
     } else if (payload.type === "interest") {
       const d = payload.data;
+      const normalizedEmail = (d.email || "").trim().toLowerCase();
+      table = "interest_submissions";
+
+      // Dedupe check (case-insensitive). Skip insert and emails if already exists.
+      const { data: existing } = await supabase
+        .from(table)
+        .select("id")
+        .ilike("email", normalizedEmail)
+        .limit(1)
+        .maybeSingle();
+
+      if (existing) {
+        return new Response(JSON.stringify({ ok: true, duplicate: true }), {
+          status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
       const insert = {
-        full_name: d.full_name, email: d.email, company: d.company,
+        full_name: d.full_name, email: normalizedEmail, company: d.company,
         campus: d.campus, interest_type: d.interest_type, excitement: d.excitement || null,
       };
-      table = "interest_submissions";
       const { error } = await supabase.from(table).insert(insert);
       if (error) throw new Error(`DB insert: ${error.message}`);
-      row = [submittedAt, d.full_name, d.email, d.company, d.campus, d.interest_type, d.excitement || ""];
+      row = [submittedAt, d.full_name, normalizedEmail, d.company, d.campus, d.interest_type, d.excitement || ""];
     } else if (payload.type === "business_case") {
       const d = payload.data as Record<string, unknown>;
       const arr = (v: unknown) => Array.isArray(v) ? v.join("; ") : "";
