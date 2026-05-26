@@ -6,10 +6,12 @@ interface RegistrationModalProps {
   open: boolean;
   onClose: () => void;
   initialCampus?: string;
+  preselectedCampus?: string;
 }
 
-const RegistrationModal = ({ open, onClose, initialCampus }: RegistrationModalProps) => {
+const RegistrationModal = ({ open, onClose, initialCampus, preselectedCampus }: RegistrationModalProps) => {
   const [submitted, setSubmitted] = useState(false);
+  const [duplicate, setDuplicate] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,8 +23,9 @@ const RegistrationModal = ({ open, onClose, initialCampus }: RegistrationModalPr
   const [excitement, setExcitement] = useState("");
 
   useEffect(() => {
-    if (open && initialCampus) setCampus(initialCampus);
-  }, [open, initialCampus]);
+    const initial = preselectedCampus ?? initialCampus;
+    if (open && initial) setCampus(initial);
+  }, [open, initialCampus, preselectedCampus]);
 
   if (!open) return null;
 
