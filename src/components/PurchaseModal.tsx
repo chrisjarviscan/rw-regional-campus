@@ -10,9 +10,8 @@ interface PurchaseModalProps {
 }
 
 const CAMPUS_OPTIONS = [
-  "Detroit — August 2026",
-  "Washington, DC — September 2026",
-  "Atlanta — October 2026",
+  "Washington, DC — September 24–25, 2026",
+  "Atlanta — October 14–15, 2026",
   "Seattle — Fall 2026",
   "Split across multiple campuses",
   "Not sure yet",
@@ -171,7 +170,7 @@ const PurchaseModal = ({ open, onClose, pack, packPrice }: PurchaseModalProps) =
                 label="Seats / split notes (optional)"
                 value={seatsNotes}
                 onChange={setSeatsNotes}
-                placeholder="e.g. 4 seats Detroit, 2 seats DC"
+                placeholder="e.g. 4 seats DC, 2 seats Atlanta"
               />
               <Textarea
                 label="Anything else we should know? (optional)"

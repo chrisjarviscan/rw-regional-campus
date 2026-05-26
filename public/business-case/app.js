@@ -506,8 +506,8 @@
       manager: "Direct manager", committee: "A committee or working group", other: "Other",
     },
     preferred_city: {
-      detroit: "Detroit (August 2026)", washington_dc: "Washington DC (September 2026)",
-      atlanta: "Atlanta (October 2026)", seattle: "Seattle (Fall 2026)",
+      washington_dc: "Washington DC (September 24–25, 2026)",
+      atlanta: "Atlanta (October 14–15, 2026)", seattle: "Seattle (Fall 2026)",
       future: "Philadelphia / Minneapolis (future)", request_other: "Request a different city", flexible: "Flexible",
     },
     preferred_quarter: {
