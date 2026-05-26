@@ -12,7 +12,7 @@ const CertificationSection = () => {
       <div className="container mx-auto max-w-6xl relative z-10">
         <AnimatedSection>
           <div className="flex justify-center mb-4">
-            <span className="text-hero-orange text-xs font-bold uppercase tracking-[0.15em]">Certification Pathway</span>
+            <span className="text-dark-teal text-sm font-bold uppercase tracking-[0.15em]">Certification Pathway</span>
           </div>
           <h2 className="text-hero-navy font-bold text-[22px] md:text-[36px] text-center mb-3">
             A credential that means something

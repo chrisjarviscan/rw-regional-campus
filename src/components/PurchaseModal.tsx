@@ -103,7 +103,7 @@ const PurchaseModal = ({ open, onClose, pack, packPrice }: PurchaseModalProps) =
               </p>
               <a
                 href="mailto:nichole@realizedworth.com"
-                className="inline-block text-hero-orange font-medium hover:underline"
+                className="inline-block text-dark-teal font-bold hover:underline"
               >
                 nichole@realizedworth.com
               </a>
