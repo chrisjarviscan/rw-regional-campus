@@ -1,7 +1,6 @@
 import { MapPin, ArrowRight, Calendar } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
-import cityDetroit from "@/assets/images/city-detroit.jpg";
 import cityWashington from "@/assets/images/city-washington.jpg";
 import cityAtlanta from "@/assets/images/city-atlanta.jpg";
 import citySeattle from "@/assets/images/city-seattle.jpg";
@@ -9,31 +8,22 @@ import { trackMailto } from "@/lib/trackMailto";
 
 const cities = [
   {
-    city: "Detroit, MI",
-    dates: "August 2026",
-    status: "Accepting Registrations Soon",
-    statusColor: "bg-dark-teal",
-    text: "Campus 01. Register by mid-June. Hosted at a corporate venue in metro Detroit.",
-    image: cityDetroit,
-    campusValue: "Detroit — August 2026",
-  },
-  {
     city: "Washington, DC",
-    dates: "September 2026",
+    dates: "September 24–25, 2026",
     status: "Accepting Registrations Soon",
     statusColor: "bg-dark-teal",
-    text: "Campus 02. Register by mid-July. A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
+    text: "Campus 01. Register by mid-July. A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
     image: cityWashington,
-    campusValue: "Washington, DC — September 2026",
+    campusValue: "Washington, DC — September 24–25, 2026",
   },
   {
     city: "Atlanta, GA",
-    dates: "October 2026",
+    dates: "October 14–15, 2026",
     status: "Accepting Registrations Soon",
     statusColor: "bg-dark-teal",
-    text: "Campus 03. Register by late August. Southeast campus with a confirmed venue partner.",
+    text: "Campus 02. Register by late August. Southeast campus with a confirmed venue partner.",
     image: cityAtlanta,
-    campusValue: "Atlanta — October 2026",
+    campusValue: "Atlanta — October 14–15, 2026",
   },
   {
     city: "Seattle, WA",
