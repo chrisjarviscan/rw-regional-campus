@@ -30,7 +30,7 @@ const CampusTeam = () => {
                 />
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-xl font-bold text-hero-navy">Nichole Giller</h3>
-                  <p className="text-sm text-hero-orange font-medium mb-3">
+                  <p className="text-sm text-dark-teal font-bold mb-3">
                     Director of Experience & Integration
                   </p>
                   <p className="text-foreground/80 text-sm leading-relaxed mb-4">
@@ -59,7 +59,7 @@ const CampusTeam = () => {
                 />
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-xl font-bold text-hero-navy">Chris Jarvis</h3>
-                  <p className="text-sm text-hero-orange font-medium mb-3">
+                  <p className="text-sm text-dark-teal font-bold mb-3">
                     Co-Founder & CSO, Realized Worth
                   </p>
                   <p className="text-foreground/80 text-sm leading-relaxed">

@@ -135,7 +135,7 @@ const FitAssessmentModal = ({ open, onClose, onExpressInterest }: FitAssessmentM
         {!isResult && current && (
           <>
             <div className="flex items-center justify-between mb-6">
-              <span className="text-hero-orange font-bold text-xs uppercase tracking-[0.15em]">
+              <span className="text-dark-teal font-bold text-sm uppercase tracking-[0.15em]">
                 Question {step + 1} of {total}
               </span>
               {step > 0 && (
@@ -173,7 +173,7 @@ const FitAssessmentModal = ({ open, onClose, onExpressInterest }: FitAssessmentM
 
         {isResult && result && (
           <div>
-            <span className="text-hero-orange font-bold text-xs uppercase tracking-[0.15em]">Your read</span>
+            <span className="text-dark-teal font-bold text-sm uppercase tracking-[0.15em]">Your read</span>
             <h3 className="text-hero-navy font-bold text-xl md:text-2xl mt-2 mb-4">{result.title}</h3>
             <p className="text-dark-grey font-light text-base mb-6 leading-relaxed">{result.body}</p>
 

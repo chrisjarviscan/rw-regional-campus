@@ -77,7 +77,7 @@ const RegistrationModal = ({ open, onClose, initialCampus }: RegistrationModalPr
               </p>
               <a
                 href="mailto:contact@rw.institute"
-                className="inline-block text-hero-orange font-medium hover:underline"
+                className="inline-block text-dark-teal font-bold hover:underline"
               >
                 contact@rw.institute
               </a>

@@ -14,7 +14,7 @@ const FitAssessment = ({ onExpressInterest }: FitAssessmentProps) => {
     <section className="py-16 md:py-24 px-4 bg-light-teal/20">
       <div className="container mx-auto max-w-3xl text-center">
         <AnimatedSection>
-          <span className="text-hero-orange font-bold text-xs uppercase tracking-[0.15em]">
+          <span className="text-hero-navy font-bold text-sm uppercase tracking-[0.15em]">
             Before you express interest
           </span>
           <h2 className="text-hero-navy font-bold text-[24px] md:text-[36px] mt-3 mb-4">
