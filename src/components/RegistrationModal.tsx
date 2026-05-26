@@ -34,12 +34,14 @@ const RegistrationModal = ({ open, onClose, initialCampus, preselectedCampus }: 
     setError(null);
     setSubmitting(true);
 
-    const { error: invokeError } = await supabase.functions.invoke("submit-form", {
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const { data, error: invokeError } = await supabase.functions.invoke("submit-form", {
       body: {
         type: "interest",
         data: {
           full_name: fullName,
-          email,
+          email: normalizedEmail,
           company,
           campus,
           interest_type: interestType,
@@ -51,10 +53,12 @@ const RegistrationModal = ({ open, onClose, initialCampus, preselectedCampus }: 
     setSubmitting(false);
 
     if (invokeError) {
-      setError("Something went wrong. Please try again, or email contact@rw.institute.");
+      setError("Something went wrong. Please try again, or email nichole@realizedworth.com.");
       return;
     }
 
+    const isDuplicate = (data as { duplicate?: boolean } | null)?.duplicate === true;
+    setDuplicate(isDuplicate);
     setSubmitted(true);
   };
 
@@ -70,19 +74,34 @@ const RegistrationModal = ({ open, onClose, initialCampus, preselectedCampus }: 
 
         {submitted ? (
           <div className="text-center py-10">
-            <h3 className="text-hero-navy font-bold text-xl mb-3">Your name's on the list.</h3>
-            <p className="text-dark-grey font-light mb-6">
-              We'll be in touch as soon as registration opens for the campus you chose. Watch your inbox for a confirmation in the next few minutes.
-            </p>
+            {duplicate ? (
+              <>
+                <h3 className="text-hero-navy font-bold text-xl mb-3">You're already on the list.</h3>
+                <p className="text-dark-grey font-light mb-6">
+                  We'll be in touch when registration opens. If you'd like to update your details, email{" "}
+                  <a href="mailto:nichole@realizedworth.com" className="text-dark-teal font-medium hover:underline">
+                    nichole@realizedworth.com
+                  </a>
+                  .
+                </p>
+              </>
+            ) : (
+              <>
+                <h3 className="text-hero-navy font-bold text-xl mb-3">Your name's on the list.</h3>
+                <p className="text-dark-grey font-light mb-6">
+                  We'll be in touch as soon as registration opens for the campus you chose. Watch your inbox for a confirmation in the next few minutes.
+                </p>
+              </>
+            )}
             <div className="border-t border-light-grey pt-6 mt-2">
               <p className="text-dark-grey font-light text-sm mb-2">
                 Don't want to wait? Talk to us now.
               </p>
               <a
-                href="mailto:contact@rw.institute"
+                href="mailto:nichole@realizedworth.com"
                 className="inline-block text-dark-teal font-bold hover:underline"
               >
-                contact@rw.institute
+                nichole@realizedworth.com
               </a>
             </div>
           </div>
