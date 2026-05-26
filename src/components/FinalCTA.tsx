@@ -67,7 +67,7 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
         <AnimatedSection delay={600}>
           <div className="mt-12 pt-10 border-t border-primary-foreground/15">
             <p className="text-light-teal text-sm uppercase tracking-[0.15em] font-bold mb-3">
-              Need to convince a sponsor first?
+              Need to convince a decision-maker first?
             </p>
             <h3 className="text-primary-foreground text-2xl md:text-3xl font-bold mb-4">
               Build your business case in 5 minutes.
