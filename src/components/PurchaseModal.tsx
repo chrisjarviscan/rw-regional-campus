@@ -170,7 +170,7 @@ const PurchaseModal = ({ open, onClose, pack, packPrice }: PurchaseModalProps) =
                 label="Seats / split notes (optional)"
                 value={seatsNotes}
                 onChange={setSeatsNotes}
-                placeholder="e.g. 4 seats Detroit, 2 seats DC"
+                placeholder="e.g. 4 seats DC, 2 seats Atlanta"
               />
               <Textarea
                 label="Anything else we should know? (optional)"
