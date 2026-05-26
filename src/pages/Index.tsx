@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProgramOverview from "@/components/ProgramOverview";
@@ -32,6 +33,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Regional Campus Series | Realized Worth</title>
+        <meta name="description" content="A two-day, multi-company training in Transformative Volunteering methodology by Realized Worth. 2026 campuses in Detroit, Washington DC, and Atlanta." />
+        <link rel="canonical" href="https://rw-regional-campus.lovable.app/" />
+        <meta property="og:url" content="https://rw-regional-campus.lovable.app/" />
+        <meta property="og:title" content="Regional Campus Series | Realized Worth" />
+        <meta property="og:description" content="A two-day, multi-company training in Transformative Volunteering methodology by Realized Worth. Express interest for 2026." />
+      </Helmet>
       <Navbar onRegisterClick={openModal} />
       <HeroSection onRegisterClick={openModal} />
       <ProgramOverview />
