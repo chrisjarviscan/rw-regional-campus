@@ -103,9 +103,8 @@ const RegistrationModal = ({ open, onClose, initialCampus }: RegistrationModalPr
                   required
                 >
                   <option value="">Select a campus</option>
-                  <option>Detroit — August 2026</option>
-                  <option>Washington, DC — September 2026</option>
-                  <option>Atlanta — October 2026</option>
+                  <option>Washington, DC — September 24–25, 2026</option>
+                  <option>Atlanta — October 14–15, 2026</option>
                   <option>Seattle — Fall 2026</option>
                   <option>Not sure yet / open to options</option>
                   <option>I'd like to request a new city</option>
