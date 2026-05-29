@@ -14,6 +14,7 @@ import PostCampusCommunity from "@/components/PostCampusCommunity";
 import SocialProof from "@/components/SocialProof";
 import BecomeHost from "@/components/BecomeHost";
 import FitAssessment from "@/components/FitAssessment";
+import IntendedOutcomes from "@/components/IntendedOutcomes";
 import CampusTeam from "@/components/CampusTeam";
 import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
@@ -48,11 +49,12 @@ const Index = () => {
       <HeroSection onRegisterClick={openModal} />
       <WhoIsAnEVL />
       <ProgramOverview />
+      <FitAssessment onExpressInterest={openModal} />
       <WhoThisIsFor onExpressInterest={openModal} />
+      <IntendedOutcomes />
       <SRLCrossPromo />
       <AgendaSection />
       <CitiesSection onNotifyClick={openModalWithCampus} />
-      <FitAssessment onExpressInterest={openModal} />
       <PricingSection onRegisterClick={openModal} />
         <CertificationSection />
         <PostCampusCommunity />

@@ -575,9 +575,9 @@
         editStep: 5,
       },
       {
-        title: "Sponsor & ask",
+        title: "Decision-maker & ask",
         rows: [
-          ["Internal sponsor", state.ask.sponsor_name],
+          ["Internal decision-maker", state.ask.sponsor_name],
           ["Budget range", decode("budget_range", state.ask.budget_range)],
           ["The ask", state.ask.primary_ask],
           ["Extra notes", state.ask.extra_notes],
