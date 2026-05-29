@@ -49,11 +49,12 @@ const Index = () => {
       <HeroSection onRegisterClick={openModal} />
       <WhoIsAnEVL />
       <ProgramOverview />
+      <FitAssessment onExpressInterest={openModal} />
       <WhoThisIsFor onExpressInterest={openModal} />
+      <IntendedOutcomes />
       <SRLCrossPromo />
       <AgendaSection />
       <CitiesSection onNotifyClick={openModalWithCampus} />
-      <FitAssessment onExpressInterest={openModal} />
       <PricingSection onRegisterClick={openModal} />
         <CertificationSection />
         <PostCampusCommunity />
