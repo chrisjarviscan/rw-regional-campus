@@ -13,7 +13,7 @@ const SRLCrossPromo = () => {
             The Regional Campus is designed for the volunteer leaders you send. For your own learning, we run Social REV Live — a different experience built for CSR and corporate volunteering professionals.
           </p>
           <a
-            href="https://www.realizedworth.com/socialrev/"
+            href="https://www.realizedworth.com/socialrevlive/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 border-2 border-hero-orange text-hero-orange font-bold text-base rounded-md px-7 py-3.5 hover:bg-hero-orange hover:text-primary-foreground transition-all"
