@@ -15,7 +15,7 @@ const tiers = [
       "Stage 1 Certificate of Completion",
       "6-month cohort access included",
     ],
-    cta: "Express Interest",
+    cta: "Purchase",
     popular: false,
     outline: false,
   },
