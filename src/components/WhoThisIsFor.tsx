@@ -50,7 +50,7 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
                   </span>
                 </div>
                 <p className="text-dark-grey font-light text-[15px] leading-relaxed">
-                  You're the CSR or corporate volunteering lead. You decide who attends, allocate the seats, and want to invest in the leaders who carry your program. This is who Campus is sold to.
+                  You're the CSR or corporate volunteering lead or program manager — you decide who attends, allocate the budget, and want to invest in the people already carrying your program. A regional campus is designed for the volunteer leaders you send, not for you to attend yourself.
                 </p>
                 <div
                   className={`grid transition-all duration-500 ease-out ${
@@ -59,13 +59,10 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
                 >
                   <div className="overflow-hidden">
                     <p className="text-dark-grey font-light text-[15px] leading-relaxed mb-3">
-                      Your most engaged volunteer leaders coordinate sign-ups, rally their teammates, and follow up without prompting. They're past the basics of running events — they're asking how to make volunteering actually transformative. They carry impact without formal recognition.
-                    </p>
-                    <p className="text-dark-grey font-light text-[15px] leading-relaxed mb-3">
-                      Campus is a two-day investment in the specific people who already lead this work for you. They come back with a framework, a credential, a six-month community of peers from other companies, and a plan to apply what they learned in your program.
+                      Your most engaged volunteer leaders are past the basics. They organize events, rally teammates, and follow up without being asked — and they're ready to go deeper. A regional campus gives them a two-day framework, a certificate, and a six-month peer community from across industries. They come back with shared language you can actually build on.
                     </p>
                     <p className="text-dark-grey font-light text-[15px] leading-relaxed mb-5">
-                      If you send two or three from the same program, they come back with shared language.
+                      Send two or three people from the same program, and that effect compounds.
                     </p>
                     {onExpressInterest && (
                       <button
@@ -96,14 +93,14 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
               >
                 <div className="flex items-start justify-between gap-4 mb-3">
                   <h3 className="text-hero-navy font-bold text-lg md:text-xl">
-                    I'm the one who organizes my team's volunteering
+                    I organize my team's volunteering
                   </h3>
                   <span className="shrink-0 w-8 h-8 rounded-full bg-hero-orange text-primary-foreground flex items-center justify-center transition-transform">
                     {expanded === "leader" ? <Minus size={16} /> : <Plus size={16} />}
                   </span>
                 </div>
                 <p className="text-dark-grey font-light text-[15px] leading-relaxed">
-                  You're the person who already shows up — the one who organizes sign-ups, rallies people, and follows up without being asked. Campus is built to train you. You probably won't buy this yourself, though.
+                  You're the one who makes volunteering happen — signing people up, rallying colleagues, and following through without being asked. A regional campus is built for you.
                 </p>
                 <div
                   className={`grid transition-all duration-500 ease-out ${
@@ -111,11 +108,8 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-dark-grey font-light text-[15px] leading-relaxed mb-3">
-                      Your CSR lead or program manager is the one who buys Campus seats and decides who attends. You probably haven't been formally recognized for the work you do beyond your job description — most volunteer leaders haven't. The Stage 1 Certificate of Completion gives you something to point to. The six-month cohort gives you peers across companies and industries who do this same work and recognize it.
-                    </p>
                     <p className="text-dark-grey font-light text-[15px] leading-relaxed mb-5">
-                      If Campus sounds like the experience you want, the best move is to share this with whoever runs CSR or volunteering at your company.
+                      Seats are typically purchased by CSR leads and program managers, so the best next step is sharing this page with whoever runs volunteering at your company. When you attend, you'll come back with a real framework, a certificate you can point to, and a cohort of peers doing this same work at other companies — people who immediately get what you do.
                     </p>
                     <a
                       href={leaderMailto}
