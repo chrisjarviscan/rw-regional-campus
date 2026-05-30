@@ -25,7 +25,7 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
       <div className="container mx-auto max-w-6xl">
         <AnimatedSection>
           <h2 className="text-hero-navy font-bold text-[22px] md:text-[32px] text-center mb-3">
-            Built for two different people — which one are you?
+            Who's this for? Depends on where you sit.
           </h2>
           <p className="text-dark-teal text-center text-base md:text-lg mb-12 max-w-2xl mx-auto">
             Both sides matter. Click whichever describes you.
