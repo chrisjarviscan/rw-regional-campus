@@ -50,7 +50,7 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
                   </span>
                 </div>
                 <p className="text-dark-grey font-light text-[15px] leading-relaxed">
-                  You're the CSR or corporate volunteering lead. You decide who attends, allocate the seats, and want to invest in the leaders who carry your program. This is who Campus is sold to.
+                  You're the CSR or corporate volunteering lead or program manager — you decide who attends, allocate the budget, and want to invest in the people already carrying your program. A regional campus is designed for the volunteer leaders you send, not for you to attend yourself.
                 </p>
                 <div
                   className={`grid transition-all duration-500 ease-out ${
@@ -59,13 +59,10 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
                 >
                   <div className="overflow-hidden">
                     <p className="text-dark-grey font-light text-[15px] leading-relaxed mb-3">
-                      Your most engaged volunteer leaders coordinate sign-ups, rally their teammates, and follow up without prompting. They're past the basics of running events — they're asking how to make volunteering actually transformative. They carry impact without formal recognition.
-                    </p>
-                    <p className="text-dark-grey font-light text-[15px] leading-relaxed mb-3">
-                      Campus is a two-day investment in the specific people who already lead this work for you. They come back with a framework, a credential, a six-month community of peers from other companies, and a plan to apply what they learned in your program.
+                      Your most engaged volunteer leaders are past the basics. They organize events, rally teammates, and follow up without being asked — and they're ready to go deeper. A regional campus gives them a two-day framework, a certificate, and a six-month peer community from across industries. They come back with shared language you can actually build on.
                     </p>
                     <p className="text-dark-grey font-light text-[15px] leading-relaxed mb-5">
-                      If you send two or three from the same program, they come back with shared language.
+                      Send two or three people from the same program, and that effect compounds.
                     </p>
                     {onExpressInterest && (
                       <button
