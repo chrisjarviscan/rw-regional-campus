@@ -55,7 +55,7 @@ const tiers = [
       "Full-scale capability development",
       "Dedicated account coordination",
     ],
-    cta: "Talk to Us",
+    cta: "Purchase",
     popular: false,
     outline: true,
   },
