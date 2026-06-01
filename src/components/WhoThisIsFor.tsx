@@ -116,10 +116,10 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
                       onClick={(e) => {
                         e.stopPropagation();
                         trackMailto({
-                          ctaLabel: "Share with my CSR lead",
+                          ctaLabel: "Share this with my CSR lead",
                           ctaLocation: "WhoThisIsFor — Volunteer Leader",
                           emailTo: "",
-                          subject: "I'd like to attend the Regional Campus",
+                          subject: "Transformative Volunteering Training — Worth a Look",
                         });
                       }}
                       className="inline-flex items-center gap-2 bg-hero-orange text-primary-foreground font-bold text-sm rounded-md px-6 py-3 hover:brightness-90 transition-all"
