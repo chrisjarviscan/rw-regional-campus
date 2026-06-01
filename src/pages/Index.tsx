@@ -17,7 +17,6 @@ import FitAssessment from "@/components/FitAssessment";
 import IntendedOutcomes from "@/components/IntendedOutcomes";
 import CampusTeam from "@/components/CampusTeam";
 import FAQSection from "@/components/FAQSection";
-import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import RegistrationModal from "@/components/RegistrationModal";
 import CampusAssistant from "@/components/CampusAssistant";
@@ -56,14 +55,13 @@ const Index = () => {
       <AgendaSection />
       <CitiesSection onNotifyClick={openModalWithCampus} />
       <PricingSection onRegisterClick={openModal} />
-        <CertificationSection />
-        <PostCampusCommunity />
-        <SocialProof />
+      <CertificationSection />
+      <PostCampusCommunity />
+      <SocialProof />
       <BecomeHost />
       <CampusTeam />
       <FAQSection />
       <CampusAssistant onExpressInterest={openModal} />
-      <FinalCTA onRegisterClick={openModal} />
       <Footer />
       <RegistrationModal
         open={modalOpen}
