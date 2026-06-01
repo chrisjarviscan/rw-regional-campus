@@ -15,9 +15,9 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
   const toggle = (key: PanelKey) => setExpanded((cur) => (cur === key ? null : key));
 
   const leaderMailto = `mailto:?subject=${encodeURIComponent(
-    "I'd like to attend the Regional Campus"
+    "Transformative Volunteering Training — Worth a Look"
   )}&body=${encodeURIComponent(
-    `Hi — I think the RW Regional Campus would be valuable for me. The page is here: ${typeof window !== "undefined" ? window.location.href : ""}. Could we talk about whether you can sponsor my attendance?`
+    `I came across this two-day training program from Realized Worth Institute on Transformative Volunteering methodology. It looks relevant to what we're doing with our volunteer programs.\n\nTake a look: https://rw-regional-campus.lovable.app/\n\nIt covers how to move from transactional volunteering to real impact — with a certification pathway. Thought you'd want to see it.`
   )}`;
 
   return (
@@ -116,10 +116,10 @@ const WhoThisIsFor = ({ onExpressInterest }: WhoThisIsForProps) => {
                       onClick={(e) => {
                         e.stopPropagation();
                         trackMailto({
-                          ctaLabel: "Share with my CSR lead",
+                          ctaLabel: "Share this with my CSR lead",
                           ctaLocation: "WhoThisIsFor — Volunteer Leader",
                           emailTo: "",
-                          subject: "I'd like to attend the Regional Campus",
+                          subject: "Transformative Volunteering Training — Worth a Look",
                         });
                       }}
                       className="inline-flex items-center gap-2 bg-hero-orange text-primary-foreground font-bold text-sm rounded-md px-6 py-3 hover:brightness-90 transition-all"
