@@ -8,14 +8,14 @@ const GATEWAY = "https://ai.gateway.lovable.dev/v1/chat/completions";
 const MODEL = "google/gemini-2.5-pro";
 
 // ======================================================================
-// RW Brand tokens — pulled from official colors_and_type.css
-// (No leading '#' — pptxgenjs wants raw hex.)
+// RW Brand tokens - pulled from official colors_and_type.css
+// (No leading '#' - pptxgenjs wants raw hex.)
 // ======================================================================
 const C = {
-  orange: "EC5C2A",        // Hero Orange — CTAs, accent rules
+  orange: "EC5C2A",        // Hero Orange - CTAs, accent rules
   orangeBurnt: "DE5123",   // H1
   orangeDark: "A73B19",    // accent on dark
-  navy: "0A3454",          // Hero Navy — covers, footers
+  navy: "0A3454",          // Hero Navy - covers, footers
   navyDeep: "062136",      // deeper navy variant
   charcoal: "3C3F44",      // primary headings (light bg)
   ink: "404040",           // body
@@ -46,17 +46,31 @@ const COPY_TOOL = {
       type: "object",
       properties: {
         cover_subtitle: { type: "string", description: "≤90 chars. One-line framing under the company name." },
-        situation_paragraph: { type: "string", description: "Slide 2 'Where {Company} is now'. 4-6 sentences. Honest, specific, grounded in research. No hype." },
+        situation_paragraph: { type: "string", description: "Slide 2 'Where {Company} is now'. 4-6 sentences. Honest, specific, grounded in research. No hype. If you cite a specific number or named statistic, that fact MUST come from research_snapshot.program_facts, and you should attribute it inline in parentheses (e.g., '(2024 Stakeholder Impact Report)'). Do not write a specific number that is not in program_facts." },
         situation_pullquote: { type: "string", description: "≤140 chars. The single sentence that captures the diagnosis." },
+        situation_sources: {
+          type: "array",
+          description: "List every fact from research_snapshot.program_facts that you actually cited in situation_paragraph. Match the label and source_url from program_facts exactly. Empty array if no specific facts were cited.",
+          maxItems: 5,
+          items: {
+            type: "object",
+            properties: {
+              label: { type: "string", description: "Short label of the fact cited, e.g. 'volunteer hours' or 'participation rate'." },
+              url: { type: ["string", "null"], description: "The source URL from research_snapshot.program_facts. Null if no URL was available." },
+            },
+            required: ["label", "url"],
+            additionalProperties: false,
+          },
+        },
         champions_intro: { type: "string", description: "Slide 5 intro. 2 sentences framing what trained champions do at this specific company." },
-        ripple_headline: { type: "string", description: "Slide 7 headline. ≤90 chars. The 'small group → shift' framing for THIS company." },
+        ripple_headline: { type: "string", description: "Slide 7 headline. ≤90 chars. The 'small group to shift' framing for THIS company." },
         ripple_body: { type: "string", description: "Slide 7 body. 3-4 sentences explaining how trained champions ripple at the company's scale." },
         getback_intro: { type: "string", description: "Slide 11 intro. 2 sentences framing what the company gets back, tailored to audience role." },
         ask_headline: { type: "string", description: "Slide 12 headline. ≤80 chars. The specific ask." },
         ask_body: { type: "string", description: "Slide 12 body. 2-3 sentences: what we want, what it costs, what we'll bring back." },
       },
       required: [
-        "cover_subtitle", "situation_paragraph", "situation_pullquote",
+        "cover_subtitle", "situation_paragraph", "situation_pullquote", "situation_sources",
         "champions_intro", "ripple_headline", "ripple_body",
         "getback_intro", "ask_headline", "ask_body",
       ],
@@ -65,13 +79,15 @@ const COPY_TOOL = {
   },
 };
 
-const SYSTEM = `You are a senior strategist helping an internal champion build a business case for sending their team to the Realized Worth Regional Campus — a 2-day program that trains corporate volunteer champions to facilitate Transformative Experiences (not just coordinate transactional events).
+const SYSTEM = `You are a senior strategist helping an internal champion build a business case for sending their team to the Realized Worth Regional Campus, a 2-day program that trains corporate volunteer champions to facilitate Transformative Experiences (not just coordinate transactional events).
 
-Voice rules — non-negotiable:
+Voice rules, non-negotiable:
 - Write like a thoughtful colleague, not a marketer. No staccato fragments. No "It's not X. It's Y." patterns. No "Imagine..." openers. No breathless hype.
+- No em dashes anywhere. None. Use commas, periods, semicolons, or two sentences. This is non-negotiable.
 - No emojis. No exclamation marks. No "unlock", "elevate", "transform your", "game-changing", "leverage", "synergy".
 - Tailor framing to the audience role: a CFO needs cost/risk language; a CHRO needs talent/retention; a CSR lead needs community impact and reporting depth; a CEO needs strategic narrative.
-- Use specifics from the research and inputs. If a fact is missing, write around it — never invent.
+- Use specifics from the research and inputs. If a fact is missing, write around it. Never invent.
+- If you cite a specific number, percentage, or named statistic about the company (volunteer hours, participation rate, employee count, partner counts), it must come from the research_snapshot. If it isn't there, do not state the number. Qualify with "publicly reported" or omit.
 - "Transformative Experiences" and "Transformative Volunteering" are RW's branded terms (capitalize). Refer to RW as "Realized Worth".
 - Keep sentences readable. One idea at a time.
 - For research-grounded slides (situation_paragraph), be honest about what the research shows: scale, structure, gaps. Do not flatter.`;
@@ -83,19 +99,21 @@ async function callAI(payload: Record<string, unknown>): Promise<any> {
   const userPrompt = `Build tailored deck copy for this case.
 
 COMPANY: ${payload.company_name}
-PRESENTER: ${payload.presenter_name || "—"} (${payload.presenter_role || "—"})
-AUDIENCE: ${payload.audience_role || "—"}; budget approver: ${payload.decision_maker || "—"}
-CITY/TIMING: ${payload.preferred_city || "—"}, seats: ${payload.seats_requested || "—"}
-HEADCOUNT: ${payload.headcount_bracket || "—"}
-CHAMPIONS: ${payload.has_champions || "—"}; formal training: ${payload.has_formal_training || "—"}
-TOP CHALLENGES: ${(payload.selected_challenges as string[] || []).join("; ") || "—"}
-DESIRED OUTCOMES: ${(payload.desired_outcomes as string[] || []).join("; ") || "—"}
-SPONSOR: ${payload.sponsor_name || "—"}; budget: ${payload.budget_range || "—"}
-THEIR ASK (raw): ${payload.primary_ask || "—"}
-EXTRA NOTES: ${payload.extra_notes || "—"}
+PRESENTER: ${payload.presenter_name || "(not provided)"} (${payload.presenter_role || "(not provided)"})
+AUDIENCE: ${payload.audience_role || "(not provided)"}; budget approver: ${payload.decision_maker || "(not provided)"}
+CITY/TIMING: ${payload.preferred_city || "(not provided)"}, seats: ${payload.seats_requested || "(not provided)"}
+HEADCOUNT: ${payload.headcount_bracket || "(not provided)"}
+CHAMPIONS: ${payload.has_champions || "(not provided)"}; formal training: ${payload.has_formal_training || "(not provided)"}
+TOP CHALLENGES: ${(payload.selected_challenges as string[] || []).join("; ") || "(not provided)"}
+DESIRED OUTCOMES: ${(payload.desired_outcomes as string[] || []).join("; ") || "(not provided)"}
+SPONSOR: ${payload.sponsor_name || "(not provided)"}; budget: ${payload.budget_range || "(not provided)"}
+THEIR ASK (raw): ${payload.primary_ask || "(not provided)"}
+EXTRA NOTES: ${payload.extra_notes || "(not provided)"}
 
 RESEARCH SNAPSHOT (may be partial; use only what's confirmed):
 ${JSON.stringify(payload.research_snapshot || {}, null, 2)}
+
+Important: the situation_paragraph may reference specific facts about ${payload.company_name} (volunteer hours, participation rate, headcount, partner counts, program age), but ONLY if those facts appear in research_snapshot.program_facts. For every such fact you cite, populate situation_sources with the matching {label, url} entry. If program_facts is empty or missing, do not state specific numbers; speak about the program's scale and structure in general terms instead.
 
 Now return tailored copy via the return_deck_copy tool.`;
 
@@ -156,7 +174,7 @@ function seatToTierIndex(seats?: string): number {
 }
 
 // ======================================================================
-// Citations (fixed — never hallucinated)
+// Citations (fixed - never hallucinated)
 // ======================================================================
 const CITATIONS = [
   { n: 1, text: "Harris, L.T. & Fiske, S.T. (2006). Dehumanizing the Lowest of the Low. Psychological Science, 17(10).", url: "https://doi.org/10.1111/j.1467-9280.2006.01793.x" },
@@ -178,6 +196,160 @@ const CITATIONS = [
 ];
 
 // ======================================================================
+// Source annotations: why each citation supports the claim it sits next to.
+// 16 entries grouped into 4 themed slides.
+// ======================================================================
+type Annotation = { n: number; title: string; where: string; finding: string; relevance: string };
+
+const ANNOTATIONS: Annotation[] = [
+  {
+    n: 1, title: "Harris & Fiske (2006)",
+    where: "Cited on slides 3, 5, 9.",
+    finding: "An fMRI study found reduced medial prefrontal cortex (mPFC) activation when participants viewed images of homeless or addicted people. The mPFC is the brain region for processing other people's minds.",
+    relevance: "The brief functions as a social priming intervention. Reactivating mPFC is the mechanism behind 'volunteers see beneficiaries as fully human.' Direct match between the claim and the finding.",
+  },
+  {
+    n: 2, title: "McGaugh (2000)",
+    where: "Cited on slides 3, 4, 5.",
+    finding: "Reviewed a century of memory research showing that emotionally arousing experiences trigger a 0 to 90 minute window of stress-hormone activity that strengthens encoding into long-term memory.",
+    relevance: "The 40-minute debrief sits inside this consolidation window. Structured reflection gets encoded alongside the experience. Outside the window, the reflection becomes a separate memory with much less identity-shaping power.",
+  },
+  {
+    n: 3, title: "Klimecki et al. (2014)",
+    where: "Cited on slide 3.",
+    finding: "Brain imaging on trained participants showed empathy training activates pain-sharing networks (anterior insula, ACC). Compassion training activates positive-affect networks (mOFC, ventral striatum). Two different circuits.",
+    relevance: "Klimecki studied training, not the absence of debrief. The mapping is adjacent. Trained debrief teaches the compassion mode. Without it, practitioners default to empathy mode, which is what wears them out.",
+  },
+  {
+    n: 4, title: "Mezirow (1991)",
+    where: "Cited on slides 4, 5, 9.",
+    finding: "Theory of transformative learning. The 'disorienting dilemma' (an experience that disrupts existing meaning structures) is the catalyst for identity-level adult learning.",
+    relevance: "The live nonprofit experience is the disorienting dilemma. The gap between expectation and reality is the learning. Direct application of Mezirow's most-cited concept.",
+  },
+  {
+    n: 5, title: "Penner et al. (2005)",
+    where: "Cited on slides 5, 6, 9.",
+    finding: "Review of prosocial behavior research distinguishing situational helping (one-time acts) from identity-level prosocial change (helping integrated into self-concept). The latter is durable; the former is not.",
+    relevance: "'Prosocial identity change' as the stated outcome is exactly Penner's construct. The phrase 'I did a good thing' vs 'this is part of who I am' is the operational difference between situational and identity-level helping.",
+  },
+  {
+    n: 6, title: "Tajfel & Turner (1979)",
+    where: "Cited on slides 4, 6.",
+    finding: "Social Identity Theory. People derive self-concept from group memberships. Behavior changes when group membership becomes salient. Identity is multi-layered and context-activated.",
+    relevance: "The deck argues that cohort identity makes the new practice stick, and that employer-supported prosocial identity links company to self-concept. Both claims rest on Tajfel and Turner. Foundational reference.",
+  },
+  {
+    n: 8, title: "Haslam (2004)",
+    where: "Cited on slide 4.",
+    finding: "Textbook applying Social Identity Theory to workplace behavior. Organizational practices that activate group identity change individual conduct, productivity, and retention.",
+    relevance: "Pairs with [6]. Provides workplace-specific evidence for the cohort identity mechanism. The 6-month cohort is not decorative; it is how group identity gets activated and held over time.",
+  },
+  {
+    n: 9, title: "Kolb (1984)",
+    where: "Cited on slide 4.",
+    finding: "Experiential learning cycle: concrete experience, reflective observation, abstract conceptualization, active experimentation. Skill acquisition requires all four. Lecture skips the first and last.",
+    relevance: "The campus design is a one-to-one mapping of Kolb. Live experience, structured debrief, design workshop, practice rounds. 'Practice, not lecture' rests on this framework.",
+  },
+  {
+    n: 10, title: "Grant (2008)",
+    where: "Cited on slide 5.",
+    finding: "Field experiments showed brief contact between workers and beneficiaries (a 5-minute meeting with a scholarship recipient) increased work effort and persistence for more than a month after the meeting.",
+    relevance: "The deck's claim about direct beneficiary contact 'durably increasing effort for over a month' is Grant's headline finding, almost verbatim. Strongest empirical match in the deck.",
+  },
+  {
+    n: 11, title: "Mitchell (2008)",
+    where: "Cited on slides 5, 6.",
+    finding: "Distinguishes traditional service-learning (volunteers serve passive recipients) from critical service-learning (volunteers and partners co-design around real need, with power-sharing). The latter produces sustained relationships.",
+    relevance: "The 'scoping projects WITH partners, not FOR them' language is direct critical service-learning vocabulary. The deck's intergroup framing maps cleanly onto Mitchell's framework.",
+  },
+  {
+    n: 12, title: "Pettigrew & Tropp (2006)",
+    where: "Cited on slides 5, 6.",
+    finding: "Meta-analysis of 515 studies confirmed Allport's intergroup contact hypothesis: contact between groups reduces prejudice when four conditions are met (equal status, common goals, cooperation, institutional support).",
+    relevance: "The deck claims trained champions meet the conditions for positive intergroup contact. Pettigrew and Tropp identified what those conditions actually are. 515 studies of empirical grounding.",
+  },
+  {
+    n: 13, title: "Aquino & Reed (2002)",
+    where: "Cited on slide 6.",
+    finding: "Scale-development study showing that the centrality of moral identity to a person's self-concept predicts moral behavior across life domains, not only in observed contexts.",
+    relevance: "The deck claims prosocial identity change 'generalizes across life domains.' That generalization is exactly what Aquino and Reed measured. Direct support for the claim.",
+  },
+  {
+    n: 14, title: "Rodell (2013)",
+    where: "Listed in references but not yet cited in body slides.",
+    finding: "Survey research showing employees who volunteer report greater meaningfulness at work, which carries into job performance and retention outcomes.",
+    relevance: "The retention argument on slide 11 rests on work like this but does not cite it directly. Could be added on 'reduced champion attrition' for stronger sourcing.",
+  },
+  {
+    n: 17, title: "Lally et al. (2010)",
+    where: "Cited on slide 9.",
+    finding: "Tracked 96 people building new habits. Automaticity took 18 to 254 days to form, with a median of 66 days. Time-to-automaticity depends on the complexity of the behavior.",
+    relevance: "The deck claims complex prosocial behaviors require repeated, spaced practice. Lally's range justifies the 6-month cohort duration. Complex behaviors sit at the upper end of the range.",
+  },
+  {
+    n: 18, title: "Cepeda et al. (2006)",
+    where: "Cited on slide 9.",
+    finding: "Meta-analysis of distributed-practice studies showed that spacing learning trials produces better retention than massing them, especially for material that needs to last.",
+    relevance: "Used to support spacing in the cohort. The domain match is imperfect. Cepeda studied verbal recall (vocabulary, facts), not behavioral skill acquisition. The principle generalizes, but a behavioral-skill study would be a tighter citation.",
+  },
+  {
+    n: 19, title: "Centola et al. (2018)",
+    where: "Listed in references but not yet cited in body slides.",
+    finding: "Lab experiment showed that a committed minority of about 25 percent can flip a group's social convention. Below the threshold, the convention holds. Above it, change happens.",
+    relevance: "Could anchor the ripple-effect argument on slide 7 with a specific threshold. Currently the ripple narrative is asserted rather than sourced; Centola would give it teeth.",
+  },
+];
+
+const ANNOTATION_GROUPS: { title: string; ids: number[] }[] = [
+  { title: "Foundations: how the brain and memory work", ids: [1, 2, 3, 4] },
+  { title: "Identity and learning", ids: [5, 6, 8, 9] },
+  { title: "Application: contact, partnership, beneficiary effects", ids: [10, 11, 12, 13] },
+  { title: "Durability and scale", ids: [14, 17, 18, 19] },
+];
+
+// ======================================================================
+// Decision-maker resolution from research_snapshot.key_people
+// ======================================================================
+// Map our audience_role enum to one or more role keywords that might appear
+// in research_snapshot.key_people[].role. Order = preference.
+const AUDIENCE_TO_ROLE_KEYWORDS: Record<string, string[]> = {
+  ceo: ["ceo", "chief executive"],
+  chro: ["chro", "chief people", "chief human"],
+  cfo: ["cfo", "chief financial"],
+  csr_lead: ["chief sustainability", "chief impact", "head of csr", "head of sustainability", "head of social impact", "chief csr"],
+  hr_director: ["hr director", "head of hr", "vp human"],
+  dei_lead: ["chief diversity", "head of dei", "head of diversity"],
+  comms_lead: ["chief communications", "head of communications"],
+  manager: [],
+  committee: [],
+  other: [],
+};
+
+type KeyPerson = { role?: string | null; name?: string | null; source_url?: string | null; confidence?: string };
+
+function resolveDecisionMaker(input: any): { display: string; sourceUrl?: string | null } {
+  const userTyped = String(input.decision_maker || "").trim();
+  if (userTyped.length > 0) return { display: userTyped };
+
+  const people: KeyPerson[] = Array.isArray(input?.research_snapshot?.key_people)
+    ? input.research_snapshot.key_people
+    : [];
+  const keywords = AUDIENCE_TO_ROLE_KEYWORDS[String(input.audience_role || "").toLowerCase()] || [];
+  if (people.length === 0 || keywords.length === 0) return { display: "" };
+
+  const acceptable = (c?: string) => c === "high" || c === "medium";
+  for (const kw of keywords) {
+    const match = people.find(
+      (p) => p?.name && typeof p.role === "string" && p.role.toLowerCase().includes(kw) && acceptable(p.confidence),
+    );
+    if (match && match.name) {
+      return { display: match.name, sourceUrl: match.source_url || null };
+    }
+  }
+  return { display: "" };
+}
+
+// ======================================================================
 // PPTX BUILDER
 // ======================================================================
 function buildDeck(input: any, copy: any): any {
@@ -193,6 +365,11 @@ function buildDeck(input: any, copy: any): any {
   const city = CITY_LABELS[input.preferred_city] || "Campus to be confirmed";
   const seats = SEAT_LABELS[input.seats_requested] || "Seats TBD";
   const tierIdx = seatToTierIndex(input.seats_requested);
+
+  // Resolve the decision-maker. Prefer the name the user typed. If empty,
+  // look up the named officer in research_snapshot.key_people that matches
+  // the audience role and has confidence high/medium plus a working source_url.
+  const resolvedDecisionMaker = resolveDecisionMaker(input);
 
   let slideNum = 0;
   const newSlide = (bg: string = C.white) => {
@@ -235,7 +412,7 @@ function buildDeck(input: any, copy: any): any {
   const addRule = (s: any, y = 2.05) =>
     s.addShape("line", { x: 0.6, y, w: 1.0, h: 0, line: { color: C.orange, width: 3 } });
 
-  // ---------- Slide 1 — Cover ----------
+  // ---------- Slide 1 - Cover ----------
   {
     const s = newSlide(C.navy);
     // Orange accent bar
@@ -270,16 +447,16 @@ function buildDeck(input: any, copy: any): any {
     s.addText(
       [
         { text: "Prepared by ", options: { color: C.aqua } },
-        { text: `${input.presenter_name || "—"}${input.presenter_role ? `, ${input.presenter_role}` : ""}\n`, options: { color: C.white, bold: true } },
+        { text: `${input.presenter_name || "(your name)"}${input.presenter_role ? `, ${input.presenter_role}` : ""}\n`, options: { color: C.white, bold: true } },
         { text: "For ", options: { color: C.aqua } },
-        { text: `${audience}${input.decision_maker ? ` · ${input.decision_maker}` : ""}\n`, options: { color: C.white, bold: true } },
+        { text: `${audience}${resolvedDecisionMaker.display ? ` · ${resolvedDecisionMaker.display}` : ""}\n`, options: { color: C.white, bold: true } },
         { text: `${city}  ·  ${seats}`, options: { color: C.aqua } },
       ],
       { x: 0.9, y: 5.9, w: 12, h: 1.5, fontFace: FONT_BODY, fontSize: 14 },
     );
   }
 
-  // ---------- Slide 2 — Where {Company} is now ----------
+  // ---------- Slide 2 - Where {Company} is now ----------
   {
     const s = newSlide(C.white);
     addEyebrow(s, `Where ${company} is now`);
@@ -287,9 +464,28 @@ function buildDeck(input: any, copy: any): any {
     addRule(s);
 
     s.addText(copy.situation_paragraph || "", {
-      x: 0.6, y: 2.4, w: 8.4, h: 4.2,
+      x: 0.6, y: 2.4, w: 8.4, h: 3.7,
       fontFace: FONT_BODY, fontSize: 15, color: C.ink, lineSpacingMultiple: 1.5,
     });
+
+    // Sources footer for slide 2 (if AI cited any sourced facts)
+    const sitSources = Array.isArray(copy.situation_sources) ? copy.situation_sources.filter((x: any) => x && x.url) : [];
+    if (sitSources.length > 0) {
+      s.addText("SOURCES FOR FIGURES CITED", {
+        x: 0.6, y: 6.15, w: 8.4, h: 0.25,
+        fontFace: FONT_COND, fontSize: 9, bold: true, color: C.orange, charSpacing: 3,
+      });
+      const runs: any[] = [];
+      sitSources.forEach((src: any, i: number) => {
+        if (i > 0) runs.push({ text: "  ·  ", options: { color: C.muted } });
+        runs.push({ text: `${src.label}: `, options: { color: C.muted } });
+        runs.push({ text: src.url, options: { color: C.dteal, hyperlink: { url: src.url } } });
+      });
+      s.addText(runs, {
+        x: 0.6, y: 6.4, w: 8.4, h: 0.5,
+        fontFace: FONT_COND, fontSize: 9, lineSpacingMultiple: 1.3,
+      });
+    }
 
     // Pull-quote sidebar
     s.addShape("rect", { x: 9.4, y: 2.4, w: 3.4, h: 4.2, fill: { color: C.aqua }, line: { color: C.aqua } });
@@ -306,7 +502,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 3 — Why most volunteer programs produce activity, not change ----------
+  // ---------- Slide 3 - Why most volunteer programs produce activity, not change ----------
   {
     const s = newSlide(C.bgSoft);
     addEyebrow(s, "The structural gap");
@@ -356,7 +552,7 @@ function buildDeck(input: any, copy: any): any {
     const cols = [
       { x: 0.6, label: "BEFORE", title: "Without a brief", body: "Volunteers arrive in task mode. The part of the brain that processes others as fully human [1] never activates." },
       { x: 5.0, label: "DURING", title: "Without a guide", body: "First-timers and veterans get the same assignment. The experience is pleasant but flat. Nobody calibrates challenge to contribution." },
-      { x: 9.4, label: "AFTER", title: "Without a debrief", body: "The 0–40 minute window for memory consolidation [2] closes. Champions burn out — repeated exposure without structured processing activates pain-sharing rather than compassion circuits [3]." },
+      { x: 9.4, label: "AFTER", title: "Without a debrief", body: "The 0–40 minute consolidation window [2] closes. Champions burn out. Without structured processing, repeated exposure activates the brain's pain-sharing circuits instead of the compassion ones [3]." },
     ];
     cols.forEach(c => {
       s.addText(c.label, {
@@ -376,7 +572,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 4 — Why immersive learning changes practice ----------
+  // ---------- Slide 4 - Why immersive learning changes practice ----------
   {
     const s = newSlide(C.white);
     addEyebrow(s, "How adults change practice");
@@ -420,7 +616,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 5 — What trained champions do differently ----------
+  // ---------- Slide 5 - What trained champions do differently ----------
   {
     const s = newSlide(C.white);
     addEyebrow(s, `What trained champions do at ${company}`);
@@ -434,8 +630,8 @@ function buildDeck(input: any, copy: any): any {
 
     const rows = [
       ["01", "They change how colleagues show up", "A 5-minute brief reactivates the part of the brain that processes others as fully human [1]. Volunteers contribute at a higher level and come back. Direct beneficiary contact durably increases effort for over a month [10]."],
-      ["02", "They build real nonprofit partnerships", "Trained champions scope projects WITH partners, not FOR them. They frame the experience so volunteers encounter the work as partners — meeting the conditions for positive intergroup contact [11][12]."],
-      ["03", "They turn a good day into a lasting shift", "A structured debrief within 40 minutes [2] uses the gap between expectation and reality [4] as the mechanism for prosocial identity change [5] — a shift in how someone understands themselves."],
+      ["02", "They build real nonprofit partnerships", "Trained champions scope projects WITH partners, not FOR them. They frame the experience so volunteers encounter the work as partners, which meets the conditions for positive intergroup contact [11][12]."],
+      ["03", "They turn a good day into a lasting shift", "A structured debrief within 40 minutes [2] uses the gap between expectation and reality [4] as the mechanism for prosocial identity change [5]. That shift changes how someone understands themselves."],
     ];
     rows.forEach(([n, k, v], i) => {
       const y = 3.2 + i * 1.1;
@@ -461,7 +657,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 6 — What changes for employee / company / community ----------
+  // ---------- Slide 6 - What changes for employee / company / community ----------
   {
     const s = newSlide(C.bgSoft);
     addEyebrow(s, "Three audiences, three outcomes");
@@ -497,7 +693,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 7 — From a small group to a shift (with chart) ----------
+  // ---------- Slide 7 - From a small group to a shift (with chart) ----------
   {
     const s = newSlide(C.white);
     addEyebrow(s, "Ripple effect at scale");
@@ -509,7 +705,7 @@ function buildDeck(input: any, copy: any): any {
       fontFace: FONT_BODY, fontSize: 13, color: C.ink, lineSpacingMultiple: 1.5,
     });
 
-    // Bar chart on the right — events influenced per year by tier
+    // Bar chart on the right - events influenced per year by tier
     const chartX = 7.2, chartY = 2.4, chartW = 5.6, chartH = 4.0;
     s.addShape("rect", { x: chartX, y: chartY, w: chartW, h: chartH, fill: { color: C.bgSoft }, line: { color: C.greyLight, width: 0.5 } });
     s.addText("EVENTS TOUCHED PER YEAR", {
@@ -560,7 +756,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 8 — The campus (agenda timeline) ----------
+  // ---------- Slide 8 - The campus (agenda timeline) ----------
   {
     const s = newSlide(C.bgSoft);
     addEyebrow(s, "The campus");
@@ -571,7 +767,7 @@ function buildDeck(input: any, copy: any): any {
     const days = [
       {
         label: "DAY 1",
-        title: "Brief, experience, debrief — live",
+        title: "Live cycle: brief, experience, debrief",
         blocks: [
           { time: "Morning", title: "Brief masterclass", body: "Frame, connect, set conditions for transformation." },
           { time: "Midday",  title: "Live nonprofit experience", body: "Real volunteer work with a partner organization." },
@@ -620,7 +816,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 9 — The credential ----------
+  // ---------- Slide 9 - The credential ----------
   {
     const s = newSlide(C.white);
     addEyebrow(s, "The credential");
@@ -632,7 +828,7 @@ function buildDeck(input: any, copy: any): any {
         bg: C.orange, fg: C.white,
         label: "STAGE 1",
         title: "Certificate of Completion",
-        body: "Awarded after the two-day campus. Validates competency in the three keystone behaviors: conducting the Brief, guiding the experience, and conducting the Debrief — trainable, repeatable facilitation skills grounded in behavioral science [1][4][5]. Included in registration.",
+        body: "Awarded after the two-day campus. Validates competency in the three keystone behaviors: conducting the Brief, guiding the experience, and conducting the Debrief. These are trainable, repeatable facilitation skills grounded in behavioral science [1][4][5]. Included in registration.",
       },
       {
         bg: C.navy, fg: C.white,
@@ -661,7 +857,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 10 — Investment (pricing table) ----------
+  // ---------- Slide 10 - Investment (pricing table) ----------
   {
     const s = newSlide(C.white);
     addEyebrow(s, "Investment");
@@ -674,7 +870,7 @@ function buildDeck(input: any, copy: any): any {
     });
 
     const tiers = [
-      ["Individual", "1",  "$2,100",  "$2,100", "—"],
+      ["Individual", "1",  "$2,100",  "$2,100", "Standard"],
       ["6-Pack",     "6",  "$12,000", "$2,000", "5% off"],
       ["12-Pack",    "12", "$22,800", "$1,900", "10% off"],
       ["18-Pack",    "18", "$32,130", "$1,785", "15% off"],
@@ -732,7 +928,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 11 — What {Company} gets back ----------
+  // ---------- Slide 11 - What {Company} gets back ----------
   {
     const s = newSlide(C.white);
     addEyebrow(s, `What ${company} gets back`);
@@ -746,7 +942,7 @@ function buildDeck(input: any, copy: any): any {
 
     const cells = [
       { k: "A quality layer across your network",       v: "Trained champions become standard-bearers across regions and business units. They coach peers and close the gap between aspiration and ground-level experience." },
-      { k: "Engagement data that survives the C-suite", v: "Measurement architecture built for ESG reporting, talent analytics, and executive dashboards — outcomes, not participation theater." },
+      { k: "Engagement data that survives the C-suite", v: "Measurement architecture built for ESG reporting, talent analytics, and executive dashboards. Outcomes, not participation theater." },
       { k: "Reduced champion attrition",                v: "Structured training, a credential, and 6 months of peer support. Retention of trained leaders is itself an ROI story." },
       { k: "Scale with quality, not just reach",        v: "Adding events without improving experience quality produces diminishing returns. Trained champions improve every experience they touch." },
       { k: "Brand perception from the inside",          v: "Employees who undergo genuine prosocial identity change embody the company's commitment. That shows up in Glassdoor, in talent conversations, in how people describe working here." },
@@ -771,7 +967,7 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
-  // ---------- Slide 12 — Next steps / The ask ----------
+  // ---------- Slide 12 - Next steps / The ask ----------
   {
     const s = newSlide(C.navy);
     s.addShape("rect", { x: 0, y: 0, w: 0.4, h: H, fill: { color: C.orange }, line: { color: C.orange } });
@@ -792,7 +988,7 @@ function buildDeck(input: any, copy: any): any {
 
     const steps = [
       ["01", "Express interest", "Visit rw-regional-campus.lovable.app and submit the interest form for your preferred campus."],
-      ["02", "Talk to us",        "Reach out to Nichole at nichole@realizedworth.com — she'll walk you through everything."],
+      ["02", "Talk to us",        "Reach out to Nichole at nichole@realizedworth.com. She'll walk you through everything."],
       ["03", "Reserve your seats","Registration opens soon. Interest form submissions are first in line."],
     ];
     steps.forEach(([n, k, v], i) => {
@@ -820,14 +1016,14 @@ function buildDeck(input: any, copy: any): any {
     });
   }
 
-  // ---------- Slide 13 — References ----------
+  // ---------- Slide 13 - References ----------
   {
     const s = newSlide(C.white);
     addEyebrow(s, "References");
-    addTitle(s, "Behavioral science citations");
+    addTitle(s, "Further reading");
     addRule(s);
 
-    s.addText("Footnote numbers in slide text correspond to entries below.", {
+    s.addText("Numbered footnotes throughout the deck correspond to these sources. Annotated notes follow.", {
       x: 0.6, y: 2.3, w: 12, h: 0.4,
       fontFace: FONT_BODY, fontSize: 11, italic: true, color: C.muted,
     });
@@ -854,11 +1050,81 @@ function buildDeck(input: any, copy: any): any {
     addFooter(s);
   }
 
+  // ---------- Slides 14-17: Source annotations ----------
+  ANNOTATION_GROUPS.forEach((group, groupIdx) => {
+    const s = newSlide(C.bgSoft);
+    addEyebrow(s, `Source notes ${groupIdx + 1} of ${ANNOTATION_GROUPS.length}`);
+    addTitle(s, group.title, { size: 22 });
+    addRule(s);
+
+    const cards = group.ids
+      .map((id) => ANNOTATIONS.find((a) => a.n === id))
+      .filter((a): a is Annotation => Boolean(a));
+
+    cards.forEach((a, i) => {
+      const col = i % 2;
+      const row = Math.floor(i / 2);
+      const cardX = 0.6 + col * 6.15;
+      const cardY = 2.4 + row * 2.2;
+      const cardW = 5.95;
+      const cardH = 2.05;
+
+      // Card background
+      s.addShape("rect", {
+        x: cardX, y: cardY, w: cardW, h: cardH,
+        fill: { color: C.white }, line: { color: C.greyLight, width: 0.5 },
+      });
+      // Orange left accent bar
+      s.addShape("rect", {
+        x: cardX, y: cardY, w: 0.08, h: cardH,
+        fill: { color: C.orange }, line: { color: C.orange },
+      });
+      // Number badge
+      s.addShape("ellipse", {
+        x: cardX + 0.2, y: cardY + 0.15, w: 0.45, h: 0.45,
+        fill: { color: C.orange }, line: { color: C.orange },
+      });
+      s.addText(`[${a.n}]`, {
+        x: cardX + 0.2, y: cardY + 0.15, w: 0.45, h: 0.45,
+        align: "center", valign: "middle",
+        fontFace: FONT_HEAD, fontSize: 10, bold: true, color: C.white,
+      });
+      // Title (author/year)
+      s.addText(a.title, {
+        x: cardX + 0.75, y: cardY + 0.12, w: cardW - 0.95, h: 0.3,
+        fontFace: FONT_HEAD, fontSize: 12, bold: true, color: C.navy,
+      });
+      // Cited-on subtitle
+      s.addText(a.where, {
+        x: cardX + 0.75, y: cardY + 0.40, w: cardW - 0.95, h: 0.22,
+        fontFace: FONT_COND, fontSize: 8.5, color: C.muted, italic: true,
+      });
+      // Finding paragraph
+      s.addText([
+        { text: "FOUND: ", options: { bold: true, color: C.orange, fontFace: FONT_COND, charSpacing: 2 } },
+        { text: a.finding, options: { color: C.ink } },
+      ], {
+        x: cardX + 0.2, y: cardY + 0.7, w: cardW - 0.3, h: 0.65,
+        fontFace: FONT_BODY, fontSize: 9, lineSpacingMultiple: 1.25,
+      });
+      // Relevance paragraph
+      s.addText([
+        { text: "WHY IT SUPPORTS: ", options: { bold: true, color: C.orange, fontFace: FONT_COND, charSpacing: 2 } },
+        { text: a.relevance, options: { color: C.ink } },
+      ], {
+        x: cardX + 0.2, y: cardY + 1.4, w: cardW - 0.3, h: 0.6,
+        fontFace: FONT_BODY, fontSize: 9, lineSpacingMultiple: 1.25,
+      });
+    });
+
+    addFooter(s);
+  });
+
   return pres;
 }
 
 // ======================================================================
-// HTML BUILDER — self-contained, dynamic, brand-faithful
+// HTML BUILDER - self-contained, dynamic, brand-faithful
 // ======================================================================
 function escapeHtml(s: string): string {
   return String(s ?? "")
@@ -872,13 +1138,14 @@ function buildHtml(input: any, copy: any): string {
   const city = escapeHtml(CITY_LABELS[input.preferred_city] || "Campus to be confirmed");
   const seats = escapeHtml(SEAT_LABELS[input.seats_requested] || "Seats TBD");
   const tierIdx = seatToTierIndex(input.seats_requested);
-  const presenter = escapeHtml(input.presenter_name || "—");
+  const presenter = escapeHtml(input.presenter_name || "(your name)");
   const presenterRole = escapeHtml(input.presenter_role || "");
-  const decisionMaker = escapeHtml(input.decision_maker || "");
-  const date = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  const resolvedDM = resolveDecisionMaker(input);
+  const decisionMaker = escapeHtml(resolvedDM.display);
+  const decisionMakerSource = resolvedDM.sourceUrl ? escapeHtml(resolvedDM.sourceUrl) : "";
 
   const tiers = [
-    ["Individual", "1",  "$2,100",  "$2,100", "—"],
+    ["Individual", "1",  "$2,100",  "$2,100", "Standard"],
     ["6-Pack",     "6",  "$12,000", "$2,000", "5% off"],
     ["12-Pack",    "12", "$22,800", "$1,900", "10% off"],
     ["18-Pack",    "18", "$32,130", "$1,785", "15% off"],
@@ -889,6 +1156,46 @@ function buildHtml(input: any, copy: any): string {
   ).join("");
 
   const fn = (nums: number[]) => nums.map(n => `<a class="fn" href="#ref-${n}">[${n}]</a>`).join("");
+
+  const sitSources: { label?: string; url?: string }[] = Array.isArray(copy.situation_sources)
+    ? copy.situation_sources.filter((x: any) => x && x.url)
+    : [];
+  const sitSourcesHtml = sitSources.length === 0 ? "" : `
+      <div class="sit-sources">
+        <div class="sit-sources-label">SOURCES FOR FIGURES CITED</div>
+        <ul>${sitSources.map(s =>
+          `<li><span>${escapeHtml(String(s.label || ""))}:</span> <a href="${escapeHtml(String(s.url))}" target="_blank" rel="noopener">${escapeHtml(String(s.url))}</a></li>`
+        ).join("")}</ul>
+      </div>`;
+
+  const annotationsHtml = ANNOTATION_GROUPS.map((group, gi) => {
+    const cards = group.ids
+      .map((id) => ANNOTATIONS.find((a) => a.n === id))
+      .filter((a): a is Annotation => Boolean(a))
+      .map((a) => `
+      <div class="anno-card">
+        <div class="anno-head">
+          <span class="anno-badge">[${a.n}]</span>
+          <div class="anno-title">
+            <h3>${escapeHtml(a.title)}</h3>
+            <p class="anno-where">${escapeHtml(a.where)}</p>
+          </div>
+        </div>
+        <p class="anno-body"><span class="anno-label">FOUND:</span> ${escapeHtml(a.finding)}</p>
+        <p class="anno-body"><span class="anno-label">WHY IT SUPPORTS:</span> ${escapeHtml(a.relevance)}</p>
+      </div>`).join("");
+
+    const slideNum = 14 + gi;
+    const bg = gi % 2 === 0 ? "soft" : "";
+    return `
+<section class="slide ${bg} reveal">
+  <div class="eyebrow">Source notes ${gi + 1} of ${ANNOTATION_GROUPS.length}</div>
+  <h2>${escapeHtml(group.title)}</h2><hr class="rule" />
+  <div class="anno-grid">${cards}
+  </div>
+  <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>${slideNum}</span></div>
+</section>`;
+  }).join("");
 
   return `<!doctype html>
 <html lang="en">
@@ -948,6 +1255,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
 .cover .subtitle { color: var(--aqua); font-style: italic; font-size: 1.5rem; max-width: 50rem; margin-bottom: 2rem; }
 .cover .meta { color: var(--aqua); font-size: 0.95rem; line-height: 1.8; }
 .cover .meta strong { color: var(--white); }
+.cover .dm-source { color: var(--aqua); font-size: 0.7rem; text-decoration: underline; margin-left: 0.4rem; opacity: 0.75; letter-spacing: 0.15em; text-transform: uppercase; }
 
 /* Two-column layouts */
 .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; }
@@ -1057,6 +1365,26 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
 .refs a { color: var(--dteal); word-break: break-all; }
 .refs li:target { background: var(--aqua); padding: 0.5rem; border-radius: 4px; }
 
+/* Slide 2 sources */
+.sit-sources { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--grey-light); }
+.sit-sources-label { font-family: 'Roboto Condensed', sans-serif; font-weight: 700; letter-spacing: 0.2em; color: var(--orange); font-size: 0.7rem; margin-bottom: 0.5rem; }
+.sit-sources ul { list-style: none; padding: 0; margin: 0; }
+.sit-sources li { font-family: 'Roboto Condensed', sans-serif; font-size: 0.8rem; line-height: 1.4; color: var(--muted); margin-bottom: 0.25rem; word-break: break-all; }
+.sit-sources li span { color: var(--charcoal); font-weight: 700; margin-right: 0.3rem; }
+.sit-sources li a { color: var(--dteal); }
+
+/* Annotation cards */
+.anno-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0 0; }
+.anno-card { background: var(--white); border: 1px solid var(--grey-light); border-left: 4px solid var(--orange); border-radius: 6px; padding: 1.1rem 1.2rem; }
+.anno-head { display: flex; gap: 0.85rem; align-items: flex-start; margin-bottom: 0.65rem; }
+.anno-badge { flex: 0 0 auto; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--orange); color: var(--white); font-weight: 700; font-size: 0.8rem; display: inline-flex; align-items: center; justify-content: center; font-family: 'Roboto', sans-serif; }
+.anno-title { flex: 1; }
+.anno-title h3 { color: var(--navy); font-size: 1rem; margin: 0 0 0.15rem; font-weight: 700; }
+.anno-where { color: var(--muted); font-style: italic; font-family: 'Roboto Condensed', sans-serif; font-size: 0.82rem; margin: 0; }
+.anno-body { font-size: 0.88rem; line-height: 1.45; margin: 0 0 0.5rem; color: var(--ink); }
+.anno-body:last-child { margin-bottom: 0; }
+.anno-label { font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: var(--orange); letter-spacing: 0.1em; font-size: 0.78rem; margin-right: 0.3rem; }
+
 /* Footer strip */
 .footstrip { font-family: 'Roboto Condensed', sans-serif; font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--orange); padding-top: 1rem; margin-top: 3rem; display: flex; justify-content: space-between; letter-spacing: 0.1em; }
 
@@ -1078,6 +1406,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
   .cover h1 { font-size: 3rem; }
   h1 { font-size: 2.25rem; } h2 { font-size: 1.75rem; }
   .refs { columns: 1; }
+  .anno-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -1094,18 +1423,21 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
     <div style="width: 60px; height: 4px; background: var(--orange); margin: 2rem 0;"></div>
     <div class="meta">
       Prepared by <strong>${presenter}${presenterRole ? `, ${presenterRole}` : ""}</strong><br/>
-      For <strong>${audience}${decisionMaker ? ` · ${decisionMaker}` : ""}</strong><br/>
-      ${city}  ·  ${seats}  ·  ${date}
+      For <strong>${audience}${decisionMaker ? ` · ${decisionMaker}` : ""}</strong>${decisionMakerSource ? ` <a class="dm-source" href="${decisionMakerSource}" target="_blank" rel="noopener">source</a>` : ""}<br/>
+      ${city}  ·  ${seats}
     </div>
   </div>
 </section>
 
-<!-- 2 — WHERE COMPANY IS NOW -->
+<!-- 2 - WHERE COMPANY IS NOW -->
 <section class="slide reveal">
   <div class="eyebrow">Where ${company} is now</div>
   <h2>Where ${company} is now</h2><hr class="rule" />
   <div class="two-col">
-    <div><p class="lead">${escapeHtml(copy.situation_paragraph || "")}</p></div>
+    <div>
+      <p class="lead">${escapeHtml(copy.situation_paragraph || "")}</p>
+      ${sitSourcesHtml}
+    </div>
     <aside class="pull">
       <span class="label">THE READ</span>
       ${escapeHtml(copy.situation_pullquote || "")}
@@ -1114,7 +1446,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>2</span></div>
 </section>
 
-<!-- 3 — STRUCTURAL GAP -->
+<!-- 3 - STRUCTURAL GAP -->
 <section class="slide soft reveal">
   <div class="eyebrow">The structural gap</div>
   <h2>Why most volunteer programs produce activity, not change</h2><hr class="rule" />
@@ -1139,13 +1471,13 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
     <div>
       <div class="col-eyebrow">AFTER</div>
       <h3>Without a debrief</h3>
-      <p>The 0–40 minute consolidation window ${fn([2])} closes. Champions burn out — repeated exposure without structured processing activates pain-sharing rather than compassion ${fn([3])}.</p>
+      <p>The 0–40 minute consolidation window ${fn([2])} closes. Champions burn out. Without structured processing, repeated exposure activates the brain's pain-sharing circuits instead of the compassion ones ${fn([3])}.</p>
     </div>
   </div>
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>3</span></div>
 </section>
 
-<!-- 4 — IMMERSIVE LEARNING -->
+<!-- 4 - IMMERSIVE LEARNING -->
 <section class="slide reveal">
   <div class="eyebrow">How adults change practice</div>
   <h2>Why immersive learning changes practice, not just knowledge</h2><hr class="rule" />
@@ -1158,20 +1490,20 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>4</span></div>
 </section>
 
-<!-- 5 — CHAMPIONS -->
+<!-- 5 - CHAMPIONS -->
 <section class="slide reveal">
   <div class="eyebrow">What trained champions do at ${company}</div>
   <h2>What trained champions do differently at ${company}</h2><hr class="rule" />
   <p class="lead" style="color: var(--muted); font-style: italic; margin-bottom: 2rem;">${escapeHtml(copy.champions_intro || "")}</p>
   <div class="champ-rows">
     <div class="row"><div class="num">01</div><div><h3>They change how colleagues show up</h3><p>A 5-minute brief reactivates the part of the brain that processes others as fully human ${fn([1])}. Volunteers contribute at a higher level and come back. Direct beneficiary contact durably increases effort for over a month ${fn([10])}.</p></div></div>
-    <div class="row"><div class="num">02</div><div><h3>They build real nonprofit partnerships</h3><p>Trained champions scope projects WITH partners, not FOR them. They frame the experience so volunteers encounter the work as partners — meeting the conditions for positive intergroup contact ${fn([11, 12])}.</p></div></div>
-    <div class="row"><div class="num">03</div><div><h3>They turn a good day into a lasting shift</h3><p>A structured debrief within 40 minutes ${fn([2])} uses the gap between expectation and reality ${fn([4])} as the mechanism for prosocial identity change ${fn([5])} — a shift in how someone understands themselves.</p></div></div>
+    <div class="row"><div class="num">02</div><div><h3>They build real nonprofit partnerships</h3><p>Trained champions scope projects WITH partners, not FOR them. They frame the experience so volunteers encounter the work as partners, which meets the conditions for positive intergroup contact ${fn([11, 12])}.</p></div></div>
+    <div class="row"><div class="num">03</div><div><h3>They turn a good day into a lasting shift</h3><p>A structured debrief within 40 minutes ${fn([2])} uses the gap between expectation and reality ${fn([4])} as the mechanism for prosocial identity change ${fn([5])}. That shift changes how someone understands themselves.</p></div></div>
   </div>
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>5</span></div>
 </section>
 
-<!-- 6 — TRI -->
+<!-- 6 - TRI -->
 <section class="slide soft reveal">
   <div class="eyebrow">Three audiences, three outcomes</div>
   <h2>What changes for the employee, the company, and the community</h2><hr class="rule" />
@@ -1183,7 +1515,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>6</span></div>
 </section>
 
-<!-- 7 — RIPPLE -->
+<!-- 7 - RIPPLE -->
 <section class="slide reveal">
   <div class="eyebrow">Ripple effect at scale</div>
   <h2>${escapeHtml(copy.ripple_headline || `From a small group to a shift in how ${company} volunteers`)}</h2><hr class="rule" />
@@ -1203,13 +1535,13 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>7</span></div>
 </section>
 
-<!-- 8 — AGENDA -->
+<!-- 8 - AGENDA -->
 <section class="slide soft reveal">
   <div class="eyebrow">The campus</div>
   <h2>Two days, designed end-to-end</h2><hr class="rule" />
   <div class="agenda">
     <div class="day">
-      <div class="label"><div class="d">DAY 1</div><div class="t">Brief, experience, debrief — live</div></div>
+      <div class="label"><div class="d">DAY 1</div><div class="t">Live cycle: brief, experience, debrief</div></div>
       <div class="block"><div class="time">MORNING</div><h4>Brief masterclass</h4><p>Frame, connect, set conditions for transformation.</p></div>
       <div class="block"><div class="time">MIDDAY</div><h4>Live nonprofit experience</h4><p>Real volunteer work with a partner organization.</p></div>
       <div class="block"><div class="time">AFTERNOON</div><h4>40-minute debrief</h4><p>Structured reflection in the consolidation window.</p></div>
@@ -1224,18 +1556,18 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>8</span></div>
 </section>
 
-<!-- 9 — CREDENTIAL -->
+<!-- 9 - CREDENTIAL -->
 <section class="slide reveal">
   <div class="eyebrow">The credential</div>
   <h2>A recognized professional development track</h2><hr class="rule" />
   <div class="cred-grid">
-    <div class="cred-card s1"><div class="stage-label">STAGE 1</div><h3>Certificate of Completion</h3><p>Awarded after the two-day campus. Validates competency in the three keystone behaviors: conducting the Brief, guiding the experience, and conducting the Debrief — trainable, repeatable facilitation skills grounded in behavioral science ${fn([1, 4, 5])}. Included in registration.</p></div>
+    <div class="cred-card s1"><div class="stage-label">STAGE 1</div><h3>Certificate of Completion</h3><p>Awarded after the two-day campus. Validates competency in the three keystone behaviors: conducting the Brief, guiding the experience, and conducting the Debrief. These are trainable, repeatable facilitation skills grounded in behavioral science ${fn([1, 4, 5])}. Included in registration.</p></div>
     <div class="cred-card s2"><div class="stage-label">STAGE 2 · OPTIONAL</div><h3>Certified Transformative Volunteering Leader</h3><p>Awarded after the 6-month cohort, sustained implementation, and competency verification. Complex prosocial behaviors require repeated, spaced practice to reach automaticity ${fn([17, 18])}. The cohort provides that structure.</p></div>
   </div>
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>9</span></div>
 </section>
 
-<!-- 10 — INVESTMENT -->
+<!-- 10 - INVESTMENT -->
 <section class="slide reveal">
   <div class="eyebrow">Investment</div>
   <h2>Pricing for the 2026 cohort</h2><hr class="rule" />
@@ -1250,14 +1582,14 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>10</span></div>
 </section>
 
-<!-- 11 — GET BACK -->
+<!-- 11 - GET BACK -->
 <section class="slide soft reveal">
   <div class="eyebrow">What ${company} gets back</div>
   <h2>What ${company} gets back</h2><hr class="rule" />
   <p class="lead" style="color: var(--muted); font-style: italic; margin-bottom: 2rem;">${escapeHtml(copy.getback_intro || "")}</p>
   <div class="get-grid">
     <div class="get-cell a"><h4>A quality layer across your network</h4><p>Trained champions become standard-bearers across regions and business units. They coach peers and close the gap between aspiration and ground-level experience.</p></div>
-    <div class="get-cell a"><h4>Engagement data that survives the C-suite</h4><p>Measurement architecture built for ESG reporting, talent analytics, and executive dashboards — outcomes, not participation theater.</p></div>
+    <div class="get-cell a"><h4>Engagement data that survives the C-suite</h4><p>Measurement architecture built for ESG reporting, talent analytics, and executive dashboards. Outcomes, not participation theater.</p></div>
     <div class="get-cell a"><h4>Reduced champion attrition</h4><p>Structured training, a credential, and 6 months of peer support. Retention of trained leaders is itself an ROI story.</p></div>
     <div class="get-cell b"><h4>Scale with quality, not just reach</h4><p>Adding events without improving experience quality produces diminishing returns. Trained champions improve every experience they touch.</p></div>
     <div class="get-cell b"><h4>Brand perception from the inside</h4><p>Employees who undergo genuine prosocial identity change embody the company's commitment. That shows up in Glassdoor, in talent conversations, in how people describe working here.</p></div>
@@ -1266,7 +1598,7 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
   <div class="footstrip"><span>Realized Worth · Regional Campus Series</span><span>11</span></div>
 </section>
 
-<!-- 12 — ASK -->
+<!-- 12 - ASK -->
 <section class="slide dark reveal" style="background: var(--navy); position: relative;">
   <div style="position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--orange);"></div>
   <div class="eyebrow">The ask · Next steps</div>
@@ -1274,19 +1606,21 @@ p { margin: 0 0 1rem; font-size: 1.0625rem; }
   <p class="lead" style="color: var(--aqua);">${escapeHtml(copy.ask_body || "")}</p>
   <div class="ask-grid">
     <div class="ask-step"><div class="num">01</div><h4>Express interest</h4><p>Visit rw-regional-campus.lovable.app and submit the interest form for your preferred campus.</p></div>
-    <div class="ask-step"><div class="num">02</div><h4>Talk to us</h4><p>Reach out to Nichole at <a href="mailto:nichole@realizedworth.com" style="color: var(--white);">nichole@realizedworth.com</a> — she'll walk you through everything.</p></div>
+    <div class="ask-step"><div class="num">02</div><h4>Talk to us</h4><p>Reach out to Nichole at <a href="mailto:nichole@realizedworth.com" style="color: var(--white);">nichole@realizedworth.com</a>. She'll walk you through everything.</p></div>
     <div class="ask-step"><div class="num">03</div><h4>Reserve your seats</h4><p>Registration opens soon. Interest form submissions are first in line.</p></div>
   </div>
   <div class="ask-foot">rw-regional-campus.lovable.app   ·   nichole@realizedworth.com</div>
 </section>
 
-<!-- 13 — REFERENCES -->
+<!-- 13 - REFERENCES -->
 <section class="slide reveal">
   <div class="eyebrow">References</div>
-  <h2>Behavioral science citations</h2><hr class="rule" />
-  <p style="color: var(--muted); font-style: italic;">Footnote numbers in the slide text correspond to entries below.</p>
+  <h2>Further reading</h2><hr class="rule" />
+  <p style="color: var(--muted); font-style: italic;">Numbered footnotes throughout the deck correspond to these sources. Annotated notes follow.</p>
   <ol class="refs">${refsHtml}</ol>
 </section>
+
+${annotationsHtml}
 
 <script>
 (function(){
@@ -1343,10 +1677,11 @@ Deno.serve(async (req: Request) => {
         cover_subtitle: "A proposal prepared for your direct manager.",
         situation_paragraph: `${company} runs volunteer activity at scale. The structure exists; the question is whether the current approach produces the depth of engagement and quality of outcomes that justify continued investment at this level.`,
         situation_pullquote: `The challenge ${company} is navigating is a symptom of a program that has outgrown its design.`,
+        situation_sources: [],
         champions_intro: `At ${company}'s scale, trained champions become the difference between activity reported and culture changed. Three behaviors carry the program.`,
         ripple_headline: `From a small group of trained leaders to a shift in how ${company} volunteers`,
-        ripple_body: `At scale, the difference between a good program and a great one is whether the people running events are coordinators or facilitators. A small cohort of trained champions ripples through every regional event they touch — and trains the next layer.`,
-        getback_intro: `Six things ${company} gets back from sending a cohort to the campus — sequenced for your audience.`,
+        ripple_body: `At scale, the difference between a good program and a great one is whether the people running events are coordinators or facilitators. A small cohort of trained champions ripples through every regional event they touch, and trains the next layer.`,
+        getback_intro: `Six things ${company} gets back from sending a cohort to the campus, sequenced for your audience.`,
         ask_headline: "Approval to send our team to the Realized Worth campus",
         ask_body: input.primary_ask || "Sponsorship to send our champions to the campus, plus the time off-site to attend. We bring back trained facilitators, a 6-month cohort, and a measurement approach that holds up to scrutiny.",
       };

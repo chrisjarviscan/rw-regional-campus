@@ -5,15 +5,17 @@ import { corsHeaders } from "https://esm.sh/@supabase/supabase-js@2.95.0/cors";
 const GATEWAY = "https://ai.gateway.lovable.dev/v1/chat/completions";
 const MODEL = "google/gemini-2.5-pro";
 
-const SYSTEM_PROMPT = `You are a research assistant for the Realized Worth. Given a company name, you return structured information about that company's corporate volunteering program, CSR/ESG reporting, and social impact posture.
+const SYSTEM_PROMPT = `You are a research assistant for Realized Worth. Given a company name, you return structured information about that company's corporate volunteering program, CSR/ESG reporting, social impact posture, and the named senior officers who could approve a learning investment.
 
 CRITICAL RULES:
-- Use null for any field you cannot confirm from training knowledge of well-known public sources. NEVER fabricate values, URLs, partners, or statistics.
+- Use null (or empty array) for any field you cannot confirm from training knowledge of well-known public sources. NEVER fabricate values, URLs, partners, statistics, or named people.
 - Confidence scale: "high" = found in widely-reported official company sources; "medium" = credible third-party sources; "low" = inferred from indirect signals; "none" = nothing found.
-- Keep every string under 100 characters.
-- Arrays max 5 items each.
-- Only include URLs you are confident actually exist. If uncertain, return an empty sources array.
-- Prefer null over guessing. A confident "I don't know" is more useful than a wrong answer.`;
+- Keep every string under 120 characters.
+- Arrays max 6 items each.
+- Only include URLs you are confident actually exist (company .com domains, well-known publications, the company's CSR/ESG report). If you cannot recall the exact URL, leave source_url null.
+- Prefer null over guessing. A confident "I don't know" is more useful than a wrong answer.
+- For key_people: only name people you are confident currently hold the role. If the officeholder has changed recently or you are unsure, return name as null with confidence "low" or "none". Never invent names.
+- For program_facts: every numeric or named claim (hours, participation rate, headcount, partners, age of program) must be paired with a source_url to where that fact is published, or source_url null with confidence "low". No unsourced numbers.`;
 
 const RESEARCH_TOOL = {
   type: "function" as const,
@@ -40,24 +42,59 @@ const RESEARCH_TOOL = {
         cause_areas: { type: "array", items: { type: "string" }, maxItems: 5 },
         values_or_mission_keywords: { type: "array", items: { type: "string" }, maxItems: 5 },
         recent_csr_news: { type: ["string", "null"] },
+        key_people: {
+          type: "array",
+          description: "Named senior officers who could approve a learning investment. Include only people you can confidently name as currently in role. Roles to attempt: CEO, CHRO/Chief People Officer, CFO, Chief CSR/Sustainability/Impact Officer, Head of Talent Development, Head of Employee Experience.",
+          maxItems: 6,
+          items: {
+            type: "object",
+            properties: {
+              role: { type: "string", description: "The role title, e.g. 'CHRO', 'Chief People Officer'." },
+              name: { type: ["string", "null"], description: "Full name if confident; otherwise null." },
+              source_url: { type: ["string", "null"], description: "URL to where this person is named (company leadership page, recent press release, LinkedIn at the company). Null if unsure." },
+              confidence: { type: "string", enum: ["high", "medium", "low", "none"] },
+            },
+            required: ["role", "name", "source_url", "confidence"],
+            additionalProperties: false,
+          },
+        },
+        program_facts: {
+          type: "array",
+          description: "Every specific numeric or named claim about the program (hours, participation rate, headcount, partner counts, program age) must be listed here with a source URL. If the source URL is unknown, set source_url to null and confidence to 'low'. No unsourced numbers should ever appear in any other field.",
+          maxItems: 8,
+          items: {
+            type: "object",
+            properties: {
+              label: { type: "string", description: "Plain English label, e.g. 'volunteer hours served (cumulative)'." },
+              value: { type: "string", description: "The value as published, e.g. 'over 8 million hours' or '~50% participation'." },
+              source_url: { type: ["string", "null"], description: "URL where this fact is published (company report, official page, reputable third-party). Null if not certain." },
+              year: { type: ["string", "null"], description: "Year of the cited figure, e.g. '2024'." },
+              confidence: { type: "string", enum: ["high", "medium", "low", "none"] },
+            },
+            required: ["label", "value", "source_url", "year", "confidence"],
+            additionalProperties: false,
+          },
+        },
         confidence: {
           type: "object",
           properties: {
             program_details: { type: "string", enum: ["high", "medium", "low", "none"] },
             scale_data: { type: "string", enum: ["high", "medium", "low", "none"] },
             csr_context: { type: "string", enum: ["high", "medium", "low", "none"] },
+            key_people: { type: "string", enum: ["high", "medium", "low", "none"] },
           },
-          required: ["program_details", "scale_data", "csr_context"],
+          required: ["program_details", "scale_data", "csr_context", "key_people"],
           additionalProperties: false,
         },
-        sources: { type: "array", items: { type: "string" }, maxItems: 5 },
+        sources: { type: "array", items: { type: "string" }, maxItems: 6 },
       },
       required: [
         "company_name", "has_volunteer_program", "program_name", "program_age_years",
         "has_champions_or_ambassadors", "champion_count_estimate", "employee_count_estimate",
         "geographic_scope", "volunteer_participation_rate", "csr_report_url", "esg_framework",
         "stated_social_impact_goals", "volunteer_hours_reported", "signature_nonprofit_partners",
-        "cause_areas", "values_or_mission_keywords", "recent_csr_news", "confidence", "sources",
+        "cause_areas", "values_or_mission_keywords", "recent_csr_news", "key_people",
+        "program_facts", "confidence", "sources",
       ],
       additionalProperties: false,
     },
