@@ -23,8 +23,6 @@ const Footer = () => {
                 href={
                   link === "Contact"
                     ? `mailto:${CONTACT_EMAIL}`
-                    : link === "Business Case"
-                    ? "/business-case/"
                     : `#${link.toLowerCase()}`
                 }
                 onClick={
