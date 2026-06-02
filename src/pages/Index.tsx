@@ -17,6 +17,7 @@ import FitAssessment from "@/components/FitAssessment";
 import IntendedOutcomes from "@/components/IntendedOutcomes";
 import CampusTeam from "@/components/CampusTeam";
 import FAQSection from "@/components/FAQSection";
+import MakeTheCase from "@/components/MakeTheCase";
 import Footer from "@/components/Footer";
 import RegistrationModal from "@/components/RegistrationModal";
 import CampusAssistant from "@/components/CampusAssistant";
@@ -60,6 +61,7 @@ const Index = () => {
       <SocialProof />
       <BecomeHost />
       <CampusTeam />
+      <MakeTheCase />
       <FAQSection />
       <CampusAssistant onExpressInterest={openModal} />
       <Footer />

@@ -2,7 +2,7 @@ import rwLogoWhite from "@/assets/logos/RW_Logo_White_Web.png";
 import { trackMailto } from "@/lib/trackMailto";
 
 const CONTACT_EMAIL = "nichole@realizedworth.com";
-const navLinks = ["Program", "Agenda", "Cities", "Pricing", "Certification", "FAQ", "Contact"];
+const navLinks = ["Program", "Agenda", "Cities", "Pricing", "Certification", "Business Case", "FAQ", "Contact"];
 
 const Footer = () => {
   return (
@@ -23,6 +23,8 @@ const Footer = () => {
                 href={
                   link === "Contact"
                     ? `mailto:${CONTACT_EMAIL}`
+                    : link === "Business Case"
+                    ? "/business-case/"
                     : `#${link.toLowerCase()}`
                 }
                 onClick={
