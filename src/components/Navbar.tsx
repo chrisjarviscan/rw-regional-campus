@@ -11,7 +11,7 @@ const navLinks = [
   { label: "Pricing", href: "#pricing" },
   { label: "Certification", href: "#certification" },
   { label: "FAQ", href: "#faq" },
-  { label: "Make the Case", href: "#make-the-case" },
+  
 ];
 
 interface NavbarProps {
