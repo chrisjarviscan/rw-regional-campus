@@ -10,7 +10,7 @@ const cities = [
   {
     city: "Washington, DC",
     dates: "September 24–25, 2026",
-    status: "Accepting Registrations Soon",
+    status: null,
     statusColor: "bg-dark-teal",
     text: "Register by mid-July. A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
     image: cityWashington,
@@ -19,7 +19,7 @@ const cities = [
   {
     city: "Atlanta, GA",
     dates: "October 14–15, 2026",
-    status: "Accepting Registrations Soon",
+    status: null,
     statusColor: "bg-dark-teal",
     text: "Register by late August. Southeast campus with a confirmed venue partner.",
     image: cityAtlanta,
@@ -73,9 +73,11 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
                     height={512}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-hero-navy/60 to-transparent" />
-                  <span className={`absolute top-3 left-3 ${c.statusColor} text-primary-foreground text-[11px] font-bold px-3 py-1 rounded-full`}>
-                    {c.status}
-                  </span>
+                  {c.status && (
+                    <span className={`absolute top-3 left-3 ${c.statusColor} text-primary-foreground text-[11px] font-bold px-3 py-1 rounded-full`}>
+                      {c.status}
+                    </span>
+                  )}
                 </div>
 
                 <div className="p-5 flex flex-col flex-1">
@@ -88,14 +90,16 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
                     <p className="text-dark-teal font-normal text-sm">{c.dates}</p>
                   </div>
                   <p className="text-dark-grey font-light text-sm mb-5 flex-1">{c.text}</p>
-                  <button
-                    type="button"
-                    onClick={() => onNotifyClick(c.campusValue)}
-                    className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
-                  >
-                    Notify Me
-                    <ArrowRight size={16} className="transition-all" />
-                  </button>
+                  {c.status && (
+                    <button
+                      type="button"
+                      onClick={() => onNotifyClick(c.campusValue)}
+                      className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
+                    >
+                      Notify Me
+                      <ArrowRight size={16} className="transition-all" />
+                    </button>
+                  )}
                 </div>
               </div>
             </AnimatedSection>
