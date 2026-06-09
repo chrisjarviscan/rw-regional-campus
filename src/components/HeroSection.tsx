@@ -48,12 +48,12 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
           </span>
         </div>
 
-        <h1
-          className={`text-primary-foreground font-bold leading-[1.05] mb-6 transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-        >
-          <span className="block text-[18px] md:text-[26px] lg:text-[32px] whitespace-nowrap">Leadership and Execution Training for Employee Volunteer Leaders</span>
-          <span className="block text-hero-orange text-[40px] md:text-[64px] lg:text-[72px] mt-3">The Regional Campus Series</span>
-        </h1>
+          <h1
+            className={`text-primary-foreground font-bold leading-[1.05] mb-6 transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+          >
+            <span className="block text-hero-orange text-[40px] md:text-[64px] lg:text-[72px]">The Regional Campus Series</span>
+            <span className="block text-[18px] md:text-[26px] lg:text-[32px] whitespace-nowrap mt-3">Leadership and Execution Training for Employee Volunteer Leaders</span>
+          </h1>
 
         <p
           className={`text-light-teal text-base md:text-xl max-w-3xl mx-auto mb-10 font-normal transition-all duration-1000 delay-400 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
