@@ -52,7 +52,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
           className={`transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
           <h1 className="text-primary-foreground font-bold leading-[1.0] mb-8">
-            <span className="block text-hero-orange text-[52px] md:text-[88px] lg:text-[104px] tracking-tight">
+            <span className="block text-hero-orange text-[52px] md:text-[88px] lg:text-[224px] tracking-tight">
               The Regional Campus Series
             </span>
           </h1>
