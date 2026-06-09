@@ -48,12 +48,27 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
           </span>
         </div>
 
-          <h1
-            className={`text-primary-foreground font-bold leading-[1.05] mb-6 transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-          >
-            <span className="block text-hero-orange text-[40px] md:text-[64px] lg:text-[72px]">The Regional Campus Series</span>
-            <span className="block text-[18px] md:text-[26px] lg:text-[32px] whitespace-nowrap mt-3">Leadership and Execution Training for Employee Volunteer Leaders</span>
+        <div
+          className={`transition-all duration-1000 delay-200 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+        >
+          <h1 className="text-primary-foreground font-bold leading-[1.0] mb-8">
+            <span className="block text-hero-orange text-[52px] md:text-[88px] lg:text-[104px] tracking-tight">
+              The Regional Campus Series
+            </span>
           </h1>
+
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="h-px w-12 md:w-20 bg-hero-orange/40" />
+            <span className="text-hero-orange/70 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em]">
+              For
+            </span>
+            <div className="h-px w-12 md:w-20 bg-hero-orange/40" />
+          </div>
+
+          <p className="text-primary-foreground font-medium text-[20px] md:text-[28px] lg:text-[34px] leading-[1.35] max-w-4xl mx-auto mb-2">
+            Leadership and Execution Training for employees who lead volunteering inside their companies as ambassadors, champions, captains, or as a committee chair.
+          </p>
+        </div>
 
         <p
           className={`text-light-teal text-base md:text-xl max-w-3xl mx-auto mb-10 font-normal transition-all duration-1000 delay-400 ease-out ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
