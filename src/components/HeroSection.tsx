@@ -65,7 +65,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
             <div className="h-px w-12 md:w-20 bg-hero-orange/40" />
           </div>
 
-          <p className="text-primary-foreground font-medium text-[20px] md:text-[28px] lg:text-[34px] leading-[1.35] max-w-4xl mx-auto mb-2">
+          <p className="text-primary-foreground font-medium text-[clamp(1rem,2.2vw,1.625rem)] leading-[1.35] max-w-4xl mx-auto mb-2">
             Leadership and Execution Training for Employee Volunteer Ambassadors
           </p>
         </div>
