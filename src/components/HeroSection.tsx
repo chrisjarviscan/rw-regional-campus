@@ -66,7 +66,7 @@ const HeroSection = ({ onRegisterClick }: HeroSectionProps) => {
           </div>
 
           <p className="text-primary-foreground font-medium text-[20px] md:text-[28px] lg:text-[34px] leading-[1.35] max-w-4xl mx-auto mb-2">
-            Leadership and Execution Training for employees who lead volunteering inside their companies as ambassadors, champions, captains, or as a committee chair.
+            Leadership and Execution Training for Employee Volunteer Ambassadors
           </p>
         </div>
 
