@@ -29,7 +29,7 @@ const CampusAssistant = ({ onExpressInterest }: CampusAssistantProps) => {
     {
       role: "assistant",
       content:
-        "Hi — I can answer questions about the RW Regional Campus: who it's for, the 2026 schedule, pricing, format, and what happens on the ground. What would you like to know?",
+        "Hi — I can answer questions about the RW Regional Campus: who it's for, the 2026–2027 schedule, pricing, format, and what happens on the ground. What would you like to know?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -130,7 +130,7 @@ const CampusAssistant = ({ onExpressInterest }: CampusAssistantProps) => {
               Ask anything about the Campus
             </h2>
             <p className="text-muted-foreground text-lg">
-              Pricing, format, who it's for, the 2026 schedule — get a straight answer in seconds.
+              Pricing, format, who it's for, the 2026–2027 schedule — get a straight answer in seconds.
             </p>
           </div>
 

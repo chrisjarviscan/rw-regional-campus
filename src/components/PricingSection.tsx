@@ -10,7 +10,7 @@ const tiers = [
     price: "$2,100",
     perSeat: "per person",
     features: [
-      "Any single 2026 campus",
+      "Any single 2026–2027 campus",
       "Two-day immersive in-person program",
       "Stage 1 Certificate of Completion",
       "6-month cohort access included",
@@ -24,7 +24,7 @@ const tiers = [
     price: "$12,000",
     perSeat: "$2,000 per seat · 5% off",
     features: [
-      "6 seats across any 2026 campuses",
+      "6 seats across any 2026–2027 campuses",
       "Everything in Individual",
       "Group onboarding call",
       "Post-event team debrief",
@@ -38,7 +38,7 @@ const tiers = [
     price: "$22,800",
     perSeat: "$1,900 per seat · 10% off",
     features: [
-      "12 seats across any 2026 campuses",
+      "12 seats across any 2026–2027 campuses",
       "Everything in 6-Pack",
       "Priority city selection",
     ],
@@ -51,7 +51,7 @@ const tiers = [
     price: "$32,130",
     perSeat: "$1,785 per seat · 15% off",
     features: [
-      "18 seats across any 2026 campuses",
+      "18 seats across any 2026–2027 campuses",
       "Full-scale capability development",
       "Dedicated account coordination",
     ],
@@ -107,13 +107,13 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
                 </ul>
                 {tier.cta === "Talk to Us" ? (
                   <a
-                    href="mailto:nichole@realizedworth.com?subject=18-Pack%20inquiry%20%E2%80%94%20Regional%20Campus%202026"
+                    href="mailto:nichole@realizedworth.com?subject=18-Pack%20inquiry%20%E2%80%94%20Regional%20Campus%202026%E2%80%932027"
                     onClick={() =>
                       trackMailto({
                         ctaLabel: "18-Pack — Talk to Us",
                         ctaLocation: "Pricing · 18-Pack tier",
                         emailTo: "nichole@realizedworth.com",
-                        subject: "18-Pack inquiry — Regional Campus 2026",
+                        subject: "18-Pack inquiry — Regional Campus 2026–2027",
                       })
                     }
                     className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 text-center inline-block ${
@@ -154,7 +154,7 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
 
         <AnimatedSection delay={600}>
           <p className="text-dark-grey font-light text-[13px] text-center max-w-2xl mx-auto mt-8">
-            All prices in USD. Multi-pack seats can be split across any combination of 2026 campuses. To preserve the multi-company learning environment, no single organization may hold more than one-third of seats at any campus. Net 30 payment terms for corporate invoices.
+            All prices in USD. Multi-pack seats can be split across any combination of 2026–2027 campuses. To preserve the multi-company learning environment, no single organization may hold more than one-third of seats at any campus. Net 30 payment terms for corporate invoices.
           </p>
         </AnimatedSection>
       </div>

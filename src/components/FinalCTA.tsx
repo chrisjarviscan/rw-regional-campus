@@ -30,7 +30,7 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
 
         <AnimatedSection delay={300}>
           <p className="text-light-teal text-base md:text-lg mb-10 font-normal max-w-2xl mx-auto">
-            Add your name to the 2026 list. We'll let you know when registration opens for the campus you choose.
+            Add your name to the 2026–2027 list. We'll let you know when registration opens for the campus you choose.
           </p>
         </AnimatedSection>
 
@@ -47,7 +47,7 @@ const FinalCTA = ({ onRegisterClick }: FinalCTAProps) => {
               href={`mailto:nichole@realizedworth.com?subject=${encodeURIComponent(
                 "Regional Campus — I'd like to learn more"
               )}&body=${encodeURIComponent(
-                "Hi Nichole,\n\nI'd like to learn more about the 2026 Regional Campus Series.\n\nA bit about me / my team:\nCompany / Organization: \nRole: \nCampus(es) I'm curious about: \nQuestions I'd like to discuss: \n\nThanks,\n"
+                "Hi Nichole,\n\nI'd like to learn more about the 2026–2027 Regional Campus Series.\n\nA bit about me / my team:\nCompany / Organization: \nRole: \nCampus(es) I'm curious about: \nQuestions I'd like to discuss: \n\nThanks,\n"
               )}`}
               onClick={() =>
                 trackMailto({

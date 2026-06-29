@@ -109,7 +109,7 @@ const RegistrationModal = ({ open, onClose, initialCampus, preselectedCampus }: 
           <>
             <h3 className="text-hero-navy font-bold text-xl mb-2">Express Interest</h3>
             <p className="text-dark-grey font-light text-sm mb-6">
-              Add your name to the 2026 list. We'll let you know the moment registration opens for the campus you choose. No commitment.
+              Add your name to the 2026–2027 list. We'll let you know the moment registration opens for the campus you choose. No commitment.
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input label="Full Name" required value={fullName} onChange={setFullName} />
@@ -128,6 +128,7 @@ const RegistrationModal = ({ open, onClose, initialCampus, preselectedCampus }: 
                   <option>Washington, DC — September 24–25, 2026</option>
                   <option>Atlanta — October 7–8, 2026</option>
                   <option>Seattle — Fall 2026</option>
+                  <option>San Francisco Bay Area — February 2027</option>
                   <option>Not sure yet / open to options</option>
                   <option>I'd like to request a new city</option>
                 </select>

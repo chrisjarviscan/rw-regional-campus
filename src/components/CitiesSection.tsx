@@ -4,6 +4,7 @@ import patternBg from "@/assets/images/pattern-bg.jpg";
 import cityWashington from "@/assets/images/city-washington.jpg";
 import cityAtlanta from "@/assets/images/city-atlanta.jpg";
 import citySeattle from "@/assets/images/city-seattle.jpg";
+import cityBayArea from "@/assets/images/city-bay-area.jpg";
 import { trackMailto } from "@/lib/trackMailto";
 
 const cities = [
@@ -34,6 +35,15 @@ const cities = [
     image: citySeattle,
     campusValue: "Seattle — Fall 2026",
   },
+  {
+    city: "San Francisco Bay Area, CA",
+    dates: "February 2027",
+    status: "Coming Soon — February 2027",
+    statusColor: "bg-mustard",
+    text: "In development for the Bay Area. Express interest to be notified when registration opens.",
+    image: cityBayArea,
+    campusValue: "San Francisco Bay Area — February 2027",
+  },
 ];
 
 interface CitiesSectionProps {
@@ -52,7 +62,7 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
       <div className="container mx-auto max-w-6xl relative z-10">
         <AnimatedSection>
           <h2 className="text-primary-foreground font-bold text-[22px] md:text-[32px] text-center mb-3">
-            Where We're Headed in 2026
+            Where We're Headed in 2026–2027
           </h2>
           <p className="text-light-teal text-center text-sm md:text-base mb-12">
             Each campus runs the same Transformative Experience, capped at ~40 participants from up to 8 companies.

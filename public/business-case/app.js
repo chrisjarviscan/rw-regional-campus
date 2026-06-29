@@ -508,10 +508,11 @@
     preferred_city: {
       washington_dc: "Washington DC (September 24–25, 2026)",
       atlanta: "Atlanta (October 14–15, 2026)", seattle: "Seattle (Fall 2026)",
+      bay_area: "San Francisco Bay Area (February 2027 — coming soon)",
       future: "Philadelphia / Minneapolis (future)", request_other: "Request a different city", flexible: "Flexible",
     },
     preferred_quarter: {
-      q1_2026: "Q1 2026", q2_2026: "Q2 2026", q3_2026: "Q3 2026", q4_2026: "Q4 2026", "2027": "Sometime in 2027",
+      q1_2026: "Q1 2026", q2_2026: "Q2 2026", q3_2026: "Q3 2026", q4_2026: "Q4 2026", q1_2027: "Q1 2027", "2027": "Sometime in 2027",
     },
     seats_requested: {
       "2_5": "2–5 seats", "6_12": "6–12 seats", "13_18": "13–18 seats", "19_30": "19–30 seats",
