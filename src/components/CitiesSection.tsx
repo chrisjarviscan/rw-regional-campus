@@ -35,6 +35,15 @@ const cities = [
     image: citySeattle,
     campusValue: "Seattle — Fall 2026",
   },
+  {
+    city: "San Francisco Bay Area, CA",
+    dates: "February 2027",
+    status: "Coming Soon — February 2027",
+    statusColor: "bg-mustard",
+    text: "In development for the Bay Area. Express interest to be notified when registration opens.",
+    image: cityBayArea,
+    campusValue: "San Francisco Bay Area — February 2027",
+  },
 ];
 
 interface CitiesSectionProps {
