@@ -63,7 +63,7 @@ const CampusTeam = () => {
                     Co-Founder & CSO, Realized Worth
                   </p>
                   <p className="text-foreground/80 text-sm leading-relaxed">
-                    Chris co-founded Realized Worth in 2008 and created the Transformative Volunteering methodology that anchors every campus. With 25 years of experience across neuroscience, behavioral science, and organizational change, his work has shaped volunteer programs at companies including SAP, Medtronic, Abbott, Deloitte, Apple, and Microsoft. He co-leads the curriculum alongside Nichole and facilitation lead Tim Parsons.
+                    Chris co-founded Realized Worth in 2008 and created the Transformative Volunteering methodology that anchors every campus. With 25 years of experience across neuroscience, behavioral science, and organizational change, his work has shaped volunteer programs at companies including SAP, Medtronic, Abbott, Deloitte, Apple, and Microsoft.&nbsp;
                   </p>
                 </div>
               </div>
