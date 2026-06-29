@@ -62,7 +62,7 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
       <div className="container mx-auto max-w-6xl relative z-10">
         <AnimatedSection>
           <h2 className="text-primary-foreground font-bold text-[22px] md:text-[32px] text-center mb-3">
-            Where We're Headed in 2026
+            Where We're Headed in 2026–2027
           </h2>
           <p className="text-light-teal text-center text-sm md:text-base mb-12">
             Each campus runs the same Transformative Experience, capped at ~40 participants from up to 8 companies.
