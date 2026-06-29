@@ -3,6 +3,7 @@ import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
 import cityWashington from "@/assets/images/city-washington.jpg";
 import cityAtlanta from "@/assets/images/city-atlanta.jpg";
+import citySeattle from "@/assets/images/city-seattle.jpg";
 import cityBayArea from "@/assets/images/city-bay-area.jpg";
 import { trackMailto } from "@/lib/trackMailto";
 
