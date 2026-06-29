@@ -18,7 +18,7 @@ const cities = [
   },
   {
     city: "Atlanta, GA",
-    dates: "October 14–15, 2026",
+    dates: "October 7–8, 2026",
     status: null,
     statusColor: "bg-dark-teal",
     text: "Register by late August. Southeast campus with a confirmed venue partner.",
