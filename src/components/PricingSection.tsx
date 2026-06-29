@@ -154,7 +154,7 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
 
         <AnimatedSection delay={600}>
           <p className="text-dark-grey font-light text-[13px] text-center max-w-2xl mx-auto mt-8">
-            All prices in USD. Multi-pack seats can be split across any combination of 2026 campuses. To preserve the multi-company learning environment, no single organization may hold more than one-third of seats at any campus. Net 30 payment terms for corporate invoices.
+            All prices in USD. Multi-pack seats can be split across any combination of 2026–2027 campuses. To preserve the multi-company learning environment, no single organization may hold more than one-third of seats at any campus. Net 30 payment terms for corporate invoices.
           </p>
         </AnimatedSection>
       </div>
