@@ -107,13 +107,13 @@ const PricingSection = ({ onRegisterClick }: PricingSectionProps) => {
                 </ul>
                 {tier.cta === "Talk to Us" ? (
                   <a
-                    href="mailto:nichole@realizedworth.com?subject=18-Pack%20inquiry%20%E2%80%94%20Regional%20Campus%202026"
+                    href="mailto:nichole@realizedworth.com?subject=18-Pack%20inquiry%20%E2%80%94%20Regional%20Campus%202026%E2%80%932027"
                     onClick={() =>
                       trackMailto({
                         ctaLabel: "18-Pack — Talk to Us",
                         ctaLocation: "Pricing · 18-Pack tier",
                         emailTo: "nichole@realizedworth.com",
-                        subject: "18-Pack inquiry — Regional Campus 2026",
+                        subject: "18-Pack inquiry — Regional Campus 2026–2027",
                       })
                     }
                     className={`w-full font-bold text-sm rounded-md py-3 transition-all hover:brightness-90 hover:-translate-y-0.5 text-center inline-block ${
