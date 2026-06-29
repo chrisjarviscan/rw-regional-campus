@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "What if my company wants to send a team?",
-    a: "Many participants come in twos or threes — the work travels further when you bring a colleague. Multi-pack pricing (6, 12, or 18 seats) offers volume discounts and can be split across any 2026 campuses. To preserve the multi-company learning environment, no single organization can hold more than one-third of the seats at any campus.",
+    a: "Many participants come in twos or threes — the work travels further when you bring a colleague. Multi-pack pricing (6, 12, or 18 seats) offers volume discounts and can be split across any 2026–2027 campuses. To preserve the multi-company learning environment, no single organization can hold more than one-third of the seats at any campus.",
   },
   {
     q: "Is the certification recognized?",
