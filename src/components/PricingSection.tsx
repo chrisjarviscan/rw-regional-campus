@@ -10,7 +10,7 @@ const tiers = [
     price: "$2,100",
     perSeat: "per person",
     features: [
-      "Any single 2026 campus",
+      "Any single 2026–2027 campus",
       "Two-day immersive in-person program",
       "Stage 1 Certificate of Completion",
       "6-month cohort access included",
@@ -24,7 +24,7 @@ const tiers = [
     price: "$12,000",
     perSeat: "$2,000 per seat · 5% off",
     features: [
-      "6 seats across any 2026 campuses",
+      "6 seats across any 2026–2027 campuses",
       "Everything in Individual",
       "Group onboarding call",
       "Post-event team debrief",
@@ -38,7 +38,7 @@ const tiers = [
     price: "$22,800",
     perSeat: "$1,900 per seat · 10% off",
     features: [
-      "12 seats across any 2026 campuses",
+      "12 seats across any 2026–2027 campuses",
       "Everything in 6-Pack",
       "Priority city selection",
     ],
@@ -51,7 +51,7 @@ const tiers = [
     price: "$32,130",
     perSeat: "$1,785 per seat · 15% off",
     features: [
-      "18 seats across any 2026 campuses",
+      "18 seats across any 2026–2027 campuses",
       "Full-scale capability development",
       "Dedicated account coordination",
     ],
