@@ -95,7 +95,7 @@ const ReserveSeatsModal = ({ open, onClose, campus }: ReserveSeatsModalProps) =>
           <div className="text-center py-10">
             <h3 className="text-hero-navy font-bold text-xl mb-3">Seats requested.</h3>
             <p className="text-dark-grey font-light mb-6">
-              Thanks — we've received your request for {campus}. Nichole will follow up within one business day to confirm availability and send your {paymentPreference === "invoice" ? "invoice" : paymentPreference === "payment_link" ? "payment link" : "next steps"}. No payment has been taken and no seats are held yet.
+              Thanks — we've received your request for {campus}. Our team will follow up within two business days to confirm availability and send your {paymentPreference === "invoice" ? "invoice" : paymentPreference === "payment_link" ? "payment link" : "next steps"}. No payment has been taken and no seats are held yet.
             </p>
             <div className="border-t border-light-grey pt-6 mt-2">
               <p className="text-dark-grey font-light text-sm mb-2">Need to talk sooner?</p>
