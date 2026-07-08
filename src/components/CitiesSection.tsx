@@ -1,4 +1,4 @@
-import { MapPin, ArrowRight, Calendar } from "lucide-react";
+import { MapPin, ArrowRight, Calendar, Clock } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
 import cityWashington from "@/assets/images/city-washington.jpg";
