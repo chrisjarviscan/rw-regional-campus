@@ -6,7 +6,7 @@ const navLinks = [
   { label: "Program", href: "#program" },
   { label: "Agenda", href: "#agenda" },
   { label: "Cities", href: "#cities" },
-  { label: "Info Sessions", href: "#info-sessions" },
+  { label: "Info Sessions", href: "#info-sessions", bold: true },
   { label: "Assessment", href: "#assessment" },
   { label: "Who You'll Work With", href: "#team" },
   { label: "Pricing", href: "#pricing" },
