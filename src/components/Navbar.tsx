@@ -15,11 +15,7 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
-interface NavbarProps {
-  onRegisterClick: () => void;
-}
-
-const Navbar = ({ onRegisterClick }: NavbarProps) => {
+const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
