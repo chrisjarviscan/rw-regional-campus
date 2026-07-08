@@ -285,7 +285,13 @@ Deno.serve(async (req) => {
         await Promise.all(sendOps);
       } else if (payload.type === "purchase") {
         const d = payload.data;
-        const paymentLabel = d.payment_method === "credit_card" ? "Credit card (5% fee)" : "Invoice (Net 30)";
+        const paymentLabels: Record<string, string> = {
+          credit_card: "Credit card (5% fee)",
+          payment_link: "Payment link (credit card, 5% fee)",
+          invoice: "Invoice (Net 30)",
+          undecided: "Not sure yet — wants to discuss",
+        };
+        const paymentLabel = paymentLabels[d.payment_method] || d.payment_method;
         await Promise.all([
           send("purchase-confirmation", d.email, {
             full_name: d.full_name, pack: d.pack,
