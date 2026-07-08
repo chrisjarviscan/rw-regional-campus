@@ -39,7 +39,7 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
             <a
               key={link.href}
               href={link.href}
-              className="text-hero-navy font-medium text-[15px] hover:text-dark-teal transition-colors"
+              className={`text-hero-navy text-[15px] hover:text-dark-teal transition-colors ${link.bold ? "font-bold" : "font-medium"}`}
             >
               {link.label}
             </a>
