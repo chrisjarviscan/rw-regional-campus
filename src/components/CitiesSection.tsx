@@ -97,10 +97,19 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
                     <MapPin className="text-hero-orange" size={18} />
                     <h3 className="text-hero-navy font-medium text-xl">{c.city}</h3>
                   </div>
-                  <div className="flex items-center gap-1.5 mb-3">
+                  <div className="flex items-center gap-1.5 mb-1">
                     <Calendar className="text-dark-teal" size={14} />
                     <p className="text-dark-teal font-normal text-sm">{c.dates}</p>
                   </div>
+                  {c.deadline && (
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <Clock className="text-hero-orange" size={14} />
+                      <p className="text-hero-orange font-semibold text-sm">
+                        Registration deadline: {c.deadline}
+                      </p>
+                    </div>
+                  )}
+                  {!c.deadline && <div className="mb-3" />}
                   <p className="text-dark-grey font-light text-sm mb-5 flex-1">{c.text}</p>
                   {c.status && (
                     <button
