@@ -1,4 +1,4 @@
-import { MapPin, ArrowRight, Calendar } from "lucide-react";
+import { MapPin, ArrowRight, Calendar, Clock } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
 import cityWashington from "@/assets/images/city-washington.jpg";
@@ -13,18 +13,20 @@ const cities = [
     dates: "September 24–25, 2026",
     status: null,
     statusColor: "bg-dark-teal",
-    text: "Register by mid-July. A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
+    text: "A capital-region cohort drawing from federal, nonprofit, and corporate teams.",
     image: cityWashington,
     campusValue: "Washington, DC — September 24–25, 2026",
+    deadline: "August 21, 2026",
   },
   {
     city: "Atlanta, GA",
     dates: "October 7–8, 2026",
     status: null,
     statusColor: "bg-dark-teal",
-    text: "Register by late August. Southeast campus with a confirmed venue partner.",
+    text: "Southeast campus with a confirmed venue partner.",
     image: cityAtlanta,
     campusValue: "Atlanta — October 7–8, 2026",
+    deadline: "September 4, 2026",
   },
   {
     city: "Seattle, WA",
@@ -95,10 +97,19 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
                     <MapPin className="text-hero-orange" size={18} />
                     <h3 className="text-hero-navy font-medium text-xl">{c.city}</h3>
                   </div>
-                  <div className="flex items-center gap-1.5 mb-3">
+                  <div className="flex items-center gap-1.5 mb-1">
                     <Calendar className="text-dark-teal" size={14} />
                     <p className="text-dark-teal font-normal text-sm">{c.dates}</p>
                   </div>
+                  {c.deadline && (
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <Clock className="text-hero-orange" size={14} />
+                      <p className="text-hero-orange font-semibold text-sm">
+                        Registration deadline: {c.deadline}
+                      </p>
+                    </div>
+                  )}
+                  {!c.deadline && <div className="mb-3" />}
                   <p className="text-dark-grey font-light text-sm mb-5 flex-1">{c.text}</p>
                   {c.status && (
                     <button
