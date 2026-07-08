@@ -69,7 +69,7 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
             <a
               key={link.href}
               href={link.href}
-              className="block py-3 text-hero-navy font-medium text-base border-b border-light-grey"
+              className={`block py-3 text-hero-navy text-base border-b border-light-grey ${link.bold ? "font-bold" : "font-medium"}`}
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
