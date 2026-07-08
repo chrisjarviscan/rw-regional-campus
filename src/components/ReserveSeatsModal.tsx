@@ -114,9 +114,9 @@ const ReserveSeatsModal = ({ open, onClose, campus }: ReserveSeatsModalProps) =>
               {campus}
             </p>
             <div className="bg-light-teal/15 border border-light-teal/40 rounded-md px-4 py-3 mb-5">
-              <p className="text-hero-navy font-medium text-sm mb-1">This holds your spot on Nichole's list — it's not a checkout.</p>
+              <p className="text-hero-navy font-medium text-sm mb-1">This holds your spot on our list — it's not a checkout.</p>
               <p className="text-dark-grey font-light text-sm">
-                Tell us how many seats you'd like and how you'd prefer to pay. Nichole will follow up within one business day to confirm seats and send the invoice or payment link.
+                Tell us how many seats you'd like and how you'd prefer to pay. Our team will follow up within two business days to confirm seats and send the invoice or payment link.
               </p>
             </div>
 
