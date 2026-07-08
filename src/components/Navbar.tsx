@@ -6,7 +6,7 @@ const navLinks = [
   { label: "Program", href: "#program" },
   { label: "Agenda", href: "#agenda" },
   { label: "Cities", href: "#cities" },
-  { label: "Info Sessions", href: "#info-sessions" },
+  { label: "Info Sessions", href: "#info-sessions", bold: true },
   { label: "Assessment", href: "#assessment" },
   { label: "Who You'll Work With", href: "#team" },
   { label: "Pricing", href: "#pricing" },
@@ -39,7 +39,7 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
             <a
               key={link.href}
               href={link.href}
-              className="text-hero-navy font-medium text-[15px] hover:text-dark-teal transition-colors"
+              className={`text-hero-navy text-[15px] hover:text-dark-teal transition-colors ${link.bold ? "font-bold" : "font-medium"}`}
             >
               {link.label}
             </a>
@@ -69,7 +69,7 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
             <a
               key={link.href}
               href={link.href}
-              className="block py-3 text-hero-navy font-medium text-base border-b border-light-grey"
+              className={`block py-3 text-hero-navy text-base border-b border-light-grey ${link.bold ? "font-bold" : "font-medium"}`}
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
