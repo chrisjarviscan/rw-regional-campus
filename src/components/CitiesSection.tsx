@@ -117,7 +117,7 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
                       onClick={() => onNotifyClick(c.campusValue)}
                       className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
                     >
-                      Notify Me
+                      {c.status === "Registration Open" ? "Express Interest" : "Notify Me"}
                       <ArrowRight size={16} className="transition-all" />
                     </button>
                   )}
