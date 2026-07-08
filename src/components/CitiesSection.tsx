@@ -31,7 +31,7 @@ const cities = [
   {
     city: "Seattle, WA",
     dates: "October 2026",
-    status: "Coming Soon — October 2026",
+    status: "Coming Soon",
     statusColor: "bg-mustard",
     text: "In development with local partners. Express interest to be notified when registration opens.",
     image: citySeattle,
@@ -40,7 +40,7 @@ const cities = [
   {
     city: "San Francisco Bay Area, CA",
     dates: "February 2027",
-    status: "Coming Soon — February 2027",
+    status: "Coming Soon",
     statusColor: "bg-mustard",
     text: "In development for the Bay Area. Express interest to be notified when registration opens.",
     image: cityBayArea,
