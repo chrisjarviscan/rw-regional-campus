@@ -62,7 +62,7 @@ const ReserveSeatsModal = ({ open, onClose, campus }: ReserveSeatsModalProps) =>
           email: email.trim().toLowerCase(),
           company,
           role,
-          pack: `Seat reservation — ${campus}`,
+          pack: "Seat reservation",
           preferred_campus: campus,
           payment_method: paymentPreference,
           seats_notes: combinedNotes,
