@@ -30,7 +30,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -40,12 +40,6 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <button
-            onClick={onRegisterClick}
-            className="bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-7 py-3 hover:brightness-90 hover:-translate-y-0.5 transition-all"
-          >
-            Express Interest
-          </button>
         </div>
 
         {/* Mobile hamburger */}
@@ -71,12 +65,6 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <button
-            onClick={() => { setMobileOpen(false); onRegisterClick(); }}
-            className="w-full mt-3 bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-7 py-3.5"
-          >
-            Express Interest
-          </button>
         </div>
       )}
     </nav>
