@@ -11,8 +11,8 @@ const cities = [
   {
     city: "Washington, DC",
     dates: "September 24–25, 2026",
-    status: null,
-    statusColor: "bg-dark-teal",
+    status: "Registration Open",
+    statusColor: "bg-green-600",
     text: "A capital-region campus in partnership with Nestlé.\u00A0",
     image: cityWashington,
     campusValue: "Washington, DC — September 24–25, 2026",
@@ -21,8 +21,8 @@ const cities = [
   {
     city: "Atlanta, GA",
     dates: "October 7–8, 2026",
-    status: null,
-    statusColor: "bg-dark-teal",
+    status: "Registration Open",
+    statusColor: "bg-green-600",
     text: "A southeast campus in partnership with Kilpatrick Townsend.",
     image: cityAtlanta,
     campusValue: "Atlanta — October 7–8, 2026",
@@ -117,7 +117,7 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
                       onClick={() => onNotifyClick(c.campusValue)}
                       className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
                     >
-                      Notify Me
+                      {c.status === "Registration Open" ? "Express Interest" : "Notify Me"}
                       <ArrowRight size={16} className="transition-all" />
                     </button>
                   )}
