@@ -8,6 +8,7 @@ import WhoThisIsFor from "@/components/WhoThisIsFor";
 import SRLCrossPromo from "@/components/SRLCrossPromo";
 import AgendaSection from "@/components/AgendaSection";
 import CitiesSection from "@/components/CitiesSection";
+import InfoSessions from "@/components/InfoSessions";
 import PricingSection from "@/components/PricingSection";
 import CertificationSection from "@/components/CertificationSection";
 import PostCampusCommunity from "@/components/PostCampusCommunity";
