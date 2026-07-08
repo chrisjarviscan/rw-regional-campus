@@ -26,7 +26,13 @@ const Email = ({ full_name, pack, preferred_campus, payment_method }: Props) => 
           We received your request to purchase the {pack || 'pack'}
           {preferred_campus ? ` for ${preferred_campus}` : ''}.
           Nichole will follow up within one business day to confirm seats
-          and walk you through {payment_method === 'credit_card' ? 'credit card payment (note: 5% processing fee applies)' : 'invoicing (Net 30)'}.
+          and walk you through {
+            payment_method === 'credit_card' || payment_method === 'payment_link'
+              ? 'credit card payment (note: 5% processing fee applies)'
+              : payment_method === 'undecided'
+                ? 'the payment options'
+                : 'invoicing (Net 30)'
+          }.
         </Text>
         <Text style={text}>
           If anything has changed since you submitted, just reply to this

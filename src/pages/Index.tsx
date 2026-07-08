@@ -21,11 +21,14 @@ import FAQSection from "@/components/FAQSection";
 import MakeTheCase from "@/components/MakeTheCase";
 import Footer from "@/components/Footer";
 import RegistrationModal from "@/components/RegistrationModal";
+import ReserveSeatsModal from "@/components/ReserveSeatsModal";
 import CampusAssistant from "@/components/CampusAssistant";
 
 const Index = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [initialCampus, setInitialCampus] = useState<string | undefined>(undefined);
+  const [reserveOpen, setReserveOpen] = useState(false);
+  const [reserveCampus, setReserveCampus] = useState<string>("");
   const openModal = () => {
     setInitialCampus(undefined);
     setModalOpen(true);
@@ -33,6 +36,10 @@ const Index = () => {
   const openModalWithCampus = (campus: string) => {
     setInitialCampus(campus);
     setModalOpen(true);
+  };
+  const openReserveModal = (campus: string) => {
+    setReserveCampus(campus);
+    setReserveOpen(true);
   };
 
   return (
@@ -55,7 +62,7 @@ const Index = () => {
       <IntendedOutcomes />
       <SRLCrossPromo />
       <AgendaSection />
-      <CitiesSection onNotifyClick={openModalWithCampus} />
+      <CitiesSection onNotifyClick={openModalWithCampus} onReserveClick={openReserveModal} />
       <InfoSessions />
       <PricingSection onRegisterClick={openModal} />
       <CertificationSection />
@@ -71,6 +78,11 @@ const Index = () => {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         initialCampus={initialCampus}
+      />
+      <ReserveSeatsModal
+        open={reserveOpen}
+        onClose={() => setReserveOpen(false)}
+        campus={reserveCampus}
       />
     </div>
   );

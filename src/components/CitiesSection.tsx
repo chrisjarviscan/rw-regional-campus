@@ -50,9 +50,10 @@ const cities = [
 
 interface CitiesSectionProps {
   onNotifyClick: (campus: string) => void;
+  onReserveClick: (campus: string) => void;
 }
 
-const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
+const CitiesSection = ({ onNotifyClick, onReserveClick }: CitiesSectionProps) => {
   return (
     <section id="cities" className="relative py-16 md:py-28 px-4 overflow-hidden">
       {/* Background */}
@@ -114,10 +115,14 @@ const CitiesSection = ({ onNotifyClick }: CitiesSectionProps) => {
                   {c.status && (
                     <button
                       type="button"
-                      onClick={() => onNotifyClick(c.campusValue)}
+                      onClick={() =>
+                        c.status === "Registration Open"
+                          ? onReserveClick(c.campusValue)
+                          : onNotifyClick(c.campusValue)
+                      }
                       className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
                     >
-                      {c.status === "Registration Open" ? "Express Interest" : "Notify Me"}
+                      {c.status === "Registration Open" ? "Reserve My Seats" : "Notify Me"}
                       <ArrowRight size={16} className="transition-all" />
                     </button>
                   )}
