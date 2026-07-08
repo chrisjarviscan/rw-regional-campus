@@ -56,6 +56,7 @@ const Index = () => {
       <SRLCrossPromo />
       <AgendaSection />
       <CitiesSection onNotifyClick={openModalWithCampus} />
+      <InfoSessions />
       <PricingSection onRegisterClick={openModal} />
       <CertificationSection />
       <PostCampusCommunity />
