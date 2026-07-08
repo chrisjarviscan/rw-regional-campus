@@ -15,17 +15,13 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
-interface NavbarProps {
-  onRegisterClick: () => void;
-}
-
-const Navbar = ({ onRegisterClick }: NavbarProps) => {
+const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 bg-background border-b border-light-grey">
-      <div className="container mx-auto flex items-center justify-between py-3 px-4 md:px-8">
-        <a href="#" className="flex items-center">
+      <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
+        <a href="#" className="flex items-center py-2 pr-4 md:pr-8">
           <img
             src={rwLogo}
             alt="Realized Worth"
@@ -34,7 +30,7 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -44,12 +40,6 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
               {link.label}
             </a>
           ))}
-          <button
-            onClick={onRegisterClick}
-            className="bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-7 py-3 hover:brightness-90 hover:-translate-y-0.5 transition-all"
-          >
-            Express Interest
-          </button>
         </div>
 
         {/* Mobile hamburger */}
@@ -75,12 +65,6 @@ const Navbar = ({ onRegisterClick }: NavbarProps) => {
               {link.label}
             </a>
           ))}
-          <button
-            onClick={() => { setMobileOpen(false); onRegisterClick(); }}
-            className="w-full mt-3 bg-hero-orange text-primary-foreground font-bold text-base rounded-md px-7 py-3.5"
-          >
-            Express Interest
-          </button>
         </div>
       )}
     </nav>

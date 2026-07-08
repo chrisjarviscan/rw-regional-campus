@@ -46,7 +46,7 @@ const Index = () => {
         <meta property="og:title" content="Corporate Volunteering Training — RW Regional Campus" />
         <meta property="og:description" content="In-person training for CSR, corporate volunteering, and employee engagement leaders. 2026–2027 campuses in Washington DC, Atlanta, and the Bay Area." />
       </Helmet>
-      <Navbar onRegisterClick={openModal} />
+      <Navbar />
       <HeroSection onRegisterClick={openModal} />
       <WhoIsAnEVL />
       <ProgramOverview />
