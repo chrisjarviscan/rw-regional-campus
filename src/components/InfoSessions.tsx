@@ -28,10 +28,10 @@ const InfoSessions = () => {
               Live Info Sessions
             </div>
             <h2 className="text-primary-foreground font-bold text-2xl md:text-4xl mb-3">
-              Curious about the Regional Campus?
+              Curious about the Regional Campus Series?
             </h2>
             <p className="text-light-teal text-base md:text-lg max-w-2xl mx-auto">
-              Join an informal, interactive session to see what your volunteer ambassadors will walk away with — and what partnership looks like.
+              Curious what a Regional Campus actually looks like, or what your volunteer ambassadors will walk away with? This info session will answer exactly that! We'll share what your volunteer ambassadors, your team, and your company will gain, so you can get clarity on whether this is the right next step for your program.
             </p>
           </div>
         </AnimatedSection>
