@@ -95,7 +95,7 @@ const ReserveSeatsModal = ({ open, onClose, campus }: ReserveSeatsModalProps) =>
           <div className="text-center py-10">
             <h3 className="text-hero-navy font-bold text-xl mb-3">Seats requested.</h3>
             <p className="text-dark-grey font-light mb-6">
-              Thanks — we've received your request for {campus}. Nichole will follow up within one business day to confirm availability and send your {paymentPreference === "invoice" ? "invoice" : paymentPreference === "payment_link" ? "payment link" : "next steps"}. No payment has been taken and no seats are held yet.
+              Thanks — we've received your request for {campus}. Our team will follow up within two business days to confirm availability and send your {paymentPreference === "invoice" ? "invoice" : paymentPreference === "payment_link" ? "payment link" : "next steps"}. No payment has been taken and no seats are held yet.
             </p>
             <div className="border-t border-light-grey pt-6 mt-2">
               <p className="text-dark-grey font-light text-sm mb-2">Need to talk sooner?</p>
@@ -114,9 +114,9 @@ const ReserveSeatsModal = ({ open, onClose, campus }: ReserveSeatsModalProps) =>
               {campus}
             </p>
             <div className="bg-light-teal/15 border border-light-teal/40 rounded-md px-4 py-3 mb-5">
-              <p className="text-hero-navy font-medium text-sm mb-1">This holds your spot on Nichole's list — it's not a checkout.</p>
+              <p className="text-hero-navy font-medium text-sm mb-1">This holds your spot on our list — it's not a checkout.</p>
               <p className="text-dark-grey font-light text-sm">
-                Tell us how many seats you'd like and how you'd prefer to pay. Nichole will follow up within one business day to confirm seats and send the invoice or payment link.
+                Tell us how many seats you'd like and how you'd prefer to pay. Our team will follow up within two business days to confirm seats and send the invoice or payment link.
               </p>
             </div>
 
