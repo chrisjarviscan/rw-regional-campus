@@ -20,8 +20,8 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-background border-b border-light-grey">
-      <div className="container mx-auto flex items-center justify-between py-3 px-4 md:px-8">
-        <a href="#" className="flex items-center">
+      <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
+        <a href="#" className="flex items-center py-2 pr-4 md:pr-8">
           <img
             src={rwLogo}
             alt="Realized Worth"
