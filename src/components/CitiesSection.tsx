@@ -30,12 +30,12 @@ const cities = [
   },
   {
     city: "Seattle, WA",
-    dates: "October 2026",
+    dates: "October 21–22, 2026",
     status: "Coming Soon",
     statusColor: "bg-mustard",
     text: "In development with local partners. Express interest to be notified when registration opens.",
     image: citySeattle,
-    campusValue: "Seattle — October 2026",
+    campusValue: "Seattle — October 21–22, 2026",
   },
   {
     city: "San Francisco Bay Area, CA",
