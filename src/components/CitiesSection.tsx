@@ -13,7 +13,7 @@ const cities = [
     dates: "September 24–25, 2026",
     status: "Registration Open",
     statusColor: "bg-green-600",
-    text: "A capital-region campus in partnership with Nestlé.\u00A0",
+    text: "A capital-region campus in partnership with Nestlé USA.\u00A0",
     image: cityWashington,
     campusValue: "Washington, DC — September 24–25, 2026",
     deadline: "August 21, 2026",
