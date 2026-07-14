@@ -5,7 +5,7 @@ const day1 = [
   { title: "Welcome and Community Building", desc: "Meet your cohort: peers from across companies and industries who came to do this work better.", icon: Users2 },
   { title: "Understanding the Employee Volunteering Landscape", desc: "Where corporate volunteering sits today, what works, and where it falls short of what people came for.", icon: Compass },
   { title: "What Is Transformative Volunteering, and Why Does It Matter?", desc: "The shift from one-off activity to experiences that change how people see their work, their company, and their community.", icon: Lightbulb },
-  { title: "Train-the-Trainer Volunteer Experience", desc: "An immersive ~4-hour session with a real nonprofit partner, designed and debriefed the way you'll lead them at home.", icon: HandHeart },
+  { title: "Train-the-Trainer Volunteer Experience", desc: "An immersive session with a real nonprofit partner, designed and debriefed the way you'll lead them at home.", icon: HandHeart },
   { title: "Reflection and Closing", desc: "Conversation and structured reflection to close the day.", icon: Coffee },
 ];
 
