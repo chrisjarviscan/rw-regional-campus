@@ -31,11 +31,12 @@ const cities = [
   {
     city: "Seattle, WA",
     dates: "October 21–22, 2026",
-    status: "Coming Soon",
-    statusColor: "bg-mustard",
-    text: "In development with local partners. Express interest to be notified when registration opens.",
+    status: "Registration Open",
+    statusColor: "bg-green-600",
+    text: "A campus in partnership with Adobe.",
     image: citySeattle,
     campusValue: "Seattle — October 21–22, 2026",
+    deadline: "September 18, 2026",
   },
   {
     city: "San Francisco Bay Area, CA",
