@@ -70,7 +70,7 @@ const CertificationSection = () => {
               </p>
 
               <div className="space-y-3">
-                {["Seven-domain competency rubric", "Foundational methodology mastery", "Peer-reviewed assessment"].map((item) => (
+                {["Seven-domain competency rubric", "Foundational methodology mastery"].map((item) => (
                   <div key={item} className="flex items-center gap-2.5 text-dark-teal text-sm font-medium">
                     <CheckCircle2 size={16} className="shrink-0" />
                     <span>{item}</span>
@@ -101,7 +101,7 @@ const CertificationSection = () => {
               </p>
 
               <div className="space-y-3">
-                {["Practitioner-level credential", "Portfolio-based evaluation", "Ongoing community access"].map((item) => (
+                {["Portfolio-based evaluation", "Ongoing community access"].map((item) => (
                   <div key={item} className="flex items-center gap-2.5 text-hero-orange text-sm font-medium">
                     <CheckCircle2 size={16} className="shrink-0" />
                     <span>{item}</span>
