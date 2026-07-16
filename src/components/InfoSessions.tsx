@@ -3,11 +3,6 @@ import AnimatedSection from "./AnimatedSection";
 
 const sessions = [
   {
-    label: "Wednesday, July 15",
-    time: "3:00 PM ET",
-    href: "https://us06web.zoom.us/meeting/register/ZIk1k7gWQVyTrgu9Q83twQ",
-  },
-  {
     label: "Thursday, August 13",
     time: "1:00 PM ET",
     href: "https://us06web.zoom.us/meeting/register/Ll0As4B5RqewA0gH9aDjMw",
