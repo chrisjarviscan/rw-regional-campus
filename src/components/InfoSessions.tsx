@@ -37,7 +37,7 @@ const InfoSessions = () => {
         </AnimatedSection>
 
         <AnimatedSection delay={200}>
-          <div className="grid grid-cols-1 gap-4 max-w-md mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
             {sessions.map((session) => (
               <a
                 key={session.href}
