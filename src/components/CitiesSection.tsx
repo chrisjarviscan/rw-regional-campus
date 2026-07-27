@@ -40,12 +40,12 @@ const cities = [
   },
   {
     city: "San Francisco Bay Area, CA",
-    dates: "May 2027",
+    dates: "May 19–20, 2027",
     status: "Coming Soon",
     statusColor: "bg-mustard",
     text: "In development for the Bay Area. Express interest to be notified when registration opens.",
     image: cityBayArea,
-    campusValue: "San Francisco Bay Area — May 2027",
+    campusValue: "San Francisco Bay Area — May 19–20, 2027",
   },
 ];
 
