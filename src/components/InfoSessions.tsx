@@ -7,6 +7,11 @@ const sessions = [
     time: "1:00 PM ET",
     href: "https://us06web.zoom.us/meeting/register/Ll0As4B5RqewA0gH9aDjMw",
   },
+  {
+    label: "Wednesday, August 26",
+    time: "3:00 PM ET",
+    href: "https://us06web.zoom.us/meeting/register/U-i1QxlPSpmxGBZyzqD6uw",
+  },
 ];
 
 const InfoSessions = () => {
