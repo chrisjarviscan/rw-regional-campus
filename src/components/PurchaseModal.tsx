@@ -13,7 +13,7 @@ const CAMPUS_OPTIONS = [
   "Washington, DC — September 24–25, 2026",
   "Atlanta — October 7–8, 2026",
   "Seattle — October 21–22, 2026",
-  "San Francisco Bay Area — May 2027",
+  "San Francisco Bay Area — May 19–20, 2027",
   "Split across multiple campuses",
   "Not sure yet",
 ];
