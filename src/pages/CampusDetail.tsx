@@ -47,70 +47,115 @@ const CampusDetail = () => {
       <Navbar />
 
       {/* Header */}
-      <section className="relative py-14 md:py-20 px-4 overflow-hidden">
+      <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img src={campus.image} alt={`${campus.city} skyline`} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-hero-navy/85" />
+          <div className="absolute inset-0 bg-hero-navy/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-hero-navy via-hero-navy/85 to-hero-navy/40" />
         </div>
-        <div className="container mx-auto max-w-4xl relative z-10">
-          <div className="mb-6">
-            <Link
-              to="/#cities"
-              className="inline-flex items-center gap-2 text-light-teal text-sm font-medium hover:text-primary-foreground transition-colors"
-            >
-              <ArrowLeft size={15} />
-              All campuses
-            </Link>
-          </div>
-
-
-          <span
-            className={`inline-block ${campus.statusColor} text-primary-foreground text-[11px] font-bold px-3 py-1 rounded-full mb-4`}
+        <div className="container mx-auto max-w-5xl relative z-10 px-4 pt-10 pb-14 md:pt-14 md:pb-20">
+          <Link
+            to="/#cities"
+            className="inline-flex items-center gap-2 text-light-teal text-sm font-medium hover:text-primary-foreground transition-colors mb-10"
           >
-            {campus.status}
-          </span>
-          <h1 className="text-primary-foreground font-bold text-[28px] md:text-[44px] leading-tight mb-3">
-            {campus.city}
-          </h1>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-4">
-            <span className="inline-flex items-center gap-2 text-light-teal text-base">
-              <Calendar size={16} />
-              {campus.dates}
-            </span>
-            {campus.deadline && (
-              <span className="inline-flex items-center gap-2 text-hero-orange font-semibold text-base">
-                <Clock size={16} />
-                Registration deadline: {campus.deadline}
+            <ArrowLeft size={15} />
+            All campuses
+          </Link>
+
+          <div className="grid md:grid-cols-[1.4fr_1fr] gap-10 md:gap-14 items-end">
+            <div>
+              <span
+                className={`inline-block ${campus.statusColor} text-primary-foreground text-[11px] font-bold uppercase tracking-[0.14em] px-3 py-1 rounded-full mb-5`}
+              >
+                {campus.status}
               </span>
-            )}
+              <h1 className="text-primary-foreground font-bold text-[34px] md:text-[56px] leading-[1.05] mb-4">
+                {campus.city}
+              </h1>
+              <div className="inline-flex items-center gap-2.5 text-light-teal text-lg md:text-xl font-medium mb-5">
+                <Calendar size={20} />
+                {campus.dates}
+              </div>
+              <p className="text-primary-foreground/75 font-light text-base max-w-xl">{campus.text}</p>
+            </div>
+
+            <div className="md:pb-1">
+              <div className="rounded-xl border border-primary-foreground/15 bg-primary-foreground/[0.07] backdrop-blur-sm p-5 md:p-6">
+                {campus.deadline && (
+                  <div className="flex items-start gap-2.5 mb-5">
+                    <Clock className="text-hero-orange mt-0.5 shrink-0" size={18} />
+                    <div>
+                      <div className="text-primary-foreground/60 text-[11px] font-bold uppercase tracking-[0.12em]">
+                        Registration deadline
+                      </div>
+                      <div className="text-primary-foreground font-semibold text-base">{campus.deadline}</div>
+                    </div>
+                  </div>
+                )}
+                <button
+                  type="button"
+                  onClick={() => (isOpen ? setReserveOpen(true) : setInterestOpen(true))}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-hero-orange text-primary-foreground font-bold text-sm rounded-md px-6 py-3.5 hover:brightness-90 transition-all"
+                >
+                  {isOpen ? "Reserve My Seats" : "Notify Me"}
+                  <ArrowRight size={16} />
+                </button>
+                <p className="text-primary-foreground/60 text-xs mt-3 text-center">
+                  Roughly 40 seats, up to 8 companies.
+                </p>
+              </div>
+            </div>
           </div>
-          <p className="text-primary-foreground/80 font-light text-base max-w-2xl mb-8">{campus.text}</p>
-          <button
-            type="button"
-            onClick={() => (isOpen ? setReserveOpen(true) : setInterestOpen(true))}
-            className="inline-flex items-center gap-2 bg-hero-orange text-primary-foreground font-bold text-sm rounded-md px-6 py-3.5 hover:brightness-90 transition-all"
-          >
-            {isOpen ? "Reserve My Seats" : "Notify Me"}
-            <ArrowRight size={16} />
-          </button>
         </div>
       </section>
 
       {/* At a glance */}
-      {facts.length > 0 && (
+      {(d.venue?.address || (d.dayTimes && d.dayTimes.length > 0)) && (
         <section className="py-12 md:py-16 px-4 bg-background">
-          <div className="container mx-auto max-w-4xl">
+          <div className="container mx-auto max-w-5xl">
             <AnimatedSection>
               <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px] mb-6">At a glance</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {facts.map((f) => (
-                  <Fact key={f.label} icon={f.icon} label={f.label} value={f.value} />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {d.venue?.address && (
+                  <div className="md:col-span-1 rounded-2xl bg-hero-navy p-7 flex flex-col justify-between min-h-[190px]">
+                    <MapPin className="text-hero-orange" size={26} />
+                    <div className="mt-6">
+                      <div className="text-light-teal text-[11px] font-bold uppercase tracking-[0.14em] mb-2">
+                        Where
+                      </div>
+                      {d.venue.name && (
+                        <div className="text-primary-foreground font-bold text-xl leading-snug">
+                          {d.venue.name}
+                        </div>
+                      )}
+                      <div className="text-primary-foreground/75 text-base mt-1">{d.venue.address}</div>
+                    </div>
+                  </div>
+                )}
+                {d.dayTimes?.map((dt, i) => (
+                  <div
+                    key={dt.label}
+                    className={`rounded-2xl p-7 flex flex-col justify-between min-h-[190px] ${
+                      i === 0 ? "bg-dark-teal" : "bg-hero-orange"
+                    }`}
+                  >
+                    <Clock className="text-primary-foreground/80" size={26} />
+                    <div className="mt-6">
+                      <div className="text-primary-foreground/75 text-[11px] font-bold uppercase tracking-[0.14em] mb-2">
+                        {dt.label}
+                      </div>
+                      <div className="text-primary-foreground font-bold text-[26px] leading-tight">
+                        {dt.window}
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </AnimatedSection>
           </div>
         </section>
       )}
+
 
       {/* Agenda with times */}
       {d.days && d.days.length > 0 && (
