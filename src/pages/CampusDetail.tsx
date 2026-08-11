@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Calendar, Clock, MapPin, HandHeart } from "lucide-react";
@@ -14,6 +14,10 @@ const CampusDetail = () => {
   const campus = getCampus(slug);
   const [reserveOpen, setReserveOpen] = useState(false);
   const [interestOpen, setInterestOpen] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
   if (!campus || !campus.detail) return <Navigate to="/" replace />;
 
