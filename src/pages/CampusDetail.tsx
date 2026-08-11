@@ -333,6 +333,46 @@ const CampusDetail = () => {
         </div>
       </section>
 
+      {/* Getting there and where to stay */}
+      {d.venue && (d.venue.gettingThere || d.venue.parking || d.venue.hotels || d.nearestAirport) && (
+        <section className="py-12 md:py-16 px-4 bg-light-teal/10">
+          <div className="container mx-auto max-w-4xl">
+            <AnimatedSection>
+              <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px] mb-6">
+                Getting there and where to stay
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {d.nearestAirport && (
+                  <div className="bg-background rounded-xl border border-light-grey p-6">
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Nearest airport</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.nearestAirport}</p>
+                  </div>
+                )}
+                {d.venue.gettingThere && (
+                  <div className="bg-background rounded-xl border border-light-grey p-6">
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Transit and arrival</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.gettingThere}</p>
+                  </div>
+                )}
+                {d.venue.parking && (
+                  <div className="bg-background rounded-xl border border-light-grey p-6">
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Parking</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.parking}</p>
+                  </div>
+                )}
+                {d.venue.hotels && (
+                  <div className="bg-background rounded-xl border border-light-grey p-6">
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Hotel recommendations</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.hotels}</p>
+                  </div>
+                )}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
+
+
       {/* Closing CTA */}
       <section className="py-14 md:py-20 px-4 bg-hero-navy">
         <div className="container mx-auto max-w-3xl text-center">
