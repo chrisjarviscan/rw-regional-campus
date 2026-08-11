@@ -306,16 +306,16 @@ const CampusDetail = () => {
               >
                 nichole@realizedworth.com
               </a>{" "}
-              and she'll answer it herself.
+              . She'd love to chat with you!
             </p>
             <div className="space-y-5">
               <div>
                 <div className="text-hero-navy font-medium text-base">Can more than one person from my company attend?</div>
                 <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">
-                  Please bring someone. Most people get more out of these two days when they have a colleague to
-                  think it through with afterward. We keep each campus to roughly 40 people from up to 8 companies,
-                  and no single organization takes more than a third of the seats, so the room stays mixed. Seats
-                  can also be split across campuses if your team can't all travel at once.
+                  Yes, please bring a buddy or two! Most people get more out of these two days when they have a
+                  colleague to think it through with afterward. We keep each campus to roughly 40 people from up to
+                  8 companies, and no single organization takes more than a third of the seats, so the room stays
+                  mixed. Seats can also be split across campuses if your team can't all travel at once.
                 </p>
               </div>
               <div>
