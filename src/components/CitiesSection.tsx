@@ -1,4 +1,5 @@
 import { MapPin, ArrowRight, Calendar, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
 import { trackMailto } from "@/lib/trackMailto";
@@ -69,21 +70,32 @@ const CitiesSection = ({ onNotifyClick, onReserveClick }: CitiesSectionProps) =>
                   )}
                   {!c.deadline && <div className="mb-3" />}
                   <p className="text-dark-grey font-light text-sm mb-5 flex-1">{c.text}</p>
-                  {c.status && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        c.status === "Registration Open"
-                          ? onReserveClick(c.campusValue)
-                          : onNotifyClick(c.campusValue)
-                      }
-                      className="w-full bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 hover:brightness-90 transition-all flex items-center justify-center gap-2 group-hover:gap-3"
-                    >
-                      {c.status === "Registration Open" ? "Reserve My Seats" : "Notify Me"}
-                      <ArrowRight size={16} className="transition-all" />
-                    </button>
-                  )}
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    {c.status && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          c.status === "Registration Open"
+                            ? onReserveClick(c.campusValue)
+                            : onNotifyClick(c.campusValue)
+                        }
+                        className="flex-1 bg-hero-orange text-primary-foreground font-bold text-sm rounded-md py-3 px-3 hover:brightness-90 transition-all flex items-center justify-center gap-2"
+                      >
+                        {c.status === "Registration Open" ? "Reserve My Seats" : "Notify Me"}
+                        <ArrowRight size={16} className="transition-all" />
+                      </button>
+                    )}
+                    {c.detail && !c.detail.draft && (
+                      <Link
+                        to={`/campus/${c.slug}`}
+                        className="flex-1 border-2 border-hero-navy text-hero-navy font-bold text-sm rounded-md py-3 px-3 hover:bg-hero-navy hover:text-primary-foreground transition-all flex items-center justify-center text-center"
+                      >
+                        Campus Details
+                      </Link>
+                    )}
+                  </div>
                 </div>
+
               </div>
             </AnimatedSection>
           ))}
