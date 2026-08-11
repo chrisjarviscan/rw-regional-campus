@@ -1,18 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Navigate, useParams } from "react-router-dom";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Calendar,
-  Clock,
-  MapPin,
-  Plane,
-  BedDouble,
-  Utensils,
-  Shirt,
-  HandHeart,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, MapPin, HandHeart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -195,7 +184,7 @@ const CampusDetail = () => {
             </div>
             <AnimatedSection delay={300}>
               <p className="text-hero-navy/60 italic text-[14px] text-center mt-8">
-                Times are subject to change as we finalize the campus.
+                Agenda subject to change. All sessions, timings, and activities may be updated as we finalize each campus.
               </p>
             </AnimatedSection>
           </div>
