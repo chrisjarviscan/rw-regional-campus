@@ -20,6 +20,12 @@ export interface CampusDay {
   items: AgendaItem[];
 }
 
+export interface CampusHotel {
+  name: string;
+  address?: string;
+  walk?: string;
+}
+
 export interface CampusVenue {
   name: string;
   address?: string;
@@ -27,6 +33,8 @@ export interface CampusVenue {
   gettingThere?: string;
   parking?: string;
   hotels?: string;
+  hotelList?: CampusHotel[];
+  hotelNote?: string;
 }
 
 export interface CampusDetail {
