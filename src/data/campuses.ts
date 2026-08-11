@@ -35,6 +35,8 @@ export interface CampusDetail {
   overnight?: string;
   nearestAirport?: string;
   dressCode?: string;
+  /** Start/end window for each day, shown at a glance. */
+  dayTimes?: { label: string; window: string }[];
   mealsIncluded?: string;
   venue?: CampusVenue;
   nonprofit?: { name?: string; description: string };
@@ -67,7 +69,11 @@ export const campuses: Campus[] = [
     deadline: "August 21, 2026",
     detail: {
       draft: true,
-      overnight: "Day 1 runs 8:30 AM to about 5:00 PM and Day 2 begins at 8:30 AM, so participants travelling from outside the region stay the night in between. Day 2 adjourns around 3:30 PM to make travel home easier. There is no room block; three hotels within a 5–10 minute walk are listed below.",
+      dayTimes: [
+        { label: "Day 1", window: "8:30 AM – 5:00 PM" },
+        { label: "Day 2", window: "8:30 AM – 3:30 PM" },
+      ],
+      overnight: "Most out-of-town participants stay one night between the two days. No room block — three hotels within a 5–10 minute walk are listed below.",
       nearestAirport: "Reagan National (DCA) — 10–15 min by car, or Blue Line direct to Rosslyn",
       mealsIncluded: "Lunch on both days, morning coffee, all materials, and the off-site volunteer experience. Travel and accommodation are not included.",
       dressCode:
@@ -92,7 +98,7 @@ export const campuses: Campus[] = [
         {
           label: "Day 1",
           subtitle: "FOUNDATION & IMMERSION",
-          hours: "Wednesday, September 24 · 8:30 AM – ~5:00 PM",
+          hours: "Wednesday, September 24",
           items: [
             { time: "8:30 AM", title: "Arrival and coffee", desc: "Check in, grab coffee, and connect with fellow participants before the day begins." },
             { time: "9:00 AM", title: "Welcome and community building", desc: "Meet your cohort — peers from across companies and industries — and ground the two days in what matters to your work." },
@@ -101,14 +107,14 @@ export const campuses: Campus[] = [
             { time: "10:35 AM", title: "Learning modules", desc: "Short, practical sessions on the building blocks of a transformative experience — sense-making, the brief, the debrief, and proximity." },
             { time: "11:55 AM", title: "Lunch, provided", desc: "" },
             { time: "12:25 PM", title: "Volunteer experience at Arcadia Farm (off-site)", desc: "A hands-on farm build project. We travel together by bus and return together." },
-            { time: "~4:45 PM", title: "Return and closing reflection", desc: "Head back, decompress, and close the day with a short reflection." },
-            { time: "~5:00 PM", title: "End of Day 1", desc: "Your evening is your own. Day 2 begins at 8:30 AM." },
+            { time: "4:45 PM", title: "Return and closing reflection", desc: "Head back, decompress, and close the day with a short reflection." },
+            { time: "5:00 PM", title: "End of Day 1", desc: "Your evening is your own. Day 2 begins at 8:30 AM." },
           ],
         },
         {
           label: "Day 2",
           subtitle: "APPLICATION & INTEGRATION",
-          hours: "Thursday, September 25 · 8:30 AM – ~3:30 PM",
+          hours: "Thursday, September 25",
           items: [
             { time: "8:30 AM", title: "Coffee and informal connection", desc: "Reconvene with your cohort and share what surfaced overnight." },
             { time: "9:00 AM", title: "Community debrief", desc: "Turn yesterday's experience into shared insight — name what landed, and what you're still sitting with." },
@@ -118,7 +124,7 @@ export const campuses: Campus[] = [
             { time: "1:30 PM", title: "Tell the story and make the case", desc: "Build a short, compelling way to communicate your program's value to leadership, using both data and story." },
             { time: "2:30 PM", title: "Cohort commitments and what comes next", desc: "Name one concrete action you'll take in the next 30 days, and see how the cohort stays connected." },
             { time: "3:15 PM", title: "Certification and closing", desc: "Celebrate the work, receive your certificate of completion, and close the campus together." },
-            { time: "~3:30 PM", title: "Adjourn", desc: "An earlier close on travel day." },
+            { time: "3:30 PM", title: "Adjourn", desc: "An earlier close on travel day." },
           ],
         },
       ],
