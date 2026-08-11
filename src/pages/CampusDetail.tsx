@@ -79,14 +79,16 @@ const CampusDetail = () => {
           <div className="absolute inset-0 bg-hero-navy/85" />
         </div>
         <div className="container mx-auto max-w-4xl relative z-10">
-          <Link
-            to="/#cities"
-            className="inline-flex items-center gap-2 text-light-teal text-sm font-medium mb-6 hover:text-primary-foreground transition-colors"
-          >
-            <ArrowLeft size={15} />
-            All campuses
-          </Link>
-          <div />
+          <div className="mb-6">
+            <Link
+              to="/#cities"
+              className="inline-flex items-center gap-2 text-light-teal text-sm font-medium hover:text-primary-foreground transition-colors"
+            >
+              <ArrowLeft size={15} />
+              All campuses
+            </Link>
+          </div>
+
 
           <span
             className={`inline-block ${campus.statusColor} text-primary-foreground text-[11px] font-bold px-3 py-1 rounded-full mb-4`}
