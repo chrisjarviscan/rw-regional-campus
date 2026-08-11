@@ -1,53 +1,9 @@
 import { MapPin, ArrowRight, Calendar, Clock } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
-import cityWashington from "@/assets/images/city-washington.jpg";
-import cityAtlanta from "@/assets/images/city-atlanta.jpg";
-import citySeattle from "@/assets/images/city-seattle.jpg";
-import cityBayArea from "@/assets/images/city-bay-area.jpg";
 import { trackMailto } from "@/lib/trackMailto";
+import { campuses as cities } from "@/data/campuses";
 
-const cities = [
-  {
-    city: "Washington, DC",
-    dates: "September 24–25, 2026",
-    status: "Registration Open",
-    statusColor: "bg-green-600",
-    text: "A campus in partnership with Nestlé USA.\u00A0",
-    image: cityWashington,
-    campusValue: "Washington, DC — September 24–25, 2026",
-    deadline: "August 21, 2026",
-  },
-  {
-    city: "Atlanta, GA",
-    dates: "October 7–8, 2026",
-    status: "Registration Open",
-    statusColor: "bg-green-600",
-    text: "A campus in partnership with Kilpatrick Townsend.",
-    image: cityAtlanta,
-    campusValue: "Atlanta — October 7–8, 2026",
-    deadline: "September 4, 2026",
-  },
-  {
-    city: "Seattle, WA",
-    dates: "October 21–22, 2026",
-    status: "Registration Open",
-    statusColor: "bg-green-600",
-    text: "A campus in partnership with Adobe.",
-    image: citySeattle,
-    campusValue: "Seattle — October 21–22, 2026",
-    deadline: "September 18, 2026",
-  },
-  {
-    city: "San Francisco Bay Area, CA",
-    dates: "May 19–20, 2027",
-    status: "Coming Soon",
-    statusColor: "bg-mustard",
-    text: "In development for the Bay Area. Express interest to be notified when registration opens.",
-    image: cityBayArea,
-    campusValue: "San Francisco Bay Area — May 19–20, 2027",
-  },
-];
 
 interface CitiesSectionProps {
   onNotifyClick: (campus: string) => void;
