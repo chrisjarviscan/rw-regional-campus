@@ -62,7 +62,7 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={to(link.href)}
               className={`block py-3 text-hero-navy text-base border-b border-light-grey ${link.bold ? "font-bold" : "font-medium"}`}
               onClick={() => setMobileOpen(false)}
             >
