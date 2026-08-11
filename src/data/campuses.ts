@@ -78,7 +78,7 @@ export const campuses: Campus[] = [
     campusValue: "Washington, DC — September 24–25, 2026",
     deadline: "August 21, 2026",
     detail: {
-      draft: true,
+      draft: false,
       dayTimes: [
         { label: "Day 1", window: "8:30 AM – 5:00 PM" },
         { label: "Day 2", window: "8:30 AM – 3:30 PM" },
