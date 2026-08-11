@@ -83,12 +83,12 @@ export const campuses: Campus[] = [
         { label: "Day 1", window: "8:30 AM – 5:00 PM" },
         { label: "Day 2", window: "8:30 AM – 3:30 PM" },
       ],
-      overnight: "Most out-of-town participants stay one night between the two days. No room block — three hotels within a 5–10 minute walk are listed below.",
+      overnight: "Most out-of-town participants choose to stay the night before Day 1 and the evening of Day 2 or the following day. As this is designed as a regional experience, there are no room blocks. However, there are three hotels within a 5–10 minute walk that are listed below.",
       nearestAirport:
         "Reagan National (DCA) — 10–15 minutes by car, or Blue Line direct to Rosslyn. Dulles (IAD) — 30–40 minutes by car, or Silver Line direct in 50–55 minutes.",
-      mealsIncluded: "Morning coffee and refreshments, lunch on both days, all materials, and the off-site volunteer experience. Travel and accommodation are not included.",
+      mealsIncluded: "Morning coffee and refreshments, lunch on both days, all materials, and travel to and from the off-site volunteer experience. Travel and accommodation are not included.",
       dressCode:
-        "Day 1: comfortable clothes you don't mind getting dirty, closed-toe shoes required. Day 2: casual to business casual.",
+        "Day 1: comfortable clothes you don't mind getting dirty, including closed-toe shoes required. Day 2: casual to business casual.",
       venue: {
         name: "Nestlé USA HQ",
         address: "1812 N Moore St, Arlington, VA 22209",
