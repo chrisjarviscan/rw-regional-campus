@@ -86,6 +86,8 @@ const CampusDetail = () => {
             <ArrowLeft size={15} />
             All campuses
           </Link>
+          <div />
+
           <span
             className={`inline-block ${campus.statusColor} text-primary-foreground text-[11px] font-bold px-3 py-1 rounded-full mb-4`}
           >
