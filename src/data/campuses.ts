@@ -84,8 +84,9 @@ export const campuses: Campus[] = [
         { label: "Day 2", window: "8:30 AM – 3:30 PM" },
       ],
       overnight: "Most out-of-town participants stay one night between the two days. No room block — three hotels within a 5–10 minute walk are listed below.",
-      nearestAirport: "Reagan National (DCA) — 10–15 min by car, or Blue Line direct to Rosslyn",
-      mealsIncluded: "Lunch on both days, morning coffee, all materials, and the off-site volunteer experience. Travel and accommodation are not included.",
+      nearestAirport:
+        "Reagan National (DCA) — 10–15 minutes by car, or Blue Line direct to Rosslyn. Dulles (IAD) — 30–40 minutes by car, or Silver Line direct in 50–55 minutes.",
+      mealsIncluded: "Morning coffee and refreshments, lunch on both days, all materials, and the off-site volunteer experience. Travel and accommodation are not included.",
       dressCode:
         "Day 1: comfortable clothes you don't mind getting dirty, closed-toe shoes required. Day 2: casual to business casual.",
       venue: {
@@ -93,11 +94,14 @@ export const campuses: Campus[] = [
         address: "1812 N Moore St, Arlington, VA 22209",
         neighborhood: "Rosslyn, Arlington, VA — across the river from DC",
         gettingThere:
-          "Rosslyn Metro (Blue, Orange, and Silver lines) is at Wilson Blvd and N Moore St, steps from the venue. From Reagan National, the Blue Line runs direct in about 15 minutes with no transfer; from Dulles, the Silver Line takes 50–55 minutes. Rideshare drop-off is at 1812 N Moore St. Enter at the main lobby and bring a photo ID for building access — Nichole will be near check-in in her RW shirt.",
-        parking:
-          "Colonial Parking at Rosslyn Metro Center, 1700 N Moore St (under UPSIDE on Moore, across from the venue). About $15/day max, or $8 early-bird if you're in by 8:30 AM. Open Monday to Saturday, 6 AM to 10 PM.",
-        hotels:
-          "Three nearby hotels shared by our host, Nestlé, all bookable directly (no room block, so confirm current rates): Hilton Arlington Rosslyn, The Key (1900 Fort Myer Dr, ~5 min walk), Hyatt Centric Arlington (1325 Wilson Blvd, ~5–10 min walk), and Homewood Suites by Hilton (1900 Quinn St, ~10 min walk).",
+          "Rosslyn Metro (Blue, Orange, and Silver lines) sits steps from the door at Wilson Blvd and N Moore St. Driving? Colonial Parking is at 1700 N Moore St, on the same street across from the venue, around $15 a day.",
+        hotelNote:
+          "Three nearby hotels shared by our host, Nestlé. There's no room block, so book directly and confirm current rates.",
+        hotelList: [
+          { name: "Hilton Arlington Rosslyn, The Key", address: "1900 Fort Myer Dr", walk: "5 min walk" },
+          { name: "Hyatt Centric Arlington", address: "1325 Wilson Blvd", walk: "5–10 min walk" },
+          { name: "Homewood Suites by Hilton", address: "1900 Quinn St", walk: "10 min walk" },
+        ],
       },
       nonprofit: {
         name: "Arcadia Center for Sustainable Food & Agriculture",
