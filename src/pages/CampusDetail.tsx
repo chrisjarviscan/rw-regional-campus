@@ -20,26 +20,6 @@ import ReserveSeatsModal from "@/components/ReserveSeatsModal";
 import RegistrationModal from "@/components/RegistrationModal";
 import { getCampus } from "@/data/campuses";
 
-const Fact = ({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: typeof MapPin;
-  label: string;
-  value: string;
-}) => (
-  <div className="flex items-start gap-3 p-4 rounded-lg border border-light-grey bg-background">
-    <div className="shrink-0 w-9 h-9 rounded-md bg-dark-teal/10 flex items-center justify-center">
-      <Icon className="text-dark-teal" size={18} />
-    </div>
-    <div>
-      <div className="text-hero-navy/60 text-[11px] font-bold uppercase tracking-[0.12em]">{label}</div>
-      <div className="text-hero-navy font-medium text-sm mt-0.5">{value}</div>
-    </div>
-  </div>
-);
-
 const CampusDetail = () => {
   const { slug } = useParams();
   const campus = getCampus(slug);
@@ -50,15 +30,9 @@ const CampusDetail = () => {
 
   const d = campus.detail;
   const isOpen = campus.status === "Registration Open";
-  const facts = [
-    d.venue?.neighborhood ? { icon: MapPin, label: "Where", value: d.venue.neighborhood } : null,
-    d.nearestAirport ? { icon: Plane, label: "Nearest airport", value: d.nearestAirport } : null,
-    d.overnight ? { icon: BedDouble, label: "Overnight stay", value: d.overnight } : null,
-    d.mealsIncluded ? { icon: Utensils, label: "Meals", value: d.mealsIncluded } : null,
-    d.dressCode ? { icon: Shirt, label: "Dress code", value: d.dressCode } : null,
-  ].filter(Boolean) as { icon: typeof MapPin; label: string; value: string }[];
 
-  const pending = !d.venue && !d.days && !d.nonprofit && facts.length === 0;
+  const pending = !d.venue && !d.days && !d.nonprofit;
+
 
   return (
     <div className="min-h-screen">
