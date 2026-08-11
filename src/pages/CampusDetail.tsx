@@ -218,6 +218,51 @@ const CampusDetail = () => {
         </section>
       )}
 
+      {/* Agenda with times */}
+      {d.days && d.days.length > 0 && (
+        <section className="py-12 md:py-16 px-4 bg-light-teal/10">
+          <div className="container mx-auto max-w-4xl">
+            <AnimatedSection>
+              <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px] mb-8">Schedule</h2>
+            </AnimatedSection>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {d.days.map((day, di) => (
+                <AnimatedSection key={day.label} delay={di * 120}>
+                  <div className="bg-background rounded-xl border border-light-grey p-6 h-full">
+                    <div className="flex items-center gap-3 mb-1">
+                      <span className="bg-hero-orange text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
+                        {day.subtitle}
+                      </span>
+                      <h3 className="text-hero-navy font-medium text-lg">{day.label}</h3>
+                    </div>
+                    {day.hours && <p className="text-dark-teal text-sm font-medium mb-5">{day.hours}</p>}
+                    <div className="relative pl-6 border-l-2 border-hero-orange/30 mt-5">
+                      {day.items.map((item, i) => (
+                        <div key={i} className="mb-6 last:mb-0 relative">
+                          <div className="absolute -left-[25px] top-1.5 w-3 h-3 rounded-full bg-hero-orange" />
+                          {item.time && (
+                            <div className="text-dark-teal font-semibold text-xs mb-0.5">{item.time}</div>
+                          )}
+                          <div className="text-hero-navy font-medium text-base">{item.title}</div>
+                          {item.desc && (
+                            <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">{item.desc}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+            <AnimatedSection delay={300}>
+              <p className="text-hero-navy/60 italic text-[14px] text-center mt-8">
+                Agenda subject to change. All sessions, timings, and activities may be updated as we finalize each campus.
+              </p>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
+
 
       {/* Still confirming */}
       {pending && (
