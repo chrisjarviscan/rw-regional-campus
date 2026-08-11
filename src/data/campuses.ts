@@ -9,7 +9,7 @@ export interface AgendaItem {
   /** Optional clock time, e.g. "8:30 AM". Omitted until confirmed. */
   time?: string;
   title: string;
-  desc: string;
+  desc?: string;
 }
 
 export interface CampusDay {
