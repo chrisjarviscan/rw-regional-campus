@@ -179,45 +179,6 @@ const CampusDetail = () => {
         </section>
       )}
 
-      {/* Volunteer experience */}
-      {d.nonprofit && (
-        <section className="py-12 md:py-16 px-4 bg-background">
-          <div className="container mx-auto max-w-4xl">
-            <AnimatedSection>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-md bg-dark-teal/10 flex items-center justify-center">
-                  <HandHeart className="text-dark-teal" size={20} />
-                </div>
-                <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px]">The volunteer experience</h2>
-              </div>
-              {d.nonprofit.name && (
-                <div className="text-hero-navy font-medium text-lg mb-2">
-                  {d.nonprofit.url ? (
-                    <a
-                      href={d.nonprofit.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-dark-teal underline underline-offset-2 hover:text-hero-orange transition-colors"
-                    >
-                      {d.nonprofit.name}
-                    </a>
-                  ) : (
-                    d.nonprofit.name
-                  )}
-                </div>
-              )}
-              <div className="space-y-4 max-w-3xl">
-                {d.nonprofit.description.split("\n\n").map((p, i) => (
-                  <p key={i} className="text-dark-grey font-light text-base leading-relaxed">
-                    {p}
-                  </p>
-                ))}
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-      )}
-
       {/* Agenda with times */}
       {d.days && d.days.length > 0 && (
         <section className="py-12 md:py-16 px-4 bg-light-teal/10">
@@ -258,6 +219,45 @@ const CampusDetail = () => {
               <p className="text-hero-navy/60 italic text-[14px] text-center mt-8">
                 Agenda subject to change. All sessions, timings, and activities may be updated as we finalize each campus.
               </p>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
+
+      {/* Volunteer experience */}
+      {d.nonprofit && (
+        <section className="py-12 md:py-16 px-4 bg-background">
+          <div className="container mx-auto max-w-4xl">
+            <AnimatedSection>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-md bg-dark-teal/10 flex items-center justify-center">
+                  <HandHeart className="text-dark-teal" size={20} />
+                </div>
+                <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px]">The volunteer experience</h2>
+              </div>
+              {d.nonprofit.name && (
+                <div className="text-hero-navy font-medium text-lg mb-2">
+                  {d.nonprofit.url ? (
+                    <a
+                      href={d.nonprofit.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-dark-teal underline underline-offset-2 hover:text-hero-orange transition-colors"
+                    >
+                      {d.nonprofit.name}
+                    </a>
+                  ) : (
+                    d.nonprofit.name
+                  )}
+                </div>
+              )}
+              <div className="space-y-4 max-w-3xl">
+                {d.nonprofit.description.split("\n\n").map((p, i) => (
+                  <p key={i} className="text-dark-grey font-light text-base leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
             </AnimatedSection>
           </div>
         </section>
