@@ -106,7 +106,7 @@ const CampusDetail = () => {
               <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px] mb-6">At a glance</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {d.venue?.address && (
-                  <div className="md:col-span-1 rounded-2xl bg-hero-navy p-7 flex flex-col justify-between min-h-[190px]">
+                  <div className="rounded-2xl bg-hero-navy p-7 flex flex-col justify-between min-h-[210px]">
                     <MapPin className="text-hero-orange" size={26} />
                     <div className="mt-6">
                       <div className="text-light-teal text-[11px] font-bold uppercase tracking-[0.14em] mb-2">
@@ -121,22 +121,56 @@ const CampusDetail = () => {
                     </div>
                   </div>
                 )}
-                {d.dayTimes?.map((dt, i) => (
-                  <div
-                    key={dt.label}
-                    className={`rounded-2xl p-7 flex flex-col justify-between min-h-[190px] ${
-                      i === 0 ? "bg-dark-teal" : "bg-hero-orange"
-                    }`}
-                  >
+                {d.dayTimes && d.dayTimes.length > 0 && (
+                  <div className="rounded-2xl bg-dark-teal p-7 flex flex-col justify-between min-h-[210px]">
                     <Clock className="text-primary-foreground/80" size={26} />
+                    <div className="mt-6 space-y-4">
+                      {d.dayTimes.map((dt) => (
+                        <div key={dt.label}>
+                          <div className="text-primary-foreground/75 text-[11px] font-bold uppercase tracking-[0.14em] mb-1">
+                            {dt.label}
+                          </div>
+                          <div className="text-primary-foreground font-bold text-[22px] leading-tight">
+                            {dt.window}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {d.nonprofit && (
+                  <div className="rounded-2xl bg-hero-orange p-7 flex flex-col justify-between min-h-[210px]">
+                    <HandHeart className="text-primary-foreground/80" size={26} />
                     <div className="mt-6">
                       <div className="text-primary-foreground/75 text-[11px] font-bold uppercase tracking-[0.14em] mb-2">
-                        {dt.label}
+                        Volunteer partner
                       </div>
-                      <div className="text-primary-foreground font-bold text-[26px] leading-tight">
-                        {dt.window}
+                      <div className="text-primary-foreground font-bold text-xl leading-snug">
+                        {d.nonprofit.name}
                       </div>
+                      {d.nonprofit.short && (
+                        <div className="text-primary-foreground/85 text-base mt-1">{d.nonprofit.short}</div>
+                      )}
                     </div>
+                  </div>
+                )}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
+
+      {/* What to expect */}
+      {d.whatToExpect && d.whatToExpect.length > 0 && (
+        <section className="py-12 md:py-16 px-4 bg-light-teal/10">
+          <div className="container mx-auto max-w-4xl">
+            <AnimatedSection>
+              <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px] mb-6">What to expect</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {d.whatToExpect.map((w) => (
+                  <div key={w.title} className="bg-background rounded-xl border border-light-grey p-6">
+                    <div className="text-hero-navy font-medium text-base mb-1.5">{w.title}</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{w.desc}</p>
                   </div>
                 ))}
               </div>
@@ -145,6 +179,44 @@ const CampusDetail = () => {
         </section>
       )}
 
+      {/* Volunteer experience */}
+      {d.nonprofit && (
+        <section className="py-12 md:py-16 px-4 bg-background">
+          <div className="container mx-auto max-w-4xl">
+            <AnimatedSection>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-md bg-dark-teal/10 flex items-center justify-center">
+                  <HandHeart className="text-dark-teal" size={20} />
+                </div>
+                <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px]">The volunteer experience</h2>
+              </div>
+              {d.nonprofit.name && (
+                <div className="text-hero-navy font-medium text-lg mb-2">
+                  {d.nonprofit.url ? (
+                    <a
+                      href={d.nonprofit.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-dark-teal underline underline-offset-2 hover:text-hero-orange transition-colors"
+                    >
+                      {d.nonprofit.name}
+                    </a>
+                  ) : (
+                    d.nonprofit.name
+                  )}
+                </div>
+              )}
+              <div className="space-y-4 max-w-3xl">
+                {d.nonprofit.description.split("\n\n").map((p, i) => (
+                  <p key={i} className="text-dark-grey font-light text-base leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
 
       {/* Agenda with times */}
       {d.days && d.days.length > 0 && (
@@ -191,55 +263,6 @@ const CampusDetail = () => {
         </section>
       )}
 
-      {/* Venue & getting there */}
-      {d.venue && (
-        <section className="py-12 md:py-16 px-4 bg-background">
-          <div className="container mx-auto max-w-4xl">
-            <AnimatedSection>
-              <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px] mb-6">Venue and getting there</h2>
-              <div className="rounded-xl border border-light-grey p-6 space-y-4">
-                <div>
-                  <div className="text-hero-navy font-medium text-lg">{d.venue.name}</div>
-                  {d.venue.address && (
-                    <p className="text-dark-grey font-light text-sm mt-1">{d.venue.address}</p>
-                  )}
-                </div>
-                {d.venue.gettingThere && (
-                  <p className="text-dark-grey font-light text-base leading-relaxed">{d.venue.gettingThere}</p>
-                )}
-                {d.venue.parking && (
-                  <p className="text-dark-grey font-light text-base leading-relaxed">{d.venue.parking}</p>
-                )}
-                {d.venue.hotels && (
-                  <p className="text-dark-grey font-light text-base leading-relaxed">{d.venue.hotels}</p>
-                )}
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-      )}
-
-      {/* Volunteer experience */}
-      {d.nonprofit && (
-        <section className="py-12 md:py-16 px-4 bg-light-teal/10">
-          <div className="container mx-auto max-w-4xl">
-            <AnimatedSection>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-md bg-dark-teal/10 flex items-center justify-center">
-                  <HandHeart className="text-dark-teal" size={20} />
-                </div>
-                <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px]">The volunteer experience</h2>
-              </div>
-              {d.nonprofit.name && (
-                <div className="text-hero-navy font-medium text-lg mb-2">{d.nonprofit.name}</div>
-              )}
-              <p className="text-dark-grey font-light text-base leading-relaxed max-w-3xl">
-                {d.nonprofit.description}
-              </p>
-            </AnimatedSection>
-          </div>
-        </section>
-      )}
 
       {/* Still confirming */}
       {pending && (
@@ -309,6 +332,46 @@ const CampusDetail = () => {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Getting there and where to stay */}
+      {d.venue && (d.venue.gettingThere || d.venue.parking || d.venue.hotels || d.nearestAirport) && (
+        <section className="py-12 md:py-16 px-4 bg-light-teal/10">
+          <div className="container mx-auto max-w-4xl">
+            <AnimatedSection>
+              <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px] mb-6">
+                Getting there and where to stay
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {d.nearestAirport && (
+                  <div className="bg-background rounded-xl border border-light-grey p-6">
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Nearest airport</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.nearestAirport}</p>
+                  </div>
+                )}
+                {d.venue.gettingThere && (
+                  <div className="bg-background rounded-xl border border-light-grey p-6">
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Transit and arrival</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.gettingThere}</p>
+                  </div>
+                )}
+                {d.venue.parking && (
+                  <div className="bg-background rounded-xl border border-light-grey p-6">
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Parking</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.parking}</p>
+                  </div>
+                )}
+                {d.venue.hotels && (
+                  <div className="bg-background rounded-xl border border-light-grey p-6">
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Hotel recommendations</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.hotels}</p>
+                  </div>
+                )}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
+
 
       {/* Closing CTA */}
       <section className="py-14 md:py-20 px-4 bg-hero-navy">
