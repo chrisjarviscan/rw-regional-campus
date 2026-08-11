@@ -1,4 +1,5 @@
 import { MapPin, ArrowRight, Calendar, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 import AnimatedSection from "./AnimatedSection";
 import patternBg from "@/assets/images/pattern-bg.jpg";
 import { trackMailto } from "@/lib/trackMailto";
