@@ -92,10 +92,30 @@ export const campuses: Campus[] = [
           "Three nearby hotels shared by our host, Nestlé, all bookable directly (no room block, so confirm current rates): Hilton Arlington Rosslyn, The Key (1900 Fort Myer Dr, ~5 min walk), Hyatt Centric Arlington (1325 Wilson Blvd, ~5–10 min walk), and Homewood Suites by Hilton (1900 Quinn St, ~10 min walk).",
       },
       nonprofit: {
-        name: "Arcadia, a local urban farm",
+        name: "Arcadia Center for Sustainable Food & Agriculture",
+        url: "https://www.arcadiafood.org/",
+        short: "A hands-on afternoon at Arcadia's farm in Alexandria, VA.",
         description:
-          "Day 1 afternoon is a structured, hands-on volunteer experience at Arcadia — an outdoor project such as building a farm stand and rebuilding the farm's raised garden beds, designed and facilitated the way you'll lead one at home. The cohort travels together by bus and returns together.",
+          "Arcadia is a Washington-area nonprofit working to rebuild the regional food system from the ground up. Its Mobile Markets bring locally grown produce into DC neighborhoods that have lost their grocery stores, with prices set so federal nutrition benefits go further; its Veteran Farmer Program trains former service members to run their own farms; and its education and camp programs bring children onto the land to learn where food comes from. Much of that food is grown on Arcadia's own farm, where we'll spend Day 1's afternoon.\n\nThe volunteer experience is a structured, hands-on outdoor project — work such as building a farm stand and rebuilding the farm's raised garden beds — designed, briefed, and debriefed the way you'll lead one at home. The cohort travels together by bus and returns together.",
       },
+      whatToExpect: [
+        {
+          title: "You'll be doing, not sitting",
+          desc: "Both days run as facilitated working sessions with a cohort of roughly 40 peers from up to 8 companies. Expect small groups, real scenarios from your own program, and very little lecture.",
+        },
+        {
+          title: "Day 1 goes off-site and outdoors",
+          desc: "The afternoon is spent at Arcadia's farm doing physical outdoor work. Wear clothes you don't mind getting dirty and closed-toe shoes; bring a water bottle, sunscreen, and a layer for the weather.",
+        },
+        {
+          title: "Bring your own program",
+          desc: "Day 2's peer design workshop works best when you arrive with a real challenge — an event you're planning, a group you can't reach, a case you need to make to leadership.",
+        },
+        {
+          title: "Come ready to be known",
+          desc: "The cohort stays together across both days, meals included. Most people leave with a handful of peers they keep in touch with long after the campus ends.",
+        },
+      ],
       days: [
         {
           label: "Day 1",
