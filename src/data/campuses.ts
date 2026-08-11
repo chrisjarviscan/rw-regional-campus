@@ -124,7 +124,7 @@ export const campuses: Campus[] = [
           desc: "Day 2's peer design workshop works best when you arrive with a real challenge — an event you're planning, a group you can't reach, a case you need to make to leadership.",
         },
         {
-          title: "Come ready to be known",
+          title: "You'll get to know people",
           desc: "The cohort stays together across both days, meals included. Most people leave with a handful of peers they keep in touch with long after the campus ends.",
         },
       ],
