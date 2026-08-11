@@ -1,20 +1,28 @@
-import { Users2, Compass, Lightbulb, HandHeart, MessageSquare, Coffee, Wrench, Map, Award } from "lucide-react";
+import { Users2, Compass, Lightbulb, HandHeart, MessageSquare, Coffee, Wrench, Map, Award, Sunrise, Utensils, Megaphone } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const day1 = [
-  { title: "Welcome and Community Building", desc: "Meet your cohort: peers from across companies and industries who came to do this work better.", icon: Users2 },
-  { title: "Understanding the Employee Volunteering Landscape", desc: "Where corporate volunteering sits today, what works, and where it falls short of what people came for.", icon: Compass },
-  { title: "What Is Transformative Volunteering, and Why Does It Matter?", desc: "The shift from one-off activity to experiences that change how people see their work, their company, and their community.", icon: Lightbulb },
-  { title: "Train-the-Trainer Volunteer Experience", desc: "An immersive session with a real nonprofit partner, designed and debriefed the way you'll lead them at home.", icon: HandHeart },
-  { title: "Reflection and Closing", desc: "Conversation and structured reflection to close the day.", icon: Coffee },
+  { time: "8:30 AM", title: "Arrival and coffee", desc: "Check in, grab coffee, and connect with fellow participants before the day begins.", icon: Sunrise },
+  { time: "9:00 AM", title: "Welcome and community building", desc: "Meet your cohort: peers from across companies and industries who came to do this work better.", icon: Users2 },
+  { time: "9:45 AM", title: "What is Transformative Volunteering, and why it matters", desc: "The shift from one-off activity to experiences that change how people see their work, their company, and their community.", icon: Lightbulb },
+  { time: "10:35 AM", title: "Learning modules", desc: "Short, practical sessions on the building blocks of a transformative experience — sense-making, the brief, the debrief, and proximity.", icon: Compass },
+  { time: "11:55 AM", title: "Lunch, provided", desc: "Eat together before heading off-site.", icon: Utensils },
+  { time: "12:25 PM", title: "Volunteer experience with a local nonprofit partner (off-site)", desc: "A hands-on project with the campus host city's nonprofit partner, designed and debriefed the way you'll lead one at home. The cohort travels together and returns together.", icon: HandHeart },
+  { time: "4:45 PM", title: "Return and closing reflection", desc: "Head back, decompress, and close the day with a short reflection.", icon: Coffee },
+  { time: "5:00 PM", title: "End of Day 1", desc: "Your evening is your own. Day 2 begins at 8:30 AM.", icon: Award },
 ];
 
 const day2 = [
-  { title: "Community Debrief: What Have We Learned So Far?", desc: "Reconvene with your cohort and turn yesterday's experience into shared insight.", icon: MessageSquare },
-  { title: "Planning and Facilitating Volunteer Events", desc: "How to recruit and motivate volunteers, work with nonprofit partners, make events safe and inclusive, respond when things go wrong, and recognize the people leading alongside you.", icon: Wrench },
-  { title: "Cross-Company Peer Design Workshop", desc: "Bring your real program. Get feedback from peers who run programs of their own.", icon: Map },
-  { title: "Cohort Commitments: Actions You'll Lead at Home", desc: "Leave with a concrete plan and a community to lean on while you put it into practice.", icon: Award },
+  { time: "8:30 AM", title: "Coffee and informal connection", desc: "Reconvene with your cohort and share what surfaced overnight.", icon: Sunrise },
+  { time: "9:00 AM", title: "Community debrief", desc: "Turn yesterday's experience into shared insight — name what landed, and what you're still sitting with.", icon: MessageSquare },
+  { time: "10:00 AM", title: "Peer design workshop", desc: "Bring your own program. Work it with peers who've done this and get concrete, generous feedback.", icon: Map },
+  { time: "11:30 AM", title: "Lunch, provided", desc: "", icon: Utensils },
+  { time: "12:15 PM", title: "From experience to leadership skills", desc: "Translate what you do as a volunteer leader into named professional competencies, and language you can take to your manager.", icon: Wrench },
+  { time: "1:30 PM", title: "Tell the story and make the case", desc: "Build a short, compelling way to communicate your program's value to leadership, using both data and story.", icon: Megaphone },
+  { time: "2:30 PM", title: "Cohort commitments and what comes next", desc: "Name one concrete action you'll take in the next 30 days, and see how the cohort stays connected.", icon: Compass },
+  { time: "3:15 PM", title: "Certification and closing", desc: "Celebrate the work, receive your certificate of completion, and close the campus together.", icon: Award },
 ];
+
 
 const TimelineDay = ({ title, subtitle, items, delay }: { title: string; subtitle: string; items: typeof day1; delay: number }) => (
   <AnimatedSection animation={delay === 0 ? "fade-left" : "fade-right"} delay={delay}>
