@@ -39,7 +39,9 @@ export interface CampusDetail {
   dayTimes?: { label: string; window: string }[];
   mealsIncluded?: string;
   venue?: CampusVenue;
-  nonprofit?: { name?: string; description: string };
+  nonprofit?: { name?: string; url?: string; short?: string; description: string };
+  /** Short "what to expect" bullets shown before the agenda. */
+  whatToExpect?: { title: string; desc: string }[];
   days?: CampusDay[];
 }
 
