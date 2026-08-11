@@ -24,15 +24,16 @@ const day2 = [
 ];
 
 
-const TimelineDay = ({ title, subtitle, items, delay }: { title: string; subtitle: string; items: typeof day1; delay: number }) => (
+const TimelineDay = ({ title, subtitle, hours, items, delay }: { title: string; subtitle: string; hours: string; items: typeof day1; delay: number }) => (
   <AnimatedSection animation={delay === 0 ? "fade-left" : "fade-right"} delay={delay}>
     <div className="bg-background rounded-xl border border-light-grey p-6 md:p-8 shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-full">
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex items-center gap-3 mb-2">
         <span className="bg-hero-orange text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
           {subtitle}
         </span>
         <h3 className="text-hero-navy font-medium text-lg md:text-xl">{title}</h3>
       </div>
+      <div className="text-dark-teal font-medium text-sm mb-6">{hours}</div>
       <div className="relative pl-6 border-l-2 border-hero-orange/30">
         {items.map((item, i) => (
           <div key={i} className="mb-6 last:mb-0 relative group">
@@ -42,8 +43,9 @@ const TimelineDay = ({ title, subtitle, items, delay }: { title: string; subtitl
                 <item.icon className="text-dark-teal" size={16} />
               </div>
               <div>
+                <div className="text-dark-teal font-medium text-xs tracking-wide">{item.time}</div>
                 <div className="text-hero-navy font-medium text-base">{item.title}</div>
-                <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">{item.desc}</p>
+                {item.desc && <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">{item.desc}</p>}
               </div>
             </div>
           </div>
@@ -52,6 +54,7 @@ const TimelineDay = ({ title, subtitle, items, delay }: { title: string; subtitl
     </div>
   </AnimatedSection>
 );
+
 
 const AgendaSection = () => {
   return (
