@@ -67,6 +67,61 @@ export const campuses: Campus[] = [
     deadline: "August 21, 2026",
     detail: {
       draft: true,
+      overnight: "Day 1 runs 8:30 AM to about 5:00 PM and Day 2 begins at 8:30 AM, so participants travelling from outside the region stay the night in between. Day 2 adjourns around 3:30 PM to make travel home easier. There is no room block; three hotels within a 5–10 minute walk are listed below.",
+      nearestAirport: "Reagan National (DCA) — 10–15 min by car, or Blue Line direct to Rosslyn",
+      mealsIncluded: "Lunch on both days, morning coffee, all materials, and the off-site volunteer experience. Travel and accommodation are not included.",
+      dressCode:
+        "Day 1: comfortable clothes you don't mind getting dirty, closed-toe shoes required. Day 2: casual to business casual.",
+      venue: {
+        name: "Nestlé USA HQ",
+        address: "1812 N Moore St, Arlington, VA 22209",
+        neighborhood: "Rosslyn, Arlington, VA — across the river from DC",
+        gettingThere:
+          "Rosslyn Metro (Blue, Orange, and Silver lines) is at Wilson Blvd and N Moore St, steps from the venue. From Reagan National, the Blue Line runs direct in about 15 minutes with no transfer; from Dulles, the Silver Line takes 50–55 minutes. Rideshare drop-off is at 1812 N Moore St. Enter at the main lobby and bring a photo ID for building access — Nichole will be near check-in in her RW shirt.",
+        parking:
+          "Colonial Parking at Rosslyn Metro Center, 1700 N Moore St (under UPSIDE on Moore, across from the venue). About $15/day max, or $8 early-bird if you're in by 8:30 AM. Open Monday to Saturday, 6 AM to 10 PM.",
+        hotels:
+          "Three nearby hotels shared by our host, Nestlé, all bookable directly (no room block, so confirm current rates): Hilton Arlington Rosslyn, The Key (1900 Fort Myer Dr, ~5 min walk), Hyatt Centric Arlington (1325 Wilson Blvd, ~5–10 min walk), and Homewood Suites by Hilton (1900 Quinn St, ~10 min walk).",
+      },
+      nonprofit: {
+        name: "Arcadia, a local urban farm",
+        description:
+          "Day 1 afternoon is a structured, hands-on volunteer experience at Arcadia — an outdoor project such as building a farm stand and rebuilding the farm's raised garden beds, designed and facilitated the way you'll lead one at home. The cohort travels together by bus and returns together.",
+      },
+      days: [
+        {
+          label: "Day 1",
+          subtitle: "FOUNDATION & IMMERSION",
+          hours: "Wednesday, September 24 · 8:30 AM – ~5:00 PM",
+          items: [
+            { time: "8:30 AM", title: "Arrival and coffee", desc: "Check in, grab coffee, and connect with fellow participants before the day begins." },
+            { time: "9:00 AM", title: "Welcome and community building", desc: "Meet your cohort — peers from across companies and industries — and ground the two days in what matters to your work." },
+            { time: "9:45 AM", title: "What is Transformative Volunteering, and why it matters", desc: "The shift from one-off activity to experiences that change how people see their work, their company, and their community." },
+            { time: "10:20 AM", title: "Break", desc: "" },
+            { time: "10:35 AM", title: "Learning modules", desc: "Short, practical sessions on the building blocks of a transformative experience — sense-making, the brief, the debrief, and proximity." },
+            { time: "11:55 AM", title: "Lunch, provided", desc: "" },
+            { time: "12:25 PM", title: "Volunteer experience at Arcadia Farm (off-site)", desc: "A hands-on farm build project. We travel together by bus and return together." },
+            { time: "~4:45 PM", title: "Return and closing reflection", desc: "Head back, decompress, and close the day with a short reflection." },
+            { time: "~5:00 PM", title: "End of Day 1", desc: "Your evening is your own. Day 2 begins at 8:30 AM." },
+          ],
+        },
+        {
+          label: "Day 2",
+          subtitle: "APPLICATION & INTEGRATION",
+          hours: "Thursday, September 25 · 8:30 AM – ~3:30 PM",
+          items: [
+            { time: "8:30 AM", title: "Coffee and informal connection", desc: "Reconvene with your cohort and share what surfaced overnight." },
+            { time: "9:00 AM", title: "Community debrief", desc: "Turn yesterday's experience into shared insight — name what landed, and what you're still sitting with." },
+            { time: "10:00 AM", title: "Peer design workshop", desc: "Bring your own program. Work it with peers who've done this and get concrete, generous feedback." },
+            { time: "11:30 AM", title: "Lunch, provided", desc: "" },
+            { time: "12:15 PM", title: "From experience to leadership skills", desc: "Translate what you do as a volunteer leader into named professional competencies, and language you can take to your manager." },
+            { time: "1:30 PM", title: "Tell the story and make the case", desc: "Build a short, compelling way to communicate your program's value to leadership, using both data and story." },
+            { time: "2:30 PM", title: "Cohort commitments and what comes next", desc: "Name one concrete action you'll take in the next 30 days, and see how the cohort stays connected." },
+            { time: "3:15 PM", title: "Certification and closing", desc: "Celebrate the work, receive your certificate of completion, and close the campus together." },
+            { time: "~3:30 PM", title: "Adjourn", desc: "An earlier close on travel day." },
+          ],
+        },
+      ],
     },
   },
   {
