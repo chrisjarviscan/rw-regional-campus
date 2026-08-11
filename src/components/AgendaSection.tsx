@@ -70,8 +70,8 @@ const AgendaSection = () => {
           <div className="w-16 h-1 bg-hero-orange mx-auto rounded-full mb-12" />
         </AnimatedSection>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <TimelineDay title="Day 1" subtitle="FOUNDATION & IMMERSION" items={day1} delay={0} />
-          <TimelineDay title="Day 2" subtitle="APPLICATION & INTEGRATION" items={day2} delay={150} />
+          <TimelineDay title="Day 1" subtitle="FOUNDATION & IMMERSION" hours="8:30 AM – 5:00 PM" items={day1} delay={0} />
+          <TimelineDay title="Day 2" subtitle="APPLICATION & INTEGRATION" hours="8:30 AM – 3:30 PM" items={day2} delay={150} />
         </div>
         <AnimatedSection delay={400}>
           <p className="text-dark-grey font-light text-[13px] text-center max-w-xl mx-auto mt-10">
