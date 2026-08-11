@@ -297,35 +297,63 @@ const CampusDetail = () => {
       <section className="py-12 md:py-16 px-4 bg-background">
         <div className="container mx-auto max-w-4xl">
           <AnimatedSection>
-            <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px] mb-6">Travel and logistics</h2>
+            <h2 className="text-hero-navy font-bold text-[20px] md:text-[26px] mb-2">Questions you're probably asking</h2>
+            <p className="text-dark-grey font-light text-base mb-7">
+              If yours isn't here, email Nichole at{" "}
+              <a
+                href={`mailto:nichole@realizedworth.com?subject=${encodeURIComponent(`${campus.city} campus question`)}`}
+                className="text-dark-teal font-medium underline underline-offset-2"
+              >
+                nichole@realizedworth.com
+              </a>{" "}
+              and she'll answer it herself.
+            </p>
             <div className="space-y-5">
               <div>
-                <div className="text-hero-navy font-medium text-base">Is this in person?</div>
+                <div className="text-hero-navy font-medium text-base">Can more than one person from my company attend?</div>
                 <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">
-                  Yes. Both days are in person, and Day 1 includes an off-site volunteer experience with a local
-                  nonprofit partner. There is no virtual option.
+                  Please bring someone. Most people get more out of these two days when they have a colleague to
+                  think it through with afterward. We keep each campus to roughly 40 people from up to 8 companies,
+                  and no single organization takes more than a third of the seats, so the room stays mixed. Seats
+                  can also be split across campuses if your team can't all travel at once.
                 </p>
               </div>
               <div>
                 <div className="text-hero-navy font-medium text-base">Do I need to stay overnight?</div>
                 <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">
                   {d.overnight ??
-                    "Participants travelling from outside the region typically arrive the evening before Day 1 and stay one night between the two days. Hotel guidance for this campus will be posted here."}
+                    "If you're coming from out of town, plan to arrive the evening before Day 1 and stay the night in between. Hotel guidance for this campus will be posted here."}
                 </p>
               </div>
               <div>
-                <div className="text-hero-navy font-medium text-base">What's included?</div>
+                <div className="text-hero-navy font-medium text-base">What's included once I'm there?</div>
                 <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">
                   {d.mealsIncluded ??
-                    "Meals during the program days, all materials, and the volunteer experience are included. Travel and accommodation are not."}
+                    "Morning coffee and refreshments, lunch on both days, all materials, and the volunteer experience. Travel and accommodation are on you."}
                 </p>
               </div>
               <div>
-                <div className="text-hero-navy font-medium text-base">Can I send more than one person?</div>
+                <div className="text-hero-navy font-medium text-base">What should I wear, and what should I bring?</div>
                 <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">
-                  Yes, and most companies do. Each campus is capped at roughly 40 participants from up to 8
-                  companies, with no more than a third of seats from any single organization. Seats can also be
-                  split across campuses.
+                  {d.dressCode ??
+                    "Comfortable clothes for Day 1's volunteer experience, and whatever you'd normally wear to work for Day 2."}{" "}
+                  A water bottle and a layer for the weather are worth packing. Bring a real challenge from your
+                  own program too — Day 2 is built around it.
+                </p>
+              </div>
+              <div>
+                <div className="text-hero-navy font-medium text-base">When can I book my flight home?</div>
+                <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">
+                  Day 2 wraps earlier on purpose so you can travel the same evening. Give yourself a little room
+                  between the close and your departure — the last conversations tend to be the ones people
+                  remember.
+                </p>
+              </div>
+              <div>
+                <div className="text-hero-navy font-medium text-base">Can I join remotely?</div>
+                <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">
+                  No — and that's deliberate. Day 1 takes the whole cohort off-site to volunteer together, and the
+                  work of both days happens in the room. There's no virtual option.
                 </p>
               </div>
             </div>
@@ -334,7 +362,7 @@ const CampusDetail = () => {
       </section>
 
       {/* Getting there and where to stay */}
-      {d.venue && (d.venue.gettingThere || d.venue.parking || d.venue.hotels || d.nearestAirport) && (
+      {d.venue && (d.venue.gettingThere || d.venue.hotelList?.length || d.venue.hotels || d.nearestAirport) && (
         <section className="py-12 md:py-16 px-4 bg-light-teal/10">
           <div className="container mx-auto max-w-4xl">
             <AnimatedSection>
@@ -344,29 +372,45 @@ const CampusDetail = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {d.nearestAirport && (
                   <div className="bg-background rounded-xl border border-light-grey p-6">
-                    <div className="text-hero-navy font-medium text-base mb-1.5">Nearest airport</div>
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Nearest airports</div>
                     <p className="text-dark-grey font-light text-sm leading-relaxed">{d.nearestAirport}</p>
                   </div>
                 )}
-                {d.venue.gettingThere && (
+                {(d.venue.gettingThere || d.venue.parking) && (
                   <div className="bg-background rounded-xl border border-light-grey p-6">
-                    <div className="text-hero-navy font-medium text-base mb-1.5">Transit and arrival</div>
-                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.gettingThere}</p>
-                  </div>
-                )}
-                {d.venue.parking && (
-                  <div className="bg-background rounded-xl border border-light-grey p-6">
-                    <div className="text-hero-navy font-medium text-base mb-1.5">Parking</div>
-                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.parking}</p>
-                  </div>
-                )}
-                {d.venue.hotels && (
-                  <div className="bg-background rounded-xl border border-light-grey p-6">
-                    <div className="text-hero-navy font-medium text-base mb-1.5">Hotel recommendations</div>
-                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.hotels}</p>
+                    <div className="text-hero-navy font-medium text-base mb-1.5">Transit and parking</div>
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">
+                      {d.venue.gettingThere ?? d.venue.parking}
+                    </p>
                   </div>
                 )}
               </div>
+
+              {(d.venue.hotelList?.length || d.venue.hotels) && (
+                <div className="mt-5 bg-background rounded-xl border border-light-grey p-6 md:p-7">
+                  <div className="text-hero-navy font-medium text-base mb-1.5">Accommodations</div>
+                  {d.venue.hotelNote && (
+                    <p className="text-dark-grey font-light text-sm leading-relaxed mb-4">{d.venue.hotelNote}</p>
+                  )}
+                  {d.venue.hotelList?.length ? (
+                    <ul className="divide-y divide-light-grey">
+                      {d.venue.hotelList.map((h) => (
+                        <li key={h.name} className="py-3 first:pt-0 last:pb-0 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                          <span className="text-hero-navy font-medium text-sm">{h.name}</span>
+                          {h.address && <span className="text-dark-grey font-light text-sm">{h.address}</span>}
+                          {h.walk && (
+                            <span className="text-dark-teal text-xs font-semibold uppercase tracking-[0.08em] ml-auto">
+                              {h.walk}
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-dark-grey font-light text-sm leading-relaxed">{d.venue.hotels}</p>
+                  )}
+                </div>
+              )}
             </AnimatedSection>
           </div>
         </section>
