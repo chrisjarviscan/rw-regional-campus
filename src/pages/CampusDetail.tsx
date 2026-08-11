@@ -164,7 +164,9 @@ const CampusDetail = () => {
                             <div className="text-dark-teal font-semibold text-xs mb-0.5">{item.time}</div>
                           )}
                           <div className="text-hero-navy font-medium text-base">{item.title}</div>
-                          <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">{item.desc}</p>
+                          {item.desc && (
+                            <p className="text-dark-grey font-light text-sm mt-1 leading-relaxed">{item.desc}</p>
+                          )}
                         </div>
                       ))}
                     </div>
