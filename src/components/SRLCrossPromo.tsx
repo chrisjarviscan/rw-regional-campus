@@ -18,7 +18,7 @@ const SRLCrossPromo = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 border-2 border-hero-orange text-hero-orange font-bold text-base rounded-md px-7 py-3.5 hover:bg-hero-orange hover:text-primary-foreground transition-all"
           >
-            Learn about Social REV<br /><em className="italic">LIVE</em>
+            Learn about Social REV <em className="italic">LIVE</em>
             <ArrowRight size={18} />
           </a>
         </AnimatedSection>
