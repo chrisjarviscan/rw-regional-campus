@@ -5,7 +5,7 @@ const day1 = [
   { time: "8:30 AM", title: "Arrival and coffee", desc: "Check in, grab coffee, and connect with fellow participants before the day begins.", icon: Sunrise },
   { time: "9:00 AM", title: "Welcome and community building", desc: "Meet your cohort: peers from across companies and industries who came to do this work better.", icon: Users2 },
   { time: "9:45 AM", title: "What is Transformative Volunteering, and why it matters", desc: "The shift from one-off activity to experiences that change how people see their work, their company, and their community.", icon: Lightbulb },
-  { time: "10:35 AM", title: "Learning modules", desc: "Short, practical sessions on the building blocks of a transformative experience — sense-making, the brief, the debrief, and proximity.", icon: Compass },
+  { time: "10:35 AM", title: "Transformative Volunteering learning modules", desc: "Short, practical sessions on the building blocks of a transformative experience — sense-making, the brief, the debrief, and proximity.", icon: Compass },
   { time: "11:55 AM", title: "Lunch, provided", desc: "Eat together before heading off-site.", icon: Utensils },
   { time: "12:25 PM", title: "Volunteer experience with a local nonprofit partner (off-site)", desc: "A hands-on project with the campus host city's nonprofit partner, designed and debriefed the way you'll lead one at home. The cohort travels together and returns together.", icon: HandHeart },
   { time: "4:45 PM", title: "Return and closing reflection", desc: "Head back, decompress, and close the day with a short reflection.", icon: Coffee },
