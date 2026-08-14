@@ -76,7 +76,7 @@ export const campuses: Campus[] = [
     text: "A campus in partnership with Nestlé USA.\u00A0",
     image: cityWashington,
     campusValue: "Washington, DC — September 24–25, 2026",
-    deadline: "August 21, 2026",
+    deadline: "August 28, 2026",
     detail: {
       draft: false,
       dayTimes: [
@@ -173,7 +173,7 @@ export const campuses: Campus[] = [
     text: "A campus in partnership with Kilpatrick Townsend.",
     image: cityAtlanta,
     campusValue: "Atlanta — October 7–8, 2026",
-    deadline: "September 4, 2026",
+    deadline: "September 11, 2026",
   },
   {
     slug: "seattle",
@@ -184,7 +184,7 @@ export const campuses: Campus[] = [
     text: "A campus in partnership with Adobe.",
     image: citySeattle,
     campusValue: "Seattle — October 21–22, 2026",
-    deadline: "September 18, 2026",
+    deadline: "September 25, 2026",
   },
   {
     slug: "san-francisco-bay-area",
