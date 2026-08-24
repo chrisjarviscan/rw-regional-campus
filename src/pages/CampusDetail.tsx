@@ -383,9 +383,15 @@ const CampusDetail = () => {
                 {(d.venue.gettingThere || d.venue.parking) && (
                   <div className="bg-background rounded-xl border border-light-grey p-6">
                     <div className="text-hero-navy font-medium text-base mb-1.5">Transit and parking</div>
-                    <p className="text-dark-grey font-light text-sm leading-relaxed">
-                      {d.venue.gettingThere ?? d.venue.parking}
-                    </p>
+                    <div className="space-y-3">
+                      {(d.venue.gettingThere ?? d.venue.parking ?? "")
+                        .split("\n\n")
+                        .map((p, i) => (
+                          <p key={i} className="text-dark-grey font-light text-sm leading-relaxed">
+                            {p}
+                          </p>
+                        ))}
+                    </div>
                   </div>
                 )}
               </div>
