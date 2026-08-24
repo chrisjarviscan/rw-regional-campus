@@ -11,6 +11,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://rw-regional-campus.lovable.app/campus/atlanta</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
     <loc>https://rw-regional-campus.lovable.app/business-case/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
