@@ -190,10 +190,10 @@ export const campuses: Campus[] = [
         "Day 1: comfortable clothes you don't mind getting dirty or painty, including closed-toe shoes required — a company volunteer t-shirt is welcome. Day 2: casual to business casual.",
       venue: {
         name: "Kilpatrick Townsend",
-        address: "1100 Peachtree St NE, 27th floor, Atlanta, GA 30309",
+        address: "1100 Peachtree St NE, Atlanta, GA 30309",
         neighborhood: "Midtown Atlanta, across from Colony Square",
         gettingThere:
-          "MARTA's Midtown station (Red and Gold lines, 10th & Peachtree) is about an 8-minute walk; Arts Center station is also nearby. Driving? Validated parking is in the garage directly to the right of the building, with entrances on Peachtree St and Crescent Ave — park in any visitor or unnumbered spot, enter the lobby from the garage's 6th floor, and check in at the security desk with a photo ID.",
+          "MARTA's Midtown station (Red and Gold lines, 10th & Peachtree) is about an 8-minute walk; Arts Center station is also nearby.\n\nDriving? Validated parking is in the garage directly to the right of the building, with entrances on Peachtree St and Crescent Ave — park in any visitor or unnumbered spot, enter the lobby from the garage's 6th floor, and check in at the security desk with a photo ID.",
         hotelNote:
           "A few well-located Midtown hotels near the venue. There's no room block, so book directly and confirm current rates.",
         hotelList: [
@@ -204,9 +204,10 @@ export const campuses: Campus[] = [
       },
       nonprofit: {
         name: "Barack & Michelle Obama Academy",
+        url: "https://bamoacademy.atlantapublicschools.us/",
         short: "A hands-on afternoon at a neighborhood school in Peoplestown.",
         description:
-          "The Barack & Michelle Obama Academy is a public elementary school in Atlanta's Peoplestown community. Day 1's afternoon is a school-beautification project refreshing the shared spaces students walk through every day — work such as creating a welcome mural, adding new decor, and brightening classrooms and common areas.\n\nThe project is designed, briefed, and debriefed the way you'll lead one at home. The cohort travels together by bus and returns together. Bring a photo ID for check-in; the school may ask volunteers to complete a quick background check in advance, and we'll share details if so.",
+          "The Barack & Michelle Obama Academy is a public elementary school in Atlanta's Peoplestown community. Day 1's afternoon is a school-beautification project refreshing the shared spaces students walk through every day — such as creating a welcome mural, adding new decor, or brightening classrooms and common areas.\n\nVolunteers will be asked to complete a simple background check in advance. Details will be shared at the time of registration.",
       },
       whatToExpect: [
         {
