@@ -174,7 +174,95 @@ export const campuses: Campus[] = [
     image: cityAtlanta,
     campusValue: "Atlanta — October 7–8, 2026",
     deadline: "September 11, 2026",
+    detail: {
+      draft: false,
+      dayTimes: [
+        { label: "Day 1", window: "8:30 AM – 5:15 PM" },
+        { label: "Day 2", window: "8:30 AM – 3:30 PM" },
+      ],
+      overnight:
+        "Most out-of-town participants choose to stay the night before Day 1 and the evening of Day 2 or the following day. As this is designed as a regional experience, there are no room blocks. However, there are three Midtown hotels within a 3–10 minute walk that are listed below.",
+      nearestAirport:
+        "Hartsfield-Jackson (ATL) — about 13 miles, 20–30 minutes by car or rideshare (roughly $37). MARTA's Red or Gold Line runs northbound from the airport straight to Midtown station in about 30–35 minutes.",
+      mealsIncluded:
+        "Morning coffee and refreshments, lunch on both days, all materials, and travel to and from the off-site volunteer experience. Travel and accommodation are not included.",
+      dressCode:
+        "Day 1: comfortable clothes you don't mind getting dirty or painty, including closed-toe shoes required — a company volunteer t-shirt is welcome. Day 2: casual to business casual.",
+      venue: {
+        name: "Kilpatrick Townsend",
+        address: "1100 Peachtree St NE, 27th floor, Atlanta, GA 30309",
+        neighborhood: "Midtown Atlanta, across from Colony Square",
+        gettingThere:
+          "MARTA's Midtown station (Red and Gold lines, 10th & Peachtree) is about an 8-minute walk; Arts Center station is also nearby. Driving? Validated parking is in the garage directly to the right of the building, with entrances on Peachtree St and Crescent Ave — park in any visitor or unnumbered spot, enter the lobby from the garage's 6th floor, and check in at the security desk with a photo ID.",
+        hotelNote:
+          "A few well-located Midtown hotels near the venue. There's no room block, so book directly and confirm current rates.",
+        hotelList: [
+          { name: "Loews Atlanta Hotel", address: "1065 Peachtree St NE", walk: "3 min walk" },
+          { name: "Hyatt Centric Midtown Atlanta", address: "125 10th St NE", walk: "6 min walk" },
+          { name: "Renaissance Atlanta Midtown", address: "866 W Peachtree St NW", walk: "10 min walk" },
+        ],
+      },
+      nonprofit: {
+        name: "Barack & Michelle Obama Academy",
+        short: "A hands-on afternoon at a neighborhood school in Peoplestown.",
+        description:
+          "The Barack & Michelle Obama Academy is a public elementary school in Atlanta's Peoplestown community. Day 1's afternoon is a school-beautification project refreshing the shared spaces students walk through every day — work such as creating a welcome mural, adding new decor, and brightening classrooms and common areas.\n\nThe project is designed, briefed, and debriefed the way you'll lead one at home. The cohort travels together by bus and returns together. Bring a photo ID for check-in; the school may ask volunteers to complete a quick background check in advance, and we'll share details if so.",
+      },
+      whatToExpect: [
+        {
+          title: "You'll be doing, not sitting",
+          desc: "Both days run as facilitated working sessions with a cohort of roughly 40 peers from up to 8 companies. Expect small groups, real scenarios from your own program, and very little lecture.",
+        },
+        {
+          title: "Day 1 goes off-site",
+          desc: "The afternoon is spent at the Obama Academy doing hands-on beautification work. Wear clothes you don't mind getting dirty or painty and closed-toe shoes; bring a water bottle and a light layer.",
+        },
+        {
+          title: "Bring your own program",
+          desc: "Day 2's peer design workshop works best when you arrive with a real challenge — an event you're planning, a group you can't reach, a case you need to make to leadership.",
+        },
+        {
+          title: "You'll meet ambassadors from other companies",
+          desc: "The cohort stays together across both days, meals included, so you're working alongside the same group of volunteer leaders the whole time. Most people leave with a set of peers outside their own company they keep comparing notes with long after the campus ends.",
+        },
+      ],
+      days: [
+        {
+          label: "Day 1",
+          subtitle: "FOUNDATION & IMMERSION",
+          hours: "Wednesday, October 7",
+          items: [
+            { time: "8:30 AM", title: "Arrival and coffee", desc: "Check in, grab coffee, and connect with fellow participants before the day begins." },
+            { time: "9:00 AM", title: "Welcome and community building", desc: "Meet your cohort — peers from across companies and industries — and ground the two days in what matters to your work." },
+            { time: "9:45 AM", title: "What is Transformative Volunteering, and why it matters", desc: "The shift from one-off activity to experiences that change how people see their work, their company, and their community." },
+            { time: "10:20 AM", title: "Break", desc: "" },
+            { time: "10:35 AM", title: "Transformative Volunteering learning modules", desc: "Short, practical sessions on the building blocks of a transformative experience — sense-making, the brief, the debrief, and proximity." },
+            { time: "11:45 AM", title: "Lunch, provided", desc: "" },
+            { time: "12:15 PM", title: "Volunteer experience at the Obama Academy (off-site)", desc: "A structured school-beautification project in Peoplestown. We travel together by bus and return together." },
+            { time: "5:00 PM", title: "Return and closing reflection", desc: "Head back, decompress, and close the day with a short reflection." },
+            { time: "5:15 PM", title: "End of Day 1", desc: "Your evening is your own. Day 2 begins at 8:30 AM." },
+          ],
+        },
+        {
+          label: "Day 2",
+          subtitle: "APPLICATION & INTEGRATION",
+          hours: "Thursday, October 8",
+          items: [
+            { time: "8:30 AM", title: "Coffee and informal connection", desc: "Reconvene with your cohort and share what surfaced overnight." },
+            { time: "9:00 AM", title: "Community debrief", desc: "Turn yesterday's experience into shared insight — name what landed, and what you're still sitting with." },
+            { time: "10:00 AM", title: "Peer design workshop", desc: "Bring your own program. Work it with peers who've done this and get concrete, generous feedback." },
+            { time: "11:30 AM", title: "Lunch, provided", desc: "" },
+            { time: "12:15 PM", title: "From experience to leadership skills", desc: "Translate what you do as a volunteer leader into named professional competencies, and language you can take to your manager." },
+            { time: "1:30 PM", title: "Tell the story and make the case", desc: "Build a short, compelling way to communicate your program's value to leadership, using both data and story." },
+            { time: "2:30 PM", title: "Cohort commitments and what comes next", desc: "Name one concrete action you'll take in the next 30 days, and see how the cohort stays connected." },
+            { time: "3:15 PM", title: "Certification and closing", desc: "Celebrate the work, receive your certificate of completion, and close the campus together." },
+            { time: "3:30 PM", title: "Adjourn", desc: "An earlier close on travel day." },
+          ],
+        },
+      ],
+    },
   },
+
   {
     slug: "seattle",
     city: "Seattle, WA",
