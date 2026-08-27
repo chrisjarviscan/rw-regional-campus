@@ -277,12 +277,12 @@ export const campuses: Campus[] = [
   {
     slug: "seattle",
     city: "Seattle, WA",
-    dates: "2027",
+    dates: "Coming 2027",
     status: "Coming Soon",
     statusColor: "bg-mustard",
     text: "In development for the Pacific Northwest. Express interest to be notified when registration opens.",
     image: citySeattle,
-    campusValue: "Seattle — 2027",
+    campusValue: "Seattle — Coming 2027",
   },
 ];
 

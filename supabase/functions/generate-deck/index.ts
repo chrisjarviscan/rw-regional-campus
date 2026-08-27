@@ -130,7 +130,7 @@ const CITY_LABELS: Record<string, string> = {
   detroit: "Detroit · August 2026",
   washington_dc: "Washington DC · September 2026",
   atlanta: "Atlanta · October 2026",
-  seattle: "Seattle · 2027",
+  seattle: "Seattle · Coming 2027",
   future: "Philadelphia or Minneapolis · future cohort",
   request_other: "City to be confirmed",
   flexible: "Open to options",

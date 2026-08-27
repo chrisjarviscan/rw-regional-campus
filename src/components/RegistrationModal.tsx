@@ -127,7 +127,7 @@ const RegistrationModal = ({ open, onClose, initialCampus, preselectedCampus }: 
                   <option value="">Select a campus</option>
                   <option>Washington, DC — September 24–25, 2026</option>
                   <option>Atlanta — October 7–8, 2026</option>
-                  <option>Seattle — 2027</option>
+                  <option>Seattle — Coming 2027</option>
                   <option>San Francisco Bay Area — May 19–20, 2027</option>
                   <option>Not sure yet / open to options</option>
                   <option>I'd like to request a new city</option>
