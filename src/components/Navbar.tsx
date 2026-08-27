@@ -38,7 +38,7 @@ const Navbar = () => {
             <a
               key={link.href}
               href={to(link.href)}
-              className={`text-hero-navy text-[15px] hover:text-dark-teal transition-colors ${link.bold ? "font-bold" : "font-medium"}`}
+              className="text-hero-navy text-[15px] font-medium hover:text-dark-teal transition-colors"
             >
               {link.label}
             </a>
@@ -62,7 +62,7 @@ const Navbar = () => {
             <a
               key={link.href}
               href={to(link.href)}
-              className={`block py-3 text-hero-navy text-base border-b border-light-grey ${link.bold ? "font-bold" : "font-medium"}`}
+              className="block py-3 text-hero-navy text-base font-medium border-b border-light-grey"
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
