@@ -265,17 +265,6 @@ export const campuses: Campus[] = [
   },
 
   {
-    slug: "seattle",
-    city: "Seattle, WA",
-    dates: "October 21–22, 2026",
-    status: "Registration Open",
-    statusColor: "bg-green-600",
-    text: "A campus in partnership with Adobe.",
-    image: citySeattle,
-    campusValue: "Seattle — October 21–22, 2026",
-    deadline: "September 25, 2026",
-  },
-  {
     slug: "san-francisco-bay-area",
     city: "San Francisco Bay Area, CA",
     dates: "May 19–20, 2027",
@@ -284,6 +273,16 @@ export const campuses: Campus[] = [
     text: "In development for the Bay Area. Express interest to be notified when registration opens.",
     image: cityBayArea,
     campusValue: "San Francisco Bay Area — May 19–20, 2027",
+  },
+  {
+    slug: "seattle",
+    city: "Seattle, WA",
+    dates: "2027",
+    status: "Coming Soon",
+    statusColor: "bg-mustard",
+    text: "In development for the Pacific Northwest. Express interest to be notified when registration opens.",
+    image: citySeattle,
+    campusValue: "Seattle — 2027",
   },
 ];
 
