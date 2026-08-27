@@ -507,7 +507,7 @@
     },
     preferred_city: {
       washington_dc: "Washington DC (September 24–25, 2026)",
-      atlanta: "Atlanta (October 14–15, 2026)", seattle: "Seattle (2027 — coming soon)",
+      atlanta: "Atlanta (October 14–15, 2026)", seattle: "Seattle (Coming 2027)",
       bay_area: "San Francisco Bay Area (May 19–20, 2027 — coming soon)",
       future: "Philadelphia / Minneapolis (future)", request_other: "Request a different city", flexible: "Flexible",
     },
